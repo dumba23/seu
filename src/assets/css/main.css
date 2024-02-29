@@ -1,0 +1,23 @@
+@font-face {
+  font-family: "FiraGO";
+  src: local("FiraGO"), url('../fonts/FiraGo.ttf') format("ttf");
+}
+
+@font-face {
+  font-family: "FiraGO-caps";
+  src:  url('../fonts/bpg_mrgvlovani_caps_2010.ttf') format("truetype");
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+:root {
+  --mainColor: #22262fcd;
+  --mainColorOrange: #f07a02;
+  --mainColorGray: #b2b2b2;
+  --textColor: #eee;
+}

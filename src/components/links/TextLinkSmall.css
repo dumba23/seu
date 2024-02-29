@@ -1,0 +1,28 @@
+.text-link-small {
+  position: relative;
+  color: white;
+  margin-bottom: 1rem;
+  text-decoration: none;
+  max-width: max-content;
+  font-size: 15px;
+  font-family: FiraGO-caps;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.text-link-small::before {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: var(--mainColorOrange);
+  transition: width 1s ease;
+}
+
+.text-link-small:hover::before {
+  width: 120%;
+  transition: 0.3s ease;
+}

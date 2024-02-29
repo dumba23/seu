@@ -1,0 +1,17 @@
+.square-link {
+  color: white;
+  text-decoration: none;
+  margin-inline: 0.2rem;
+  border: 1px solid white;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-size: 10px;
+  transition: 0.3s;
+  text-transform: uppercase;
+  font-family: FiraGO-caps;
+}
+
+.square-link:hover {
+  background-color: #e45b00;
+  border: 1px solid #e45b00;
+}
