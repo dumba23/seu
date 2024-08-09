@@ -1,0 +1,117 @@
+.category-page-card-container {
+  background-color: #fff;
+  border: 1px solid #fff;
+  transition: all 0.5s;
+  border-radius: 0.5rem;
+  display: flex;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  flex-direction: column;
+  font-family: "FiraGO";
+  font-feature-settings: "case" on;
+  max-width: 845px;
+  cursor: pointer;
+  position: relative;
+  z-index: 10000;
+}
+
+.category-page-card-container:hover {
+  border: 1px solid var(--mainColorOrange);
+}
+
+.category-page-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 0.8rem;
+  margin-bottom: 0.8rem;
+  border-bottom: 1px solid var(--mainColorOrange);
+}
+
+.category-page-card-title {
+  font-weight: 600;
+  color: #29334f;
+  font-size: 18px;
+  max-width: 655px;
+}
+
+.category-page-card-label {
+  font-weight: 400;
+  color: #29334f;
+  font-size: 18px;
+  max-width: 655px;
+}
+
+.category-page-card-value {
+  font-weight: 500;
+  color: #29334f;
+  font-size: 18px;
+  max-width: 655px;
+}
+
+.category-page-card-description {
+  max-width: 810px;
+  font-weight: 400;
+  font-size: 18px;
+  color: #383e4d;
+}
+
+.category-page-card-date-month {
+  font-weight: 700;
+  font-size: 24px;
+  color: var(--mainColorOrange);
+}
+
+.category-page-card-date-top {
+  height: 25px;
+  display: flex;
+  align-items: center;
+}
+
+.category-page-card-date-top-day {
+  font-weight: 700;
+  font-family: "Rubik";
+  font-size: 42px;
+  color: var(--mainColorOrange);
+  padding: 0;
+  margin: 0;
+}
+
+.category-page-card-date-top-year {
+  transform: translateY(25%);
+  font-weight: 600;
+  font-family: "Rubik";
+  font-size: 20px;
+  color: var(--mainColorOrange);
+}
+
+.category-page-card-bottom {
+  display: flex;
+  justify-content: space-between;
+  max-width: 90%;
+}
+
+@media only screen and (max-width: 475px) {
+  .category-page-card-container {
+    max-width: 100%;
+  }
+
+  .category-page-card-bottom {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .category-page-card-title {
+    font-size: 16px;
+  }
+
+  .category-page-card-label {
+    font-weight: 400;
+    font-size: 14px;
+  }
+
+  .category-page-card-value {
+    font-size: 14px;
+    font-weight: 500;
+  }
+}

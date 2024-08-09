@@ -8,6 +8,19 @@ header {
   padding: 0 4rem;
   background-color: transparent;
   color: var(--textColor);
+  z-index: 1001;
+}
+
+.nav-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 80px;
+  padding: 0.2rem 0.5rem;
+  margin-top: 1rem;
+  border-radius: 1rem;
+  color: var(--textColor);
   z-index: 11;
 }
 
@@ -24,7 +37,8 @@ header.collapsible {
   position: relative;
 }
 
-.search-input {
+.search-input,
+.mobile-search-input {
   width: 0;
   padding: 10px;
   background-color: transparent;
@@ -35,7 +49,7 @@ header.collapsible {
 }
 
 .search-icon-container {
-  border: 1px solid white;
+  border: 1px solid #fff;
   position: absolute;
   right: 0px;
   top: 50%;
@@ -107,7 +121,8 @@ header .nav-btn {
 
 header .nav-btn div {
   margin-right: 1.2em;
-  font-family: FiraGO-caps;
+  font-family: FiraGO;
+  font-feature-settings: "case" on;
   font-size: 18px;
   font-weight: 600;
 }
@@ -115,6 +130,20 @@ header .nav-btn div {
 header .nav-lang-btn {
   background-color: transparent;
   color: white;
+  border: 1px solid white;
+  transition: 0.4s;
+  padding: 8px 4px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -1px;
+  margin: 0 1.5rem 0 0.5rem;
+  cursor: pointer;
+}
+
+.mobile-nav-lang-btn {
+  background-color: #fff;
+  color: #111111;
   border: 1px solid white;
   transition: 0.4s;
   padding: 8px 4px;
@@ -155,7 +184,7 @@ header nav {
   position: fixed;
   top: -100vh;
   left: 0;
-  height: 80%;
+  height: 717px;
   width: 100%;
   gap: 1.5rem;
   background-color: var(--mainColor);
@@ -202,6 +231,11 @@ nav a {
 .nav-links-right {
   border-left: 1px solid var(--mainColorGray);
   width: 75%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  height: 200px;
+  padding-left: 2rem;
 }
 
 .nav-info {
@@ -230,6 +264,8 @@ nav a {
   text-align: end;
   margin-bottom: 0.4rem;
   cursor: pointer;
+  position: relative;
+  z-index: 1000;
 }
 
 .nav-call {
@@ -238,16 +274,9 @@ nav a {
   font-size: 14px;
   text-align: end;
   margin-bottom: 0.2rem;
-}
-
-.nav-links-right div {
-  display: flex;
-  flex-direction: column;
-  margin-inline: 3rem;
-}
-
-.nav-links-right div:last-child {
-  margin-left: 12rem;
+  position: relative;
+  cursor: pointer;
+  z-index: 1000;
 }
 
 .nav-links-bottom {
@@ -255,4 +284,230 @@ nav a {
   display: flex;
   justify-content: space-between;
   margin: 0 10rem;
+}
+
+.mobile-search-container,
+.mobile-socials,
+.mobile-info-container,
+.nav-links-right-mobile,
+.text-link-mobile-wrapper {
+  display: none;
+}
+
+@media only screen and (max-width: 475px) {
+  header {
+    padding: 0 0.8rem;
+  }
+
+  header nav {
+    transform: translateY(-100vh);
+    overflow-y: scroll;
+    z-index: 10;
+    position: absolute;
+    height: 100vh;
+    background-color: #22262f;
+  }
+
+  .search-container {
+    display: none;
+  }
+
+  .nav-lang-btn {
+    display: none;
+  }
+
+  .nav-container {
+    height: 56px;
+  }
+
+  .nav-container img {
+    width: 58px;
+  }
+
+  .home-submenu-container {
+    display: none;
+  }
+
+  .main-title {
+    font-size: 24px !important;
+    width: 100%;
+    font-weight: 300 !important;
+  }
+
+  .explore-button {
+    font-size: 14px !important;
+  }
+
+  .explore-button img {
+    width: 16px;
+  }
+
+  .collapsible_nav .nav-header {
+    padding: 1.3rem 0.8rem;
+  }
+
+  header .collapsible_nav {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .nav-close-btn {
+    right: 2rem !important;
+    top: 2rem !important;
+  }
+
+  header .nav-btn div {
+    font-size: 14px;
+  }
+  header .nav-btn img {
+    width: 16px;
+  }
+
+  .nav-external-links {
+    display: none;
+  }
+
+  .nav-links {
+    margin: 0;
+    padding-left: 0.8rem;
+    padding-bottom: 0;
+    width: 100%;
+    border: none;
+  }
+
+  .nav-links-right {
+    display: none;
+  }
+
+  .nav-links-left {
+    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
+  }
+
+  .text-link {
+    width: 100%;
+    max-width: 90%;
+    justify-content: start;
+  }
+
+  .text-link-active::before {
+    width: 100%;
+  }
+
+  .text-link-active img:last-child {
+    right: 0;
+    min-height: 8px;
+  }
+
+  .text-link img {
+    width: 8px;
+  }
+
+  .nav-links-bottom {
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-links-bottom .text-link-xs {
+    width: 96%;
+    border-right: none;
+    height: 20px;
+    background-color: #383e4da3;
+    padding: 1.5rem;
+    border-radius: 0.6rem;
+    margin-bottom: 1rem;
+  }
+
+  .mobile-search-container {
+    display: flex;
+    width: 100%;
+    transform: translateY(-1.8rem);
+  }
+
+  .mobile-search-input {
+    width: 100%;
+    border-radius: 12px;
+    margin-left: 0.5rem;
+  }
+
+  .nav-info {
+    display: none;
+  }
+
+  .mobile-info-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .mobile-info-tel,
+  .mobile-info-email {
+    width: 96%;
+    border: none;
+    height: 20px;
+    background-color: var(--mainColorOrange);
+    padding: 1.5rem;
+    border-radius: 0.6rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: "FiraGO";
+  }
+
+  .mobile-socials {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin: 0 1rem;
+    column-gap: 4rem;
+  }
+
+  .mobile-social {
+    display: flex;
+    padding: 2rem 0;
+    border-top: 1px solid #ffffff6c;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    color: #ffffff6c;
+    font-weight: 700;
+    font-size: 12px;
+    font-family: "FiraGO";
+    font-feature-settings: "case" on;
+  }
+
+  .mobile-socials-icon {
+    width: 16px !important;
+  }
+
+  .nav-links-right-mobile {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 200px;
+    padding-left: 2rem;
+  }
+
+  .text-link-mobile-wrapper {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 1s ease-in-out, opacity 1s ease;
+  }
+
+  .text-link-mobile-wrapper.expand {
+    max-height: 500px; /* Adjust this value based on your content */
+    opacity: 1;
+    gap: 1rem;
+    margin: 1rem 0;
+  }
 }

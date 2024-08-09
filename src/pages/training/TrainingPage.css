@@ -1,0 +1,155 @@
+.training-card-container {
+  background-color: #fff;
+  border: 1px solid #fff;
+  transition: all 0.5s;
+  border-radius: 0.5rem;
+  display: flex;
+  padding: 1rem 2rem;
+  margin-bottom: 2rem;
+  flex-direction: column;
+  font-family: "FiraGO";
+  width: 95%;
+  height: 166px;
+  max-height: 250px;
+  position: relative;
+  font-feature-settings: "case" on;
+  cursor: pointer;
+}
+
+.training-card-left-horizontal {
+  width: 1rem;
+  height: 100%;
+  background-color: #29334f;
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+}
+
+.training-card-container:hover {
+  border: 1px solid var(--mainColorOrange);
+}
+
+.training-card-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.training-card-row h6 {
+  font-family: "FiraGO";
+  font-weight: 400;
+  font-size: 12px;
+  margin-bottom: 0.5rem;
+  color: #4a4a4a;
+}
+
+.training-card-title {
+  font-family: "FiraGO";
+  font-size: 16px;
+  font-weight: 400;
+  color: #29334f;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--mainColorOrange);
+}
+
+.training-page-cards-container {
+  margin-bottom: 2rem;
+  padding-left: 4rem;
+  width: 950px;
+  overflow-y: scroll;
+  min-height: 600px;
+  max-height: 620px;
+  background-color: #ededed;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.training-page-links-container {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  padding: 0rem 2rem;
+  width: calc(100% - 950px);
+}
+
+.training-details-card {
+  background-color: #fff;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 1rem 4rem 1rem 1rem;
+  width: 80%;
+  border-radius: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.training-link {
+  background-color: #f07a02;
+  font-family: "FiraGo";
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.7rem 1rem;
+  text-align: center;
+  height: 44px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.training-link:hover {
+  background-color: #da6d00;
+}
+
+@media only screen and (max-width: 475px) {
+  .training-page-links-container {
+    display: none;
+  }
+
+  .training-page-container {
+    min-height: 100%;
+  }
+
+  .training-page-background-image {
+    height: 167px;
+  }
+
+  .training-page-middle-content {
+    top: 167px;
+    width: calc(100% - 2rem);
+    left: 1rem;
+    font-size: 20px;
+  }
+
+  .training-page-middle-content div {
+    margin: 0 !important;
+    padding: 1rem;
+  }
+
+  .training-page-cards-container {
+    padding: 0;
+    width: 100%;
+    max-height: 100%;
+    min-height: 10px;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    justify-items: center;
+    padding: 0 1rem;
+    row-gap: 0.3rem;
+    margin-bottom: 0;
+    padding-bottom: 3rem;
+  }
+
+  .training-page-bottom-container {
+    overflow-x: scroll;
+    max-width: 100%;
+    padding-top: 1rem;
+  }
+
+  .training-details-card {
+    width: 100%;
+  }
+}

@@ -1,0 +1,270 @@
+.enrollments-container {
+  background-color: #efefef;
+  font-family: "FiraGO";
+  font-feature-settings: "case" on;
+  padding-bottom: 5rem;
+}
+
+.enrollments-description {
+  color: #214177;
+  font-size: 16px;
+  font-weight: 400;
+  font-family: sans-serif;
+}
+
+.enrollments-title {
+  color: #214177;
+  font-size: 32px;
+  font-weight: 500;
+}
+
+.enrollments-content {
+  display: flex;
+  height: 100%;
+  justify-content: space-between;
+  margin: 0 5rem;
+  align-items: center;
+}
+
+.enrollments-content-left {
+  width: 45%;
+  max-width: 658px;
+  height: 307px;
+  margin-right: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.enrollments-content-right {
+  max-width: 45%;
+}
+
+.enrollments-main-photo {
+  max-width: 100%;
+  max-height: 310px;
+  border-radius: 1rem;
+}
+
+.enrollments-button-scroll {
+  display: flex;
+  border: none;
+  font-size: 12px;
+  cursor: pointer;
+  align-items: center;
+}
+
+.enrollments-scroll-container {
+  border: 1px solid;
+  padding: 4px 7px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-color: #21417734;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+}
+
+.enrollments-button-explore {
+  border: none;
+  display: flex;
+  background-color: var(--mainColorOrange);
+  color: white;
+  padding: 0.5rem 3rem;
+  border-radius: 0.5rem;
+}
+
+.enrollments-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.enrollments-animated-container {
+  grid-column: span 1;
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  max-width: 208px;
+  max-height: 408px;
+  background-color: #fff;
+  margin-bottom: 1.5rem;
+  border-radius: 1rem;
+}
+
+.enrollments-animated-img {
+  width: 100%;
+  height: 236px;
+  object-fit: cover;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
+
+.enrollments-animated-author {
+  font-size: 14px;
+  margin-left: 0.5rem;
+  margin-top: 1rem;
+}
+
+.enrollments-animated-degree {
+  margin-left: 0.5rem;
+  font-size: 10px;
+  max-width: 80%;
+  margin-bottom: 0.5rem;
+  color: #626262;
+}
+
+.enrollments-animated-paragraph {
+  display: flex;
+  align-items: start;
+  margin: 0 1rem 1rem 0.5rem;
+}
+
+.enrollments-animated-paragraph-description {
+  font-weight: 800;
+  font-size: 10px;
+  margin-left: 0.5rem;
+}
+
+.enrollments-animted {
+  display: inline-grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 20px;
+  justify-content: center;
+}
+
+.enrollments-grid-container {
+  background-color: #09224c;
+  margin: 5rem;
+  display: flex;
+  justify-content: center;
+  max-height: 600px;
+  overflow: hidden;
+  border-radius: 1rem;
+}
+
+@keyframes carouselDown {
+  0% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(-150%);
+  }
+}
+
+@keyframes carouselUp {
+  0% {
+    transform: translateY(-150%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+.enrollments-content-left-overlay {
+  display: none;
+}
+
+.enrollments-animted {
+  display: flex;
+  overflow: hidden;
+}
+
+.enrollments-column {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.enrollments-column:nth-child(odd) {
+  animation-delay: 0ms;
+}
+
+.enrollments-column:nth-child(odd):hover {
+  animation-play-state: paused;
+}
+
+.enrollments-column:nth-child(even):hover {
+  animation-play-state: paused;
+}
+
+.enrollments-column:nth-child(even) {
+  animation-delay: 0ms;
+}
+
+.enrollments-content-divider {
+  width: 1px;
+  height: 310px;
+  background-color: #214177;
+}
+
+@media only screen and (max-width: 475px) {
+  .enrollments-content {
+    margin: 0;
+  }
+
+  .enrollments-content-divider {
+    display: none;
+  }
+
+  .enrollments-content-right {
+    display: none;
+  }
+
+  .enrollments-content-left {
+    width: 100%;
+    margin: 0rem;
+    padding: 1rem;
+    background-repeat: no-repeat;
+    background-position: 50% 0;
+    background-size: cover;
+    position: relative;
+  }
+
+  .enrollments-title {
+    font-size: 18px;
+    z-index: 1;
+  }
+
+  .enrollments-description {
+    font-size: 14px;
+    z-index: 1;
+  }
+
+  .enrollments-buttons {
+    transform: translateY(200%);
+  }
+
+  .enrollments-content-left-overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    opacity: 0.7;
+    min-width: 5px;
+    width: 100%;
+    height: 100%;
+    display: block;
+    background-color: #fff;
+  }
+
+  .enrollments-grid-container {
+    margin: 5rem 1rem;
+    z-index: 111;
+    position: relative;
+  }
+
+  .enrollments-animted {
+    display: inline-grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+    justify-content: center;
+  }
+
+  .enrollments-column:nth-child(n + 3) {
+    display: none;
+  }
+
+  .enrollments-animated-container {
+    max-height: max-content;
+  }
+}

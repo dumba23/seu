@@ -1,11 +1,47 @@
 @font-face {
   font-family: "FiraGO";
-  src: local("FiraGO"), url('../fonts/FiraGo.ttf') format("ttf");
+  src: url("../fonts/FiraGO-Regular.ttf") format("truetype");
+  font-weight: 400;
 }
 
 @font-face {
-  font-family: "FiraGO-caps";
-  src:  url('../fonts/bpg_mrgvlovani_caps_2010.ttf') format("truetype");
+  font-family: "FiraGO";
+  src: url("../fonts/FiraGO-Medium.ttf") format("truetype");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "FiraGO";
+  src: url("../fonts/FiraGO-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "FiraGO";
+  src: url("../fonts/FiraGO-Bold.ttf") format("truetype");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "FiraGO";
+  src: url("../fonts/FiraGO-ExtraBold.ttf") format("truetype");
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: "FiraGO";
+  src: url("../fonts/FiraGO-Heavy.ttf") format("truetype");
+  font-weight: 900;
+}
+
+@font-face {
+  font-family: "Rubik";
+  src: url("../fonts/Rubik.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/Inter.ttf") format("truetype");
 }
 
 * {
@@ -20,4 +56,60 @@
   --mainColorOrange: #f07a02;
   --mainColorGray: #b2b2b2;
   --textColor: #eee;
+}
+
+.pdf-link {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  position: relative;
+  padding: 1rem 3.5rem 1rem 3rem;
+  min-width: 300px;
+  min-height: 60px;
+  color: #214177;
+  font-family: "FiraGO";
+  font-weight: 400;
+  font-size: 16px;
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+.pdf-link::before {
+  content: url("../images/pdf.svg"); /* Replace with your icon path */
+  display: block;
+  width: 20px; /* Adjust icon size */
+  height: 20px;
+  position: absolute; /* Position relative to .pdf-link */
+  left: 10px; /* Adjust as needed */
+  top: 50%; /* Center vertically */
+  transform: translateY(-50%); /* Adjust vertical alignment */
+  margin-right: 100px;
+}
+
+.new-link {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  position: relative;
+  padding: 1rem 3.5rem 1rem 2.5rem;
+  color: #214177;
+  font-family: "FiraGO";
+  font-weight: 400;
+  font-size: 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  min-width: 300px;
+  min-height: 60px;
+}
+
+.new-link::before {
+  content: url("../images/link.svg"); /* Replace with your icon path */
+  display: block;
+  width: 20px; /* Adjust icon size */
+  height: 20px;
+  position: absolute; /* Position relative to .pdf-link */
+  left: 10px; /* Adjust as needed */
+  top: 50%; /* Center vertically */
+  transform: translateY(-50%); /* Adjust vertical alignment */
+  margin-right: 100px;
 }

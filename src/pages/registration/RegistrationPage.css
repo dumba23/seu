@@ -1,0 +1,151 @@
+.register-page-container {
+  min-height: 100vh;
+  width: 100%;
+  background-color: #ededed;
+  z-index: 100;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  padding-top: 8rem;
+  padding-bottom: 12rem;
+}
+
+.register-container {
+  padding-top: 5rem;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: center;
+  position: relative;
+}
+
+.register-title {
+  color: #29334f;
+  font-family: "FiraGo";
+  font-feature-settings: "case" on;
+  font-weight: 500;
+  font-size: 24px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  transform: translateY(-150%);
+}
+
+.register-form-container {
+  width: 100%;
+  margin-top: 2rem;
+  display: inline-grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.register-form-field {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.register-form-field-label {
+  color: #214177;
+  font-size: 16px;
+  font-family: "FiraGO";
+  font-weight: 400;
+}
+
+.register-form-field-text {
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 16px 8px;
+  border: 1px solid #c7c7c7;
+  border-radius: 8px;
+  outline: none;
+}
+
+.register-form-field-checkbox {
+  margin-top: 0.5rem;
+}
+
+.register-checkbox-option {
+  background-color: #fff;
+  border: 1px solid #c7c7c7;
+  border-radius: 8px;
+  padding: 1rem 0.5rem;
+  margin-bottom: 0.2rem;
+  accent-color: #214177;
+  transition: all 0.2s;
+}
+
+.register-checkbox-option:hover {
+  background-color: rgb(247, 245, 245);
+}
+
+.register-form-field-date {
+  padding: 1rem 0.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #c7c7c7;
+  border-radius: 8px;
+  outline: none;
+}
+
+.register-form-field-date::-webkit-calendar-picker-indicator {
+  background: transparent;
+  bottom: 0;
+  color: transparent;
+  cursor: pointer;
+  height: auto;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: auto;
+}
+
+.register-form-field-select {
+  padding: 1rem 0.5rem;
+  margin-top: 0.5rem;
+  border: 1px solid #c7c7c7;
+  border-radius: 8px;
+}
+
+.register-form-submit {
+  background-color: #f07a02;
+  font-family: "FiraGo";
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  transform: translate(-22%, 250%);
+  width: 300px;
+  height: 44px;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 475px) {
+  .register-container {
+    padding-top: 1rem;
+    width: 100%;
+    margin: 0;
+  }
+
+  .register-form-container {
+    grid-template-columns: repeat(1, 1fr);
+    margin-top: 0;
+  }
+
+  .register-form-field {
+    width: 90%;
+  }
+
+  .register-form-submit {
+    width: calc(100% - 2rem);
+    left: 1rem;
+    transform: translate(0, 200%);
+  }
+}

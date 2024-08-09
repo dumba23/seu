@@ -1,0 +1,68 @@
+.breadcrumbs-mobile-container {
+  display: none;
+  align-items: center;
+  padding: 1.4rem 0 1.5rem 1rem;
+  font-family: "FiraGO";
+  font-feature-settings: "case" on;
+  overflow-x: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  background-color: #ededed;
+}
+
+.breadcrumbs-mobile-container::-webkit-scrollbar {
+  display: none;
+}
+
+.breadcrumbs-mobile-content {
+  padding: 0.6rem 0.5rem;
+  min-width: max-content;
+  border-radius: 0.2rem;
+  display: flex;
+  color: #29334f;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background-color: #fff;
+  border-radius: 6px;
+  margin-right: 0.4rem;
+}
+
+.breadcrumbs-mobile-content:hover {
+  background-color: #f0790245;
+}
+
+.breadcrumbs-mobile-content.active {
+  border-radius: 6px;
+  background-color: var(--mainColorOrange);
+  color: #fff;
+}
+
+.breadcrumbs-mobile-content.active:hover {
+  border-radius: 0;
+  background-color: transparent;
+}
+
+.breadcrumbs-mobile-title {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.breadcrumbs-mobile-content.active .breadcrumbs-mobile-title {
+  font-weight: 500;
+}
+
+.breadcrumbs-mobile-content.active {
+  border-bottom: 1px solid var(--mainColorOrange);
+}
+
+.breadcrumbs-mobile-arrow {
+  margin: 0rem 0.4rem 0 0.4rem;
+  height: 100%;
+}
+
+@media only screen and (max-width: 475px) {
+  .breadcrumbs-mobile-container {
+    display: flex;
+  }
+}

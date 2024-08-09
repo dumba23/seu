@@ -1,0 +1,46 @@
+.text-link-mobile {
+  position: relative;
+  color: white;
+  margin-bottom: 1rem;
+  text-decoration: none;
+  max-width: 90%;
+  font-size: 14px;
+  justify-content: space-between;
+  font-weight: 400;
+  font-family: "FiraGO";
+  font-feature-settings: "case" on;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.text-link-mobile span {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 425px;
+}
+
+.mobile-link-icon {
+  width: 14px !important;
+}
+
+.text-link-mobile::before {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: var(--mainColorOrange);
+  transition: width 1s ease;
+}
+/* 
+.text-link-mobile:hover::before {
+  width: 104%;
+  transition: 0.3s ease;
+} */
+
+.text-link-mobile.active::before {
+  width: 100%;
+}

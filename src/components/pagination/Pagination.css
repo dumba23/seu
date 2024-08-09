@@ -1,0 +1,34 @@
+.pagination-container {
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  list-style-type: none;
+  z-index: 100;
+  margin-top: 4rem;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  list-style-type: none;
+  padding: 0;
+}
+
+.page-item {
+  margin: 0 5px;
+}
+
+.page-link {
+  padding: 10px 15px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-weight: 700;
+}
+
+.page-item.active .page-link {
+  background-color: #f0790243;
+  border: 1px solid var(--mainColorOrange);
+  color: var(--mainColorOrange);
+  border-color: var(mainColorOrange);
+}

@@ -8,9 +8,18 @@
   justify-content: center;
   align-items: center;
   border-right: 1px solid var(--mainColorGray);
-  font-family: FiraGO-caps;
-  font-size: 12px;
+  font-family: "FiraGO";
+  font-feature-settings: "case" on;
+  font-size: 14px;
   padding: 0 10px; /* Add padding to create space between text and borders */
+  text-transform: uppercase;
+  transition: all 0.3s;
+}
+
+.text-link-xs:hover {
+  font-weight: 800;
+  font-size: 14.1px;
+  transition: all 0.3s;
 }
 
 .text-link-xs:last-child {

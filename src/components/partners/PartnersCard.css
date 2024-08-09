@@ -1,0 +1,112 @@
+.partners-card-container {
+  cursor: pointer;
+  background-color: #fff;
+  border: 1px solid #fff;
+  transition: all 0.5s;
+  border-radius: 0.5rem;
+  display: flex;
+  margin-bottom: 1rem;
+  align-items: center;
+  flex-direction: column;
+  width: 193px;
+  height: 190px;
+  margin-right: 1rem;
+  font-family: "FiraGO";
+  position: relative;
+}
+
+.partners-card-top {
+  height: 90px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.partners-card-container h3 {
+  font-size: 10px;
+  text-align: center;
+}
+
+.partners-card-image {
+  width: 87px;
+  max-height: 90px;
+}
+
+.partners-card-location {
+  position: absolute;
+  bottom: 0;
+  background-color: #29334f;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.1rem;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  border-bottom: 1px solid #29334f;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.partners-card-country {
+  width: 18px;
+}
+
+.partners-card-name-mobile {
+  display: none;
+}
+
+@media only screen and (max-width: 475px) {
+  .partners-card-name-mobile {
+    display: block;
+  }
+
+  .partners-card-container {
+    width: 80px;
+    height: 82px;
+    margin: 0;
+  }
+
+  .partners-card-container h3 {
+    font-size: 6px;
+    font-weight: 600;
+  }
+
+  .partners-card-top {
+    width: 80px;
+    height: max-content;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .partners-card-image {
+    width: 32px;
+    max-height: 32px;
+  }
+
+  .partners-card-location {
+    font-size: 5px;
+  }
+
+  .partners-card-location-image {
+    width: 6px;
+  }
+
+  .partners-card-country {
+    width: 9px;
+    height: 5.8px;
+  }
+
+  .partners-card-name-desktop {
+    display: none;
+  }
+
+  .partners-card-image-mobile-wrapper {
+    height: 32px;
+    margin-top: 0.4rem;
+  }
+}
