@@ -12,13 +12,17 @@ export default function BenefitsSliderItem({
 }) {
   const { i18n } = useTranslation();
   const videoRef = useRef(null);
+  const canvasRef = useRef(null);
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(5000); // Default duration for images
+  const [poster, setPoster] = useState(null);
 
   useEffect(() => {
     if (videoRef.current && isVideo(item.url)) {
       const handleLoadedMetadata = () => {
         setDuration(videoRef.current.duration * 1000);
+
+        captureVideoFrame(1);
       };
       videoRef.current.addEventListener("loadedmetadata", handleLoadedMetadata);
 
@@ -32,6 +36,32 @@ export default function BenefitsSliderItem({
       };
     }
   }, [item.url]);
+
+  const captureVideoFrame = (timeInSeconds) => {
+    if (videoRef.current && canvasRef.current) {
+      const canvas = canvasRef.current;
+      const context = canvas.getContext("2d");
+
+      // Seek video to the desired time
+      videoRef.current.currentTime = timeInSeconds;
+
+      // Once the seek operation is complete, draw the frame
+      videoRef.current.onseeked = () => {
+        // Set canvas dimensions to match video
+        canvas.width = videoRef.current.videoWidth;
+        canvas.height = videoRef.current.videoHeight;
+
+        // Draw the video frame to the canvas
+        context.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height);
+
+        // Convert canvas to an image URL
+        const dataURL = canvas.toDataURL("image/jpeg");
+
+        // Set the captured frame as the poster
+        setPoster(dataURL);
+      };
+    }
+  };
 
   const startProgress = () => {
     handleClick();
@@ -73,14 +103,24 @@ export default function BenefitsSliderItem({
       key={index}
     >
       {isVideo(item.url) ? (
-        <video
-          src={`${import.meta.env.VITE_API_MEDIA_URL + item.url}`}
-          className="benefits-media"
-          controls={false}
-          muted
-          ref={videoRef}
-          loop
-        />
+        <>
+          <video
+            src={`${import.meta.env.VITE_API_MEDIA_URL + item.url}`}
+            className="benefits-media"
+            controls={false}
+            muted
+            ref={videoRef}
+            loop
+            preload="metadata"
+            poster={poster}
+          >
+            <source
+              src={`${import.meta.env.VITE_API_MEDIA_URL + item.url}`}
+              type="video/mp4"
+            />
+          </video>
+          <canvas ref={canvasRef} style={{ display: "none" }} />
+        </>
       ) : (
         <img
           src={`${import.meta.env.VITE_API_MEDIA_URL + item.url}`}

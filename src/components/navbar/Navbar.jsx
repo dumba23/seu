@@ -212,8 +212,7 @@ function Navbar() {
                   <SearchIcon color />
                 </div>
               </div>
-              {localStorage.getItem("language") &&
-              localStorage.getItem("language") === "en" ? (
+              {i18n.language && i18n.language === "en" ? (
                 <button
                   className={`nav-lang-btn ${isNavOpen ? "expanded" : ""}`}
                   onClick={() => changeLanguage("ka")}
@@ -255,8 +254,7 @@ function Navbar() {
               }`}
               style={{ backgroundColor: "#efefef" }}
             />
-            {localStorage.getItem("language") &&
-            localStorage.getItem("language") === "en" ? (
+            {i18n.language && i18n.language === "en" ? (
               <button
                 className={`mobile-nav-lang-btn ${isNavOpen ? "expanded" : ""}`}
                 onClick={() => changeLanguage("ka")}
@@ -517,8 +515,7 @@ function Navbar() {
               <SearchIcon color={isHeightExceed && "#383E4D"} />
             </div>
           </div>
-          {localStorage.getItem("language") &&
-          localStorage.getItem("language") === "en" ? (
+          {i18n.language && i18n.language === "en" ? (
             <button
               className={`nav-lang-btn ${isNavOpen ? "expanded" : ""}`}
               onClick={() => changeLanguage("ka")}

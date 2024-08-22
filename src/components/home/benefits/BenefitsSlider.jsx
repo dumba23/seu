@@ -39,7 +39,7 @@ const responsive = {
     slidesToSlide: 1, // optional, default to 1.
   },
   mobile: {
-    breakpoint: { max: 767, min: 370 },
+    breakpoint: { max: 767, min: 0 },
     items: 2,
     slidesToSlide: 1, // optional, default to 1.
   },
@@ -88,7 +88,7 @@ const BenefitsSlider = () => {
         responsive={responsive}
         autoPlay={!isPaused}
         autoPlaySpeed={3000}
-        swipeable={false}
+        swipeable={true}
         draggable={true}
         arrows={false}
         infinite={true}

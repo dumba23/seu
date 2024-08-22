@@ -44,7 +44,7 @@
   border-radius: 1rem;
   transition: all 0.3s;
   cursor: pointer;
-  z-index: 10000;
+  z-index: 10;
 }
 
 .category-see-full:hover {
