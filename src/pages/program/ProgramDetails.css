@@ -153,7 +153,7 @@
   border-bottom-right-radius: 0;
 }
 
-@media only screen and (max-width: 475px) {
+@media only screen and (max-width: 1050px) {
   .program-details-bottom-container {
     overflow-x: scroll;
     overflow-y: hidden;

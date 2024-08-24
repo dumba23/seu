@@ -249,7 +249,7 @@
   display: flex;
 }
 
-@media only screen and (max-width: 475px) {
+@media only screen and (max-width: 1050px) {
   .vacancy-details-bottom-container {
     display: none;
   }

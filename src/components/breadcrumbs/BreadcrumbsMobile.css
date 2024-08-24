@@ -61,7 +61,7 @@
   height: 100%;
 }
 
-@media only screen and (max-width: 475px) {
+@media only screen and (max-width: 1050px) {
   .breadcrumbs-mobile-container {
     display: flex;
   }

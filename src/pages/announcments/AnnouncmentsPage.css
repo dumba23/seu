@@ -145,7 +145,38 @@
   opacity: 100;
 }
 
-@media only screen and (max-width: 475px) {
+@media only screen and (min-width: 1540px) {
+  .announcments-page-bottom-container {
+    min-width: 70%;
+  }
+
+  .announcments-page-cards-container {
+    min-width: 70%;
+    position: relative;
+  }
+
+  .announcments-card-container {
+    max-width: 95%;
+  }
+
+  .announcments-page-container {
+    min-height: 100%;
+  }
+
+  .announcments-card-title {
+    max-width: 80%;
+  }
+
+  .announcments-card-description {
+    max-width: 100%;
+  }
+
+  .announcments-card-top {
+    justify-content: baseline;
+  }
+}
+
+@media only screen and (max-width: 1050px) {
   .announcments-page-links-container {
     display: none;
   }

@@ -108,7 +108,7 @@
   color: rgba(255, 255, 255, 0.748);
 }
 
-@media only screen and (max-width: 475px) {
+@media only screen and (max-width: 1050px) {
   .video-page-container {
     padding: 0;
     width: 100%;

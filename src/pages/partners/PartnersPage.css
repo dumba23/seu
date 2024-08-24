@@ -144,7 +144,26 @@
   opacity: 100;
 }
 
-@media only screen and (max-width: 475px) {
+@media only screen and (min-width: 1540px) {
+  .partners-page-bottom-container {
+    min-width: 70%;
+  }
+
+  .partners-page-cards-container {
+    min-width: 70%;
+    position: relative;
+  }
+
+  .partners-page-paragraph {
+    max-width: 95%;
+  }
+
+  .partners-page-container {
+    min-height: 100%;
+  }
+}
+
+@media only screen and (max-width: 1050px) {
   .partners-page-links-container {
     display: none;
   }

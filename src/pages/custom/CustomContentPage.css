@@ -335,6 +335,26 @@
   border-bottom-right-radius: 4rem;
 }
 
+@media only screen and (min-width: 1540px) {
+  .about-type4-html-container,
+  .about-type5-html-container,
+  .about-type6-html-container,
+  .about-type7-html-container,
+  .about-breadcrumbs-container,
+  .content-page-bottom-container,
+  .about-html-container {
+    min-width: 70%;
+  }
+
+  .about-html {
+    max-width: 95%;
+  }
+
+  .about-container {
+    min-height: 100%;
+  }
+}
+
 .about-type5-html-container {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
@@ -466,7 +486,7 @@
   margin-bottom: 1rem;
 }
 
-@media only screen and (max-width: 475px) {
+@media only screen and (max-width: 1050px) {
   .rector-container {
     position: relative;
     overflow: hidden;

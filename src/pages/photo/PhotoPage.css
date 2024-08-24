@@ -39,7 +39,19 @@
   transform: scale(1.03);
 }
 
-@media only screen and (max-width: 475px) {
+@media only screen and (min-width: 1540px) {
+  .video-page-container,
+  .article-page-cards-container {
+    min-width: 70%;
+  }
+
+  .article-card-container {
+    max-width: 95%;
+    min-width: 95%;
+  }
+}
+
+@media only screen and (max-width: 1050px) {
   .photo-page-links-container {
     display: none;
   }

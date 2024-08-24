@@ -142,7 +142,26 @@
   opacity: 100;
 }
 
-@media only screen and (max-width: 475px) {
+@media only screen and (min-width: 1540px) {
+  .category-page-bottom-container {
+    min-width: 70%;
+  }
+
+  .category-page-cards-container {
+    min-width: 70%;
+    position: relative;
+  }
+
+  .category-page-paragraph {
+    max-width: 95%;
+  }
+
+  .category-page-container {
+    min-height: 100%;
+  }
+}
+
+@media only screen and (max-width: 1050px) {
   .category-page-links-container {
     display: none;
   }

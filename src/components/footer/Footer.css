@@ -251,7 +251,7 @@
   width: 100%;
 }
 
-@media only screen and (max-width: 475px) {
+@media only screen and (max-width: 1050px) {
   .footer {
     height: auto;
     padding-bottom: 20rem;

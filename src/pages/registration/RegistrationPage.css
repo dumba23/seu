@@ -127,7 +127,7 @@
   cursor: pointer;
 }
 
-@media only screen and (max-width: 475px) {
+@media only screen and (max-width: 1050px) {
   .register-container {
     padding-top: 1rem;
     width: 100%;

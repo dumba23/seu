@@ -142,7 +142,26 @@
   opacity: 100;
 }
 
-@media only screen and (max-width: 475px) {
+@media only screen and (min-width: 1540px) {
+  .vacancy-page-bottom-container {
+    min-width: 70%;
+  }
+
+  .vacancy-page-cards-container {
+    min-width: 70%;
+    position: relative;
+  }
+
+  .category-card-container {
+    max-width: 90%;
+  }
+
+  .vacancy-page-container {
+    min-height: 100%;
+  }
+}
+
+@media only screen and (max-width: 1050px) {
   .vacancy-page-links-container {
     display: none;
   }

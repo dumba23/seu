@@ -270,7 +270,7 @@
   }
 }
 
-@media only screen and (max-width: 475px) {
+@media only screen and (max-width: 1050px) {
   .news-slider {
     transform: translateX(0);
     padding: 4rem 5.2rem;
@@ -335,6 +335,7 @@
     overflow: hidden;
     text-overflow: none;
     height: 40px;
+    margin-top: 0.5rem;
     display: -webkit-box;
     -webkit-line-clamp: 5;
     -webkit-box-orient: vertical;
@@ -356,5 +357,9 @@
 
   .news-slider-overlay {
     font-size: 5px;
+  }
+
+  .news-slider-image {
+    max-height: 79px;
   }
 }

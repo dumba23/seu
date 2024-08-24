@@ -127,7 +127,7 @@
   }
 }
 
-@media only screen and (max-width: 475px) {
+@media only screen and (max-width: 1050px) {
   .text-link-active img:last-child {
     animation: rotateDown 0.5s forwards;
     right: 0;

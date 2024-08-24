@@ -142,7 +142,38 @@
   opacity: 100;
 }
 
-@media only screen and (max-width: 475px) {
+@media only screen and (min-width: 1540px) {
+  .news-page-bottom-container {
+    min-width: 70%;
+  }
+
+  .news-page-cards-container {
+    min-width: 70%;
+    position: relative;
+  }
+
+  .news-card-container {
+    max-width: 95%;
+  }
+
+  .news-card-title {
+    max-width: 100%;
+  }
+
+  .news-card-description {
+    max-width: 100%;
+  }
+
+  .news-page-paragraph {
+    max-width: 95%;
+  }
+
+  .news-page-container {
+    min-height: 100%;
+  }
+}
+
+@media only screen and (max-width: 1050px) {
   .news-page-links-container {
     display: none;
   }

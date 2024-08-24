@@ -48,7 +48,7 @@
   cursor: pointer;
 }
 
-@media only screen and (max-width: 475px) {
+@media only screen and (max-width: 1050px) {
   .register-form-field-select {
     margin-bottom: 1rem;
   }

@@ -90,7 +90,7 @@
   opacity: 1;
 }
 
-@media only screen and (max-width: 475px) {
+@media only screen and (max-width: 1050px) {
   .arrow-button {
     display: none;
   }

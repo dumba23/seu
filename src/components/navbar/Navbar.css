@@ -294,7 +294,7 @@ nav a {
   display: none;
 }
 
-@media only screen and (max-width: 475px) {
+@media only screen and (max-width: 1050px) {
   header {
     padding: 0 0.8rem;
   }

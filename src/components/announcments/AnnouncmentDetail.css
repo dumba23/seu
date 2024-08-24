@@ -180,7 +180,26 @@
   align-items: center;
 }
 
-@media only screen and (max-width: 475px) {
+@media only screen and (min-width: 1540px) {
+  .announcment-details-bottom-container {
+    min-width: 70%;
+  }
+
+  .announcment-details-cards-container {
+    min-width: 70%;
+    position: relative;
+  }
+
+  .announcment-details-paragraph {
+    max-width: 95%;
+  }
+
+  .announcment-details-container {
+    min-height: 100%;
+  }
+}
+
+@media only screen and (max-width: 1050px) {
   .announcment-details-bottom-container {
     padding: 0 !important;
     height: 60px;

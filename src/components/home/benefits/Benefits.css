@@ -266,7 +266,7 @@
   animation: roll 2s ease-in-out forwards;
 }
 
-@media only screen and (max-width: 475px) {
+@media only screen and (max-width: 1050px) {
   .benefits-data {
     flex-wrap: wrap;
     padding: 0 0.8rem;

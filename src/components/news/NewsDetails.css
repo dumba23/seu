@@ -178,7 +178,30 @@
   font-size: 12px;
 }
 
-@media only screen and (max-width: 475px) {
+.news-details-middle-content-wrapper {
+  margin-left: 1rem;
+}
+
+@media only screen and (min-width: 1540px) {
+  .news-details-bottom-container {
+    min-width: 70%;
+  }
+
+  .news-details-cards-container {
+    min-width: 70%;
+    position: relative;
+  }
+
+  .news-details-paragraph {
+    max-width: 95%;
+  }
+
+  .news-details-container {
+    min-height: 100%;
+  }
+}
+
+@media only screen and (max-width: 1050px) {
   .news-details-bottom-container {
     padding: 0 !important;
     height: 60px;

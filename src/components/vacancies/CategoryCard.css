@@ -52,7 +52,7 @@
   color: #fff;
 }
 
-@media only screen and (max-width: 475px) {
+@media only screen and (max-width: 1050px) {
   .category-card-container {
     width: 100%;
   }

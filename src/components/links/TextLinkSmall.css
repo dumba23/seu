@@ -15,6 +15,7 @@
 
 .text-link-small span {
   text-overflow: ellipsis;
+  text-transform: capitalize;
   white-space: nowrap;
   overflow: hidden;
   max-width: 425px;

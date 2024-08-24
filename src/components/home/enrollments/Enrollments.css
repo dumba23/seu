@@ -197,7 +197,7 @@
   background-color: #214177;
 }
 
-@media only screen and (max-width: 475px) {
+@media only screen and (max-width: 1050px) {
   .enrollments-content {
     margin: 0;
   }

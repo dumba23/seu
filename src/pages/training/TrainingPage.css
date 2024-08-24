@@ -104,7 +104,18 @@
   background-color: #da6d00;
 }
 
-@media only screen and (max-width: 475px) {
+@media only screen and (min-width: 1540px) {
+  .training-page-cards-container {
+    min-width: 70%;
+    position: relative;
+  }
+
+  .training-page-container {
+    min-height: 100%;
+  }
+}
+
+@media only screen and (max-width: 1050px) {
   .training-page-links-container {
     display: none;
   }

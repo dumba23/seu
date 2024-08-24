@@ -262,7 +262,7 @@
   }
 }
 
-@media only screen and (max-width: 475px) {
+@media only screen and (max-width: 1050px) {
   .announcments-right-button,
   .announcments-left-button {
     display: none;
@@ -320,7 +320,12 @@
 
   .announcments-slider-description p {
     font-size: 8px;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
     height: 39px;
+    text-overflow: ellipsis;
   }
 
   .announcments-slider-overlay {
