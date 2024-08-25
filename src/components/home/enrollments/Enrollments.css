@@ -198,6 +198,10 @@
 }
 
 @media only screen and (max-width: 1050px) {
+  .enrollments-button-scroll {
+    background-color: transparent;
+  }
+
   .enrollments-content {
     margin: 0;
   }

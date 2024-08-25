@@ -28,16 +28,6 @@
   margin-right: 0.4rem;
 }
 
-.breadcrumbs-mobile-content:hover {
-  background-color: #f0790245;
-}
-
-.breadcrumbs-mobile-content.active {
-  border-radius: 6px;
-  background-color: var(--mainColorOrange);
-  color: #fff;
-}
-
 .breadcrumbs-mobile-content.active:hover {
   border-radius: 0;
   background-color: transparent;

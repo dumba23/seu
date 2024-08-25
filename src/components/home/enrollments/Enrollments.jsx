@@ -72,12 +72,13 @@ export default function Enrollments() {
 
       let intervalId = setInterval(moveColumn, 40);
 
-      column.addEventListener("mouseenter", () => clearInterval(intervalId));
-      column.addEventListener("mouseleave", () => {
-        clearInterval(intervalId);
-        intervalId = setInterval(moveColumn, 30);
-      });
-
+      if (!isSmallScreen) {
+        column.addEventListener("mouseenter", () => clearInterval(intervalId));
+        column.addEventListener("mouseleave", () => {
+          clearInterval(intervalId);
+          intervalId = setInterval(moveColumn, 30);
+        });
+      }
       const calculateCenterPosition = (hoveredCard) => {
         const columnRect = column.getBoundingClientRect();
         const hoveredCardRect = hoveredCard.getBoundingClientRect();
@@ -107,21 +108,23 @@ export default function Enrollments() {
         column.style.transform = `translateY(${centerPosition}px)`;
       };
 
-      // Add event listeners to each card
-      column
-        .querySelectorAll(".enrollments-animated-container")
-        .forEach((card) => {
-          card.addEventListener("mouseenter", () => {
-            moveColumnToCenterCard(card);
+      if (!isSmallScreen) {
+        // Add event listeners to each card
+        column
+          .querySelectorAll(".enrollments-animated-container")
+          .forEach((card) => {
+            card.addEventListener("mouseenter", () => {
+              moveColumnToCenterCard(card);
+            });
+
+            card.addEventListener("mouseleave", () => {
+              // Restore the column to its original position when the mouse leaves the card
+              moveColumnToCenterCard(null);
+            });
           });
 
-          card.addEventListener("mouseleave", () => {
-            // Restore the column to its original position when the mouse leaves the card
-            moveColumnToCenterCard(null);
-          });
-        });
-
-      return () => clearInterval(intervalId);
+        return () => clearInterval(intervalId);
+      }
     });
   }, [enrollmentsSliders]);
 

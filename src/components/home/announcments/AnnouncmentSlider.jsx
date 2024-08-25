@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -39,18 +39,21 @@ const responsive = {
   },
   mobile: {
     breakpoint: { max: 767, min: 464 },
-    items: 3,
+    items: 2.5,
     slidesToSlide: 1, // optional, default to 1.
   },
   mobileXs: {
-    breakpoint: { max: 464, min: 375 },
-    items: 3,
+    breakpoint: { max: 464, min: 0 },
+    items: 2.5,
     slidesToSlide: 1,
   },
 };
 
 const AnnouncmentSlider = () => {
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
+  const carouselRef = useRef(null);
+
   const announcements = useSelector((state) => state.announcements.data);
 
   const CustomLeftArrow = ({ onClick }) => (
@@ -71,11 +74,10 @@ const AnnouncmentSlider = () => {
     </button>
   );
 
-  const navigate = useNavigate();
-
   return (
     <div className="announcments-slider-container">
       <Carousel
+        ref={carouselRef}
         className="announcments-slider"
         responsive={responsive}
         autoPlay={false}

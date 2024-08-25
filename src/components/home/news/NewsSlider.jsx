@@ -40,12 +40,12 @@ const responsive = {
   },
   mobile: {
     breakpoint: { max: 767, min: 464 },
-    items: 3,
+    items: 2.5,
     slidesToSlide: 1, // optional, default to 1.
   },
   mobileXs: {
-    breakpoint: { max: 464, min: 370 },
-    items: 3,
+    breakpoint: { max: 464, min: 0 },
+    items: 2.5,
     slidesToSlide: 1, // optional, default to 1.
   },
 };
