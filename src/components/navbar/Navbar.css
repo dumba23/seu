@@ -321,7 +321,7 @@ nav a {
   }
 
   .nav-container img {
-    width: 58px;
+    max-width: 58px;
   }
 
   .home-submenu-container {

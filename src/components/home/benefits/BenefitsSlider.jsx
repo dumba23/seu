@@ -13,7 +13,7 @@ const responsive = {
   desktop4: { breakpoint: { max: 1500, min: 1270 }, items: 5 },
   desktop5: { breakpoint: { max: 1270, min: 1024 }, items: 4 },
   tablet: { breakpoint: { max: 1024, min: 768 }, items: 3 },
-  mobile: { breakpoint: { max: 767, min: 0 }, items: 2 },
+  mobile: { breakpoint: { max: 767, min: 0 }, items: 2.5 },
 };
 
 const BenefitsSlider = () => {
@@ -24,7 +24,6 @@ const BenefitsSlider = () => {
   const carouselRef = useRef(null);
 
   const handlePlayerImageClick = (index) => {
-    const { slidesToShow } = carouselRef.current.state;
     setIsPaused(true);
   };
 
@@ -67,29 +66,22 @@ const BenefitsSlider = () => {
         draggable={true}
         arrows={false}
         infinite={true}
-        partialVisible={false}
-        pauseOnHover={true}
+        partialVisible={true}
+        pauseOnHover={false}
         beforeChange={handleSlideChange}
         dotListClass="custom-dot-list-style"
       >
-        {stories &&
-          stories?.map((item, index) => {
-            if (item.visible === "both" || item.visible === i18n.language)
-              return (
-                <BenefitsSliderItem
-                  key={index}
-                  item={item}
-                  index={index}
-                  handleClick={() => handlePlayerImageClick(index)}
-                  startCarousel={startCarousel}
-                  isActive={
-                    index === activeIndex ||
-                    index ===
-                      activeIndex - carouselRef?.current?.state?.slidesToShow
-                  }
-                />
-              );
-          })}
+        {stories?.map((item, index) => {
+          if (item.visible === "both" || item.visible === i18n.language)
+            return (
+              <BenefitsSliderItem
+                key={index}
+                item={item}
+                handleClick={() => handlePlayerImageClick(index)}
+                startCarousel={startCarousel}
+              />
+            );
+        })}
       </Carousel>
     </div>
   );

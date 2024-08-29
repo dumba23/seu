@@ -308,19 +308,27 @@
     margin-top: 0.5rem;
   }
 
+  .announcments-slider-description {
+    min-height: 83px;
+  }
+
   .announcments-slider-description h3 {
+    margin-bottom: 4px;
     font-size: 10px;
-    height: 38px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    height: auto;
   }
 
   .announcments-slider-description p {
     font-size: 8px;
     display: -webkit-box;
-    -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
     overflow: hidden;
-    height: 39px;
-    text-overflow: ellipsis;
+    height: auto;
   }
 
   .announcments-slider-overlay {

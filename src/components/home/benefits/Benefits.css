@@ -321,10 +321,16 @@
     background-position: center;
     border-radius: 1rem;
     transition: all 1s;
+    z-index: 2;
   }
 
   .benefits-player-icon {
     width: 38px;
+    z-index: 10;
+  }
+
+  .benefits-media {
+    z-index: 1;
   }
 
   .benefits-lecturer-info h4 {
@@ -344,6 +350,11 @@
 
   .benefits-slider-top {
     align-items: start;
+    z-index: 10;
+  }
+
+  .benefits-slider-item-overlay {
+    z-index: 8;
   }
 
   .benefits-slider-item:hover {
@@ -353,9 +364,17 @@
 
   .benefits-slider {
     padding: 0rem 1rem 2rem 1rem;
+    z-index: 1;
   }
 
   .benefits-slider-item:hover .benefits-lecturer-info h4 {
     max-width: 90px;
+  }
+
+  .benefits-slider-item-overlay,
+  .benefits-player-icon,
+  .benefits-slider-top,
+  .progress-bar {
+    will-change: transform;
   }
 }

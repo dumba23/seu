@@ -5,10 +5,8 @@ import "./Benefits.css";
 
 export default function BenefitsSliderItem({
   item,
-  index,
   handleClick,
   startCarousel,
-  isActive,
 }) {
   const { i18n } = useTranslation();
   const videoRef = useRef(null);
@@ -35,7 +33,7 @@ export default function BenefitsSliderItem({
         }
       };
     }
-  }, [item.url]);
+  }, []);
 
   const captureVideoFrame = (timeInSeconds) => {
     if (videoRef.current && canvasRef.current) {
@@ -98,10 +96,7 @@ export default function BenefitsSliderItem({
   };
 
   return (
-    <div
-      className={`benefits-slider-item ${isActive ? "active" : ""}`}
-      key={index}
-    >
+    <div className="benefits-slider-item">
       {isVideo(item.url) ? (
         <>
           <video
