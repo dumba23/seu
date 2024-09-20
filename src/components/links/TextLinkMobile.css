@@ -1,4 +1,5 @@
 .text-link-mobile {
+  text-transform: capitalize;
   position: relative;
   color: white;
   margin-bottom: 1rem;
@@ -35,11 +36,6 @@
   background-color: var(--mainColorOrange);
   transition: width 1s ease;
 }
-/* 
-.text-link-mobile:hover::before {
-  width: 104%;
-  transition: 0.3s ease;
-} */
 
 .text-link-mobile.active::before {
   width: 100%;

@@ -1,7 +1,8 @@
 .breadcrumbs-mobile-container {
   display: none;
   align-items: center;
-  padding: 1.4rem 0 1.5rem 1rem;
+  padding-left: 1rem;
+  height: max-content;
   font-family: "FiraGO";
   font-feature-settings: "case" on;
   overflow-x: scroll;
@@ -44,6 +45,8 @@
 
 .breadcrumbs-mobile-content.active {
   border-bottom: 1px solid var(--mainColorOrange);
+  background-color: var(--mainColorOrange);
+  color: #fff;
 }
 
 .breadcrumbs-mobile-arrow {
@@ -54,5 +57,10 @@
 @media only screen and (max-width: 1050px) {
   .breadcrumbs-mobile-container {
     display: flex;
+  }
+
+  .breadcrumbs-mobile-content.active:hover {
+    border-radius: 0.2rem;
+    background-color: var(--mainColorOrange);
   }
 }

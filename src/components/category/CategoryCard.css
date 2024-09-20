@@ -12,7 +12,7 @@
   max-width: 845px;
   cursor: pointer;
   position: relative;
-  z-index: 10000;
+  z-index: 1000;
 }
 
 .category-page-card-container:hover {

@@ -42,3 +42,16 @@
   opacity: 100;
   transition: 0.3s ease;
 }
+
+@media only screen and (max-width: 1050px) {
+  .text-link-xs:hover::before {
+    opacity: 0;
+    transition: none;
+  }
+
+  .text-link-xs:hover {
+    transition: none;
+    font-size: 14px;
+    font-weight: normal;
+  }
+}

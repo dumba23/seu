@@ -105,6 +105,8 @@
   min-height: 400px;
   display: flex;
   align-items: start;
+  position: relative;
+  z-index: 10;
   flex-wrap: wrap;
   background-color: #ededed;
   border-bottom-right-radius: 4rem;
@@ -157,6 +159,8 @@
   padding-bottom: 4rem;
   width: 950px;
   min-height: 700px;
+  position: relative;
+  z-index: 10;
   height: auto;
   overflow-y: auto;
   background-color: #ededed;
@@ -250,14 +254,14 @@
 
   .rector-wrapper {
     background-color: #ededed;
-    max-height: 250px;
+    max-height: 265px;
   }
 
   .content-page-bottom-container {
     overflow-x: scroll;
     overflow-y: hidden;
     max-width: 100%;
-    height: 60px;
+    padding-top: 1rem;
   }
 
   .seu-rector-image-mobile {
@@ -280,7 +284,7 @@
 
   .about-html-container {
     width: 100%;
-    padding-left: 0;
+    padding-top: 1rem;
     padding-left: 1rem;
   }
 

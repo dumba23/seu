@@ -47,13 +47,24 @@ export default function PersonalDetails() {
               className="personal-image"
             />
             <div className="personal-right-box">
-              <h3>{info.title[i18n.language]}</h3>
-              <h5>{info.position[i18n.language]}</h5>
-              <p>{info.description[i18n.language]}</p>
-              <Link to={info.linkedin} className="personal-linkedin">
-                <img src={Linkedin} />
-                <span>Linkedin</span>
-              </Link>
+              <h3 className="personal-right-box-h3">
+                {info.title[i18n.language]}
+              </h3>
+              <h5 className="personal-right-box-h5">
+                {info.position[i18n.language]}
+              </h5>
+              <p
+                className="personal-right-box-p"
+                dangerouslySetInnerHTML={{
+                  __html: info.description[i18n.language],
+                }}
+              />
+              {info.linkedin && (
+                <Link to={info.linkedin} className="personal-linkedin">
+                  <img src={Linkedin} />
+                  <span>Linkedin</span>
+                </Link>
+              )}
             </div>
           </div>
         </div>

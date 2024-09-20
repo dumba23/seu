@@ -1,5 +1,5 @@
 .footer {
-  height: 973px;
+  min-height: 973px;
   background-color: #22262f;
   position: relative;
   width: 100%;

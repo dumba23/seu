@@ -14,6 +14,11 @@
   border-image-width: 2;
 }
 
+.general-info-program {
+  position: relative;
+  z-index: 10;
+}
+
 .general-info-program,
 .mobile-general-info-program {
   background-color: #fff;
@@ -153,6 +158,25 @@
   border-bottom-right-radius: 0;
 }
 
+@media only screen and (min-width: 1540px) {
+  .program-details-bottom-container {
+    min-width: 70%;
+  }
+
+  .announcment-details-cards-container {
+    min-width: 70%;
+    position: relative;
+  }
+
+  .announcment-details-paragraph {
+    max-width: 95%;
+  }
+
+  .announcment-details-container {
+    min-height: 100%;
+  }
+}
+
 @media only screen and (max-width: 1050px) {
   .program-details-bottom-container {
     overflow-x: scroll;
@@ -161,6 +185,7 @@
   }
 
   .program-details-dropdown {
+    padding-top: 1rem;
     display: flex;
     background-color: #ededed;
   }

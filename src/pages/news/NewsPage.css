@@ -214,6 +214,7 @@
   .news-page-bottom-container {
     overflow-x: scroll;
     max-width: 100%;
-    padding-top: 1rem;
+    padding-top: 2rem;
+    padding-bottom: 1rem;
   }
 }

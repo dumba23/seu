@@ -202,8 +202,7 @@
 @media only screen and (max-width: 1050px) {
   .announcment-details-bottom-container {
     padding: 0 !important;
-    height: 60px;
-    padding-bottom: 4rem !important;
+    padding-bottom: 1rem !important;
     background-color: #ededed;
     display: flex;
   }
@@ -223,6 +222,7 @@
   .announcment-details-middle-container {
     background-color: #ededed;
     padding: 0;
+    max-height: min-content;
   }
 
   .announcment-details-middle-content {

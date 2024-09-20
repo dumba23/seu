@@ -89,7 +89,7 @@ export default function ProgramExams() {
         <div className={`about-bottom-container ${info.type}`}>
           <div className={`about-empty-div ${info.type}`} />
           <div
-            className="program-page-bottom-container"
+            className="program-details-bottom-container"
             ref={bottomContainerRef}
           >
             <Breadcrumbs

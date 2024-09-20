@@ -20,6 +20,7 @@
 .personal-image {
   width: 422px;
   height: 341px;
+  object-fit: cover;
   border-top-left-radius: 12px;
   border-bottom-left-radius: 12px;
 }
@@ -30,21 +31,21 @@
   padding: 0 3rem;
 }
 
-.personal-right-box h3 {
+.personal-right-box-h3 {
   font-weight: 400;
   font-size: 20px;
   color: #29334f;
   margin-bottom: 0.3rem;
 }
 
-.personal-right-box h5 {
+.personal-right-box-h5 {
   font-size: 12px;
   font-weight: 400;
   color: #29334f;
   margin-bottom: 0.5rem;
 }
 
-.personal-right-box p {
+.personal-right-box-p {
   font-weight: 400;
   font-size: 14px;
   color: #4a4a4a;
@@ -93,6 +94,7 @@
     height: 203px;
     object-fit: cover;
     border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
     margin-bottom: 1rem;
   }
 

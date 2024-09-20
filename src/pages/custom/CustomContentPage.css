@@ -330,9 +330,15 @@
   padding-bottom: 4rem;
   width: 950px;
   height: 700px;
+  position: relative;
+  z-index: 10;
   overflow-y: auto;
   background-color: #ededed;
   border-bottom-right-radius: 4rem;
+}
+
+.about-type7-html-container {
+  flex-wrap: nowrap;
 }
 
 @media only screen and (min-width: 1540px) {
@@ -340,6 +346,7 @@
   .about-type5-html-container,
   .about-type6-html-container,
   .about-type7-html-container,
+  .about-type8-html-container,
   .about-breadcrumbs-container,
   .content-page-bottom-container,
   .about-html-container {
@@ -459,6 +466,9 @@
 .type6-bottom p {
   max-height: 90px;
   overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
 .type7-box {
@@ -641,10 +651,6 @@
 
   .type7-box {
     width: 100%;
-  }
-
-  .type7-bottom {
-    min-height: 140px;
   }
 
   .type7-box p {

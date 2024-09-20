@@ -70,6 +70,7 @@
   display: flex;
   background-color: var(--mainColorOrange);
   color: white;
+  cursor: pointer;
   padding: 0.5rem 3rem;
   border-radius: 0.5rem;
 }

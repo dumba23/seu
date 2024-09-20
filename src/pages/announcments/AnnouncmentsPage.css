@@ -213,4 +213,8 @@
     margin-bottom: 0;
     padding-bottom: 3rem;
   }
+
+  .announcments-page-bottom-container {
+    padding-bottom: 1rem;
+  }
 }
