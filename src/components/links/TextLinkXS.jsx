@@ -1,9 +1,10 @@
+import { Link } from "react-router-dom";
 import "./TextLinkXS.css";
 
-export default function TextLinkXS({ title }) {
+export default function TextLinkXS({ title, url }) {
   return (
-    <a href="#" className="text-link-xs">
+    <Link to={url} className="text-link-xs">
       <span>{title}</span>
-    </a>
+    </Link>
   );
 }

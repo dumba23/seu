@@ -47,7 +47,7 @@ export default function PersonalDetails() {
     const hasTitleInLanguage = info?.program_infos?.some(
       (info) => info.title[i18n.language]
     );
-    console.log(info);
+
     return (
       <div className="about-container">
         <div className="vacancy-page-background-image" />
@@ -94,7 +94,10 @@ export default function PersonalDetails() {
                   title: info.title[i18n.language],
                   link: "",
                 },
-                { title: t("exam_topics"), link: "/programs/exam/" + info.id },
+                info.program_exams.length > 0 && {
+                  title: t("exam_topics"),
+                  link: "/programs/exam/" + info.id,
+                },
               ]}
             />
           </div>
@@ -122,12 +125,14 @@ export default function PersonalDetails() {
                       className="news-page-link-arrow"
                     />
                   </Link>
-                  <Link
-                    to={`/programs/exam/${info.id}`}
-                    className={`vacancy-page-link`}
-                  >
-                    {t("exam_topics")}
-                  </Link>
+                  {info.program_exams.length > 0 && (
+                    <Link
+                      to={`/programs/exam/${info.id}`}
+                      className={`vacancy-page-link`}
+                    >
+                      {t("exam_topics")}
+                    </Link>
+                  )}
                 </>
               )}
               {hasTitleInLanguage && (

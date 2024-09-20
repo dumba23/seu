@@ -34,7 +34,6 @@ export default function ContentPage() {
           res.data.content.visible === i18n.language
         ) {
           setContent(res.data.content);
-
           if (res.data?.content?.child_contents?.length > 0) {
             window.location.replace(
               res.data.content.child_contents[0].page_url
@@ -549,7 +548,7 @@ export default function ContentPage() {
               data={linksData}
             />
           </div>
-          <div className="vacancy-page--content">
+          <div className="vacancy-page-content">
             <div
               className="about-type7-html-container"
               style={{ display: "flex", flexDirection: "column" }}

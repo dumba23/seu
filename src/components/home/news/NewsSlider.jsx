@@ -88,33 +88,35 @@ const NewsSlider = () => {
       >
         {news.map((item, index) => {
           const formattedDate = formatDate(item.date, i18n);
-          return (
-            <div
-              className="news-slider-item"
-              key={index}
-              onClick={() => navigate(`/news/details/${item.id}`)}
-            >
-              <div className="news-slider-item-top-content">
-                <div className="news-slider-overlay">
-                  {formattedDate.day + " " + formattedDate.month}{" "}
+          if (item.visible === "both" || item.visible === i18n.language) {
+            return (
+              <div
+                className="news-slider-item"
+                key={index}
+                onClick={() => navigate(`/news/details/${item.id}`)}
+              >
+                <div className="news-slider-item-top-content">
+                  <div className="news-slider-overlay">
+                    {formattedDate.day + " " + formattedDate.month}{" "}
+                  </div>
+                  <div className="news-slider-image-container">
+                    <img
+                      src={import.meta.env.VITE_API_MEDIA_URL + item.image}
+                      alt="image"
+                      className="news-slider-image"
+                    />
+                  </div>
+                  <div className="news-slider-description">
+                    <h3>{item.title[i18n.language]}</h3>
+                    <p>{item.description[i18n.language]}</p>
+                  </div>
                 </div>
-                <div className="news-slider-image-container">
-                  <img
-                    src={import.meta.env.VITE_API_MEDIA_URL + item.image}
-                    alt="image"
-                    className="news-slider-image"
-                  />
-                </div>
-                <div className="news-slider-description">
-                  <h3>{item.title[i18n.language]}</h3>
-                  <p>{item.description[i18n.language]}</p>
+                <div className="news-slider-read-more">
+                  <div>{t("read_more")}</div>
                 </div>
               </div>
-              <div className="news-slider-read-more">
-                <div>{t("read_more")}</div>
-              </div>
-            </div>
-          );
+            );
+          }
         })}
       </Carousel>
     </div>

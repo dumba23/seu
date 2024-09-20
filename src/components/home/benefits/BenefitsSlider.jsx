@@ -36,23 +36,28 @@ const BenefitsSlider = () => {
   };
 
   useEffect(() => {
-    const handleDragStart = (event) => {
-      event.preventDefault(); // Prevent default scroll behavior
+    const handleTouchStart = (event) => {
+      if (event.target.closest(".react-multi-carousel-list")) {
+        // Disable Y-axis scrolling
+        document.body.style.overflowY = "hidden";
+      }
     };
 
-    const carouselNode = carouselRef.current?.container;
-    if (carouselNode) {
-      carouselNode.addEventListener("touchmove", handleDragStart, {
-        passive: false,
-      });
-      carouselNode.addEventListener("mousedown", handleDragStart);
-    }
+    const handleTouchEnd = () => {
+      // Re-enable Y-axis scrolling
+      document.body.style.overflowY = "auto";
+    };
+
+    window.addEventListener("touchstart", handleTouchStart, { passive: false });
+    window.addEventListener("touchend", handleTouchEnd);
+    window.addEventListener("mousedown", handleTouchStart);
+    window.addEventListener("mouseup", handleTouchEnd);
 
     return () => {
-      if (carouselNode) {
-        carouselNode.removeEventListener("touchmove", handleDragStart);
-        carouselNode.removeEventListener("mousedown", handleDragStart);
-      }
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchend", handleTouchEnd);
+      window.removeEventListener("mousedown", handleTouchStart);
+      window.removeEventListener("mouseup", handleTouchEnd);
     };
   }, []);
 

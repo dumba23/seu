@@ -120,6 +120,7 @@ export default function ContentPage() {
         <div className={`about-bottom-container ${contentData.type}`}>
           <div className={`about-empty-div ${contentData.type}`} />
           <div className="content-page-bottom-container">
+            {console.log(menuData, submenuData, contentData)}
             <Breadcrumbs
               data={[
                 { title: t("home"), link: "/" },

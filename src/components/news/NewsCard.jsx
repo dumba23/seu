@@ -15,7 +15,13 @@ export default function NewsCard({ data }) {
     >
       <div className="news-card-image-container">
         <img
-          src={import.meta.env.VITE_API_MEDIA_URL + data.image}
+          src={
+            data.image_en !== null
+              ? i18n.language === "en"
+                ? import.meta.env.VITE_API_MEDIA_URL + data.image_en
+                : import.meta.env.VITE_API_MEDIA_URL + data.image
+              : import.meta.env.VITE_API_MEDIA_URL + data.image
+          }
           alt="news"
           className="news-card-image"
         />

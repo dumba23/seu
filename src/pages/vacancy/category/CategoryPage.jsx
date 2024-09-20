@@ -36,12 +36,13 @@ export default function CategoryPage() {
 
   let linksData = [
     {
-      title: "ვაკანსიები",
+      title: t("vacancies"),
       link: "/vacancies",
     },
   ];
 
   if (vacancies.length > 0) {
+    linksData = [];
     vacancies.forEach((vac) => {
       linksData = [
         ...linksData,
@@ -82,7 +83,7 @@ export default function CategoryPage() {
             className="category-page-middle-content"
             ref={middleContainerRef}
           >
-            <div style={{ marginLeft: "1rem" }}>ვაკანსიები</div>
+            <div style={{ marginLeft: "1rem" }}>{t("vacancies")}</div>
           </div>
         </div>
         <div
@@ -99,7 +100,10 @@ export default function CategoryPage() {
               },
             ]}
           />
-          <BreadcrumbsMobile activeTitle={t("vacancies")} data={linksData} />
+          <BreadcrumbsMobile
+            activeTitle={vacancy.title[i18n.language]}
+            data={linksData}
+          />
         </div>
         <div className="category-page-content">
           <div className="category-page-cards-container">

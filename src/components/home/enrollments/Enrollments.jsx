@@ -21,7 +21,7 @@ export default function Enrollments() {
 
   useEffect(() => {
     const checkScreenSize = () => {
-      setIsSmallScreen(window.innerWidth <= 475);
+      setIsSmallScreen(window.innerWidth <= 1000);
     };
 
     checkScreenSize();
@@ -162,7 +162,12 @@ export default function Enrollments() {
                 </div>
                 <div>{t("scroll_down")}</div>
               </button>
-              <button className="enrollments-button-explore">
+              <button
+                className="enrollments-button-explore"
+                onClick={() =>
+                  window.location.replace("https://new.seu.edu.ge/76#menuId=2")
+                }
+              >
                 <div style={{ marginRight: ".5rem" }}>{t("learn_more")}</div>
                 <img src={ArrowRight} alt="enter" />
               </button>
