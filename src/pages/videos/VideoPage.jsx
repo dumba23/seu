@@ -22,16 +22,16 @@ export default function VideoPage() {
   useEffect(() => {
     const callFetchVideos = async () => {
       try {
-        const res = await fetchVideos(currentPage, perPage);
-        setVideos(res.data.data);
-        setTotalPages(res.data.last_page);
+        const res = await fetchVideos(currentPage, perPage, i18n.language);
+        setVideos(res?.data?.data);
+        setTotalPages(res?.data?.last_page);
       } catch (err) {
         console.error(err);
       }
     };
 
     callFetchVideos();
-  }, [currentPage]);
+  }, [currentPage, i18n.language]);
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { fetchVideo } from "../../services/video";
-import { fetchMainTitle } from "../../services/title";
+import { fetchLockScreen } from "../../services/home";
 
 import Benefits from "../../components/home/benefits/Benefits";
 import Partners from "../../components/home/partners/Partners";
@@ -13,7 +13,6 @@ import News from "../../components/home/news/News";
 import ScrollImg from "../../assets/images/scroll.svg";
 import ScrollDownImg from "../../assets/images/scroll-down.svg";
 import "./HomePage.css";
-import { Link } from "react-router-dom";
 
 export default function HomePage() {
   const { t, i18n } = useTranslation();
@@ -22,26 +21,17 @@ export default function HomePage() {
   const links = useSelector((state) => state.links.data.links) || [];
 
   useEffect(() => {
-    const callFetchVideo = async () => {
+    const callFetchLockScreen = async () => {
       try {
-        const res = await fetchVideo();
+        const res = await fetchLockScreen();
         setVideo(res.data.video);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
-    const callFetchMainTitle = async () => {
-      try {
-        const res = await fetchMainTitle();
         setTitle(...res.data.title);
       } catch (err) {
         console.error(err);
       }
     };
 
-    callFetchMainTitle();
-    callFetchVideo();
+    callFetchLockScreen();
   }, []);
 
   const scrollToBenefits = () => {

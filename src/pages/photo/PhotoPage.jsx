@@ -23,7 +23,7 @@ export default function PhotoPage() {
   useEffect(() => {
     const callFetchVideos = async () => {
       try {
-        const res = await fetchPhotos(currentPage, perPage);
+        const res = await fetchPhotos(currentPage, perPage, i18n.language);
         setPhotos(res.data.data);
         setTotalPages(res.data.last_page);
       } catch (err) {
@@ -32,7 +32,7 @@ export default function PhotoPage() {
     };
 
     callFetchVideos();
-  }, [currentPage]);
+  }, [currentPage, i18n.language]);
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);

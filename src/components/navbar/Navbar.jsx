@@ -33,12 +33,11 @@ import "./Navbar.css";
 
 function Navbar() {
   const { t, i18n } = useTranslation();
-  const dispatch = useDispatch();
   const location = useLocation();
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [isSearchExpanded, setIsSearchExpanded] = useState(false);
-  const [menus, setMenus] = useState([]);
-  const [activeMenu, setActiveMenu] = useState([]);
+  const menus = useSelector((state) => state.menus);
+  const [activeMenu, setActiveMenu] = useState(menus?.data[0] || []);
   const links = useSelector((state) => state.links.data.links) || [];
   const contacts = useSelector((state) => state.links.data.socials) || [];
   const hashWithoutHashSymbol = location.hash.slice(1);
@@ -130,32 +129,15 @@ function Navbar() {
   }, [location.pathname]);
 
   useEffect(() => {
-    const callFetchMenus = async () => {
-      dispatch(fetchMenusStart());
-
-      try {
-        const res = await fetchMenus();
-
-        setMenus(res.data.menus);
-        dispatch(fetchMenusSuccess(res.data.menus));
-        if (menuId) {
-          const menu = res.data.menus.find((menu) => menu.id == menuId);
-
-          setActiveMenu(menu);
-        } else {
-          setActiveMenu(res.data.menus[0]);
-        }
-      } catch (err) {
-        dispatch(fetchMenusFailure(err.message));
-        console.error(err);
-      }
-    };
-
-    callFetchMenus();
-  }, []);
+    if (menus.data.length > 0 && activeMenu.length === 0 && menuId) {
+      setActiveMenu(menus.data.find((menu) => menu.id == menuId));
+    } else if (menus.data.length > 0 && activeMenu.length === 0) {
+      setActiveMenu(menus.data[0]);
+    }
+  }, [menus.data]);
 
   const changeActiveMenu = (id) => {
-    const menu = menus.find((menu) => menu.id == id);
+    const menu = menus?.data.find((menu) => menu.id == id);
 
     setActiveMenu(menu);
   };
@@ -288,7 +270,7 @@ function Navbar() {
           </div>
           <div className="nav-links">
             <div className="nav-links-left">
-              {menus.map((menu) => {
+              {menus?.data.map((menu) => {
                 return (
                   <React.Fragment key={menu.id}>
                     <TextLink
@@ -369,7 +351,13 @@ function Navbar() {
             {links &&
               links.map((link) => {
                 return (
-                  <TextLinkXS key={link.id} title={link.title[i18n.language]} />
+                  <TextLinkXS
+                    key={link.id}
+                    url={
+                      i18n.language === "ka" ? link.page_url : link.page_url_en
+                    }
+                    title={link.title[i18n.language]}
+                  />
                 );
               })}
           </div>
