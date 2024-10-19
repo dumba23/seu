@@ -1,21 +1,29 @@
-import { useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { fetchNews } from "../../services/news";
+import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
+import {
+  fetchNewsStart,
+  fetchNewsFailure,
+  fetchNewsSuccess,
+} from "../../store/slices/newsSlice";
 
+import Pagination from "../../components/pagination/Pagination";
 import Breadcrumbs from "../../components/breadcrumbs/Breadcrumbs";
 import NewsCard from "../../components/news/NewsCard";
 
 import ArrowRight from "../../assets/images/arrow-right-orange.svg";
-import NewsImage from "../../assets/images/news-card-image.jpeg";
 
 import "./NewsPage.css";
 import BreadcrumbsMobile from "../../components/breadcrumbs/BreadcrumbsMobile";
 
 export default function NewsPage() {
   const { t, i18n } = useTranslation();
+  const dispatch = useDispatch();
   const news = useSelector((state) => state.news.data);
   const menus = useSelector((state) => state.menus.data);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const middleContainerRef = useRef(null);
   const bottomContainerRef = useRef(null);
@@ -32,6 +40,21 @@ export default function NewsPage() {
     (menu) => menu.id === Number(submenuData?.menu_id)
   );
 
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    fetchData(i18n.language, pageNumber);
+  };
+
+  const fetchData = async (lang, pageNumber) => {
+    dispatch(fetchNewsStart());
+    try {
+      const response = await fetchNews(lang, pageNumber);
+      dispatch(fetchNewsSuccess(response.data.news));
+    } catch (error) {
+      dispatch(fetchNewsFailure(error.message));
+    }
+  };
+
   let linksData = [];
 
   if (menuData) {
@@ -39,6 +62,8 @@ export default function NewsPage() {
       let pageLink =
         submenu.contents.length > 0
           ? submenu.contents[0].page_url
+          : submenu.page_url
+          ? submenu.page_url
           : submenu.template.page_url;
       linksData = [
         ...linksData,
@@ -60,7 +85,13 @@ export default function NewsPage() {
 
   return (
     <div className="news-page-container">
-      <div className="news-page-background-image" />
+      <div className="news-page-background-image">
+        <h1 className="background-image-text">
+          {menuData?.title[i18n.language]}
+          <span className="circle" />
+          <div className="element-with-border" />
+        </h1>
+      </div>
       <div className="news-page-middle-container">
         <div className="news-page-middle-content" ref={middleContainerRef}>
           <div style={{ marginLeft: "1rem" }}>{t("news_title")}</div>
@@ -70,18 +101,24 @@ export default function NewsPage() {
         <Breadcrumbs
           data={[
             { title: t("home"), link: "/" },
-            { title: t("news_title"), link: "/news" },
+            { title: menuData?.title[i18n.language], link: "#" },
+            { title: submenuData?.title[i18n.language], link: "" },
           ]}
         />
         <BreadcrumbsMobile activeTitle={t("news_title")} data={linksData} />
       </div>
       <div className="news-page-content">
         <div className="news-page-cards-container">
-          {news.map((card, idx) => {
+          {news?.data?.map((card, idx) => {
             if (card.visible === "both" || card.visible === i18n.language) {
               return <NewsCard data={card} key={idx} />;
             }
           })}
+          <Pagination
+            currentPage={news.current_page}
+            totalPages={news.last_page}
+            onPageChange={handlePageChange}
+          />
         </div>
         <div className="news-page-links-container">
           {linksData.map((item, idx) => {

@@ -39,6 +39,8 @@ export default function VacancyPage() {
       let pageLink =
         submenu.contents.length > 0
           ? submenu.contents[0].page_url
+          : submenu.page_url
+          ? submenu.page_url
           : submenu.template.page_url;
       linksData = [
         ...linksData,
@@ -60,7 +62,13 @@ export default function VacancyPage() {
 
   return (
     <div className="vacancy-page-container">
-      <div className="vacancy-page-background-image" />
+      <div className="vacancy-page-background-image">
+        <h1 className="background-image-text">
+          {menuData?.title[i18n.language]}
+          <span className="circle" />
+          <div className="element-with-border" />
+        </h1>
+      </div>
       <div className="vacancy-page-middle-container">
         <div className="vacancy-page-middle-content" ref={middleContainerRef}>
           <div style={{ marginLeft: "1rem" }}>{t("vacancies")}</div>
@@ -70,7 +78,8 @@ export default function VacancyPage() {
         <Breadcrumbs
           data={[
             { title: t("home"), link: "/" },
-            { title: t("vacancies"), link: "/vacancies" },
+            { title: menuData?.title[i18n.language], link: "#" },
+            { title: submenuData?.title[i18n.language], link: "" },
           ]}
         />
         <BreadcrumbsMobile activeTitle={t("vacancies")} data={linksData} />

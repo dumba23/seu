@@ -22,6 +22,7 @@ const BenefitsSlider = () => {
   const [activeIndex, setActiveIndex] = useState(stories.length);
   const [isPaused, setIsPaused] = useState(false);
   const carouselRef = useRef(null);
+  const isMobile = window.innerWidth < 750;
 
   const handlePlayerImageClick = (index) => {
     setIsPaused(true);
@@ -35,31 +36,31 @@ const BenefitsSlider = () => {
     setActiveIndex(state.currentSlide);
   };
 
-  useEffect(() => {
-    const handleTouchStart = (event) => {
-      if (event.target.closest(".react-multi-carousel-list")) {
-        // Disable Y-axis scrolling
-        document.body.style.overflowY = "hidden";
-      }
-    };
+  // useEffect(() => {
+  //   const handleTouchStart = (event) => {
+  //     if (event.target.closest(".react-multi-carousel-list")) {
+  //       // Disable Y-axis scrolling
+  //       document.body.style.overflowY = "hidden";
+  //     }
+  //   };
 
-    const handleTouchEnd = () => {
-      // Re-enable Y-axis scrolling
-      document.body.style.overflowY = "auto";
-    };
+  //   const handleTouchEnd = () => {
+  //     // Re-enable Y-axis scrolling
+  //     document.body.style.overflowY = "auto";
+  //   };
 
-    window.addEventListener("touchstart", handleTouchStart, { passive: false });
-    window.addEventListener("touchend", handleTouchEnd);
-    window.addEventListener("mousedown", handleTouchStart);
-    window.addEventListener("mouseup", handleTouchEnd);
+  //   window.addEventListener("touchstart", handleTouchStart, { passive: false });
+  //   window.addEventListener("touchend", handleTouchEnd);
+  //   window.addEventListener("mousedown", handleTouchStart);
+  //   window.addEventListener("mouseup", handleTouchEnd);
 
-    return () => {
-      window.removeEventListener("touchstart", handleTouchStart);
-      window.removeEventListener("touchend", handleTouchEnd);
-      window.removeEventListener("mousedown", handleTouchStart);
-      window.removeEventListener("mouseup", handleTouchEnd);
-    };
-  }, []);
+  //   return () => {
+  //     window.removeEventListener("touchstart", handleTouchStart);
+  //     window.removeEventListener("touchend", handleTouchEnd);
+  //     window.removeEventListener("mousedown", handleTouchStart);
+  //     window.removeEventListener("mouseup", handleTouchEnd);
+  //   };
+  // }, []);
 
   return (
     <div className="benefits-slider-container">
@@ -67,10 +68,10 @@ const BenefitsSlider = () => {
         ref={carouselRef}
         className="benefits-slider"
         responsive={responsive}
-        swipeable={true}
-        draggable={true}
+        swipeable={isMobile ? false : true}
+        draggable={isMobile ? false : true}
         arrows={false}
-        infinite={true}
+        infinite={isMobile ? false : true}
         partialVisible={true}
         pauseOnHover={false}
         beforeChange={handleSlideChange}

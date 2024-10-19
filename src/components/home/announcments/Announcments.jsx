@@ -16,14 +16,12 @@ export default function Announcments() {
       <h1 className="announcments-title">{t("announcements_title")}</h1>
 
       <div>
-        {/* <div className="announcments-button-container"> */}
         <button
           className="announcments-button all"
           onClick={() => navigate("/announcments")}
         >
           {t("all_announcements")}
         </button>
-        {/* </div> */}
 
         <AnnouncmentSlider />
       </div>

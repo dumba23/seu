@@ -40,6 +40,10 @@
   max-width: 500px;
   font-weight: 400;
   font-size: 18px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  overflow: hidden;
   color: #383e4d;
   font-feature-settings: "case" on;
 }
@@ -111,5 +115,9 @@
     max-width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+
+  .news-card-title {
+    font-size: 16px;
   }
 }

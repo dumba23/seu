@@ -4,7 +4,7 @@
   "ka": "GEO",
   "close": "close",
   "explore_more": "Explore More",
-  "benefits_title": "What sets Seu apart",
+  "benefits_title": "More About Us",
   "partners_title": "Our partner universities",
   "all_partners": "All Partners",
   "enrollment_title": "Enrollment",
@@ -47,5 +47,10 @@
   "photo_gallery": "Photo gallery",
   "video_gallery": "Video gallery",
   "partners": "Partners",
-  "training_center": "Training center"
+  "training_center": "Training center",
+  "faculty": "Faculty",
+  "programs": "Programs",
+  "university": "University",
+  "media": "Media",
+  "maintenance": "Website Is Under Maintenance"
 }

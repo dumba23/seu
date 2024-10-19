@@ -8,11 +8,19 @@
   padding-left: 4rem;
   padding-bottom: 4rem;
   width: 950px;
-  height: 990px;
-  overflow-y: auto;
   background-color: #e3e3e3;
-  border-bottom-right-radius: 4rem;
+  border-bottom-right-radius: 32px;
   z-index: 10;
+}
+
+.photo-page-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.photo-page-container {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 .photo-container {

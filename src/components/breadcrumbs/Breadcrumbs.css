@@ -30,7 +30,7 @@
 }
 
 .breadcrumbs-title {
-  font-size: 10px;
+  font-size: 13px;
   font-weight: 400;
 }
 
@@ -40,6 +40,7 @@
 
 .breadcrumbs-content.active {
   border-bottom: 1px solid var(--mainColorOrange);
+  margin-right: 10px;
 }
 
 .breadcrumbs-arrow {
@@ -50,5 +51,19 @@
 @media only screen and (max-width: 1050px) {
   .breadcrumbs-container {
     display: none;
+  }
+}
+
+@media only screen and (max-width: 1420px) {
+  .breadcrumbs-title {
+    /* font-size: 10px; */
+  }
+
+  .breadcrumbs-content {
+    margin-top: 1rem;
+  }
+
+  .breadcrumbs-arrow {
+    margin-top: 1rem;
   }
 }

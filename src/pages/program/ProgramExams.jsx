@@ -68,7 +68,11 @@ export default function ProgramExams() {
     return (
       <div className="about-container">
         <div className="vacancy-page-background-image">
-          {/* <h1>{info?.child_content?.custom_contents.title[i18n.language]}</h1> */}
+          <h1 className="background-image-text">
+            {t("programs")}
+            <span className="circle" />
+            <div className="element-with-border" />
+          </h1>
         </div>
         <div className="rector-wrapper">
           <div className="rector-container type2" ref={middleContainerRef}>
@@ -96,8 +100,7 @@ export default function ProgramExams() {
               data={[
                 { title: t("home"), link: "/" },
                 {
-                  title:
-                    info?.child_content?.custom_contents.title[i18n.language],
+                  title: t("faculty"),
                   link: info?.child_content?.custom_contents.page_url,
                 },
                 {

@@ -152,7 +152,6 @@
 
 .footer-links-pages li:hover span {
   transform: translateX(10px);
-  font-weight: 900;
   font-family: FiraGO;
   opacity: 1;
   color: #fff;
@@ -223,6 +222,7 @@
 
 .footer-end {
   margin-top: 2rem;
+  padding-bottom: 2rem;
   width: 90%;
   display: flex;
   justify-content: space-between;
@@ -347,6 +347,7 @@
   .footer-end {
     position: absolute;
     bottom: 3rem;
+    padding-bottom: 0;
   }
 
   .footer-image {

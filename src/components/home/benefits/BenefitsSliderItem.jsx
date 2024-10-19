@@ -100,6 +100,7 @@ export default function BenefitsSliderItem({
       {isVideo(item.url) ? (
         <>
           <video
+            crossOrigin="anonymous"
             src={`${import.meta.env.VITE_API_MEDIA_URL + item.url}`}
             className="benefits-media"
             controls={false}

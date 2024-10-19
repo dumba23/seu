@@ -8,7 +8,7 @@
   margin-bottom: 2rem;
   flex-direction: column;
   font-family: "FiraGO";
-  max-width: 845px;
+  width: 70%;
   position: relative;
   font-feature-settings: "case" on;
 }

@@ -44,6 +44,7 @@
 }
 
 .partners-button {
+  font-family: FiraGO;
   background: #f3f3f3;
   border: none;
   color: #214177;
@@ -165,7 +166,16 @@
 
   .partners-overview-container {
     padding: 2rem 0;
+    padding-bottom: 1rem;
     height: auto;
+  }
+
+  .partners-overview-container .react-multi-carousel-track {
+    padding-bottom: 12px;
+  }
+
+  .react-multi-carousel-track::-webkit-scrollbar {
+    display: none;
   }
 
   .partners-description {
@@ -219,5 +229,23 @@
 
   .partners-img {
     width: 120px;
+  }
+}
+
+@media only screen and (max-width: 410px) {
+  .partners-slider-item {
+    max-width: 130px;
+    width: 130px;
+    min-width: 130px;
+    height: 135px;
+  }
+}
+
+@media only screen and (max-width: 385px) {
+  .partners-slider-item {
+    max-width: 120px;
+    width: 120px;
+    min-width: 120px;
+    height: 125px;
   }
 }

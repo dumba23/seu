@@ -11,17 +11,27 @@ import { useTranslation } from "react-i18next";
 
 export default function Enrollments() {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [showColumn4, setShowColumn4] = useState(true);
   const { t, i18n } = useTranslation();
   const enrollmentsSliders =
     useSelector((state) => state.enrollments.data.sliders) || [];
   const enrollmentsContent =
     useSelector((state) => state.enrollments.data.content) || [];
 
+  const filteredSliders = enrollmentsSliders.map((innerArray) =>
+    innerArray.filter(
+      (slider) => slider.visible === "both" || slider.visible === i18n.language
+    )
+  );
+
   const columnRef = useRef(null);
 
   useEffect(() => {
     const checkScreenSize = () => {
-      setIsSmallScreen(window.innerWidth <= 1000);
+      const width = window.innerWidth;
+
+      setIsSmallScreen(width <= 1000);
+      setShowColumn4(width > 1350);
     };
 
     checkScreenSize();
@@ -52,6 +62,7 @@ export default function Enrollments() {
 
       let currentPositionOdd = 0;
       let currentPositionEven = -height;
+
       const moveColumn = () => {
         if (column.id[column.id.length - 1] % 2) {
           currentPositionOdd--;
@@ -70,21 +81,38 @@ export default function Enrollments() {
         }
       };
 
-      let intervalId = setInterval(moveColumn, 40);
+      let intervalId = setInterval(moveColumn, 30);
 
-      if (!isSmallScreen) {
+      const startAnimation = () => {
+        intervalId = setInterval(moveColumn, 30);
+      };
+
+      const stopAnimation = () => {
+        clearInterval(intervalId);
+      };
+
+      if (isSmallScreen) {
+        // Toggle animation on click
+        column.addEventListener("click", () => {
+          if (intervalId) {
+            stopAnimation();
+            intervalId = null; // Pause
+          } else {
+            startAnimation(); // Resume
+          }
+        });
+      } else {
         column.addEventListener("mouseenter", () => clearInterval(intervalId));
         column.addEventListener("mouseleave", () => {
           clearInterval(intervalId);
           intervalId = setInterval(moveColumn, 30);
         });
       }
+
       const calculateCenterPosition = (hoveredCard) => {
         const columnRect = column.getBoundingClientRect();
         const hoveredCardRect = hoveredCard.getBoundingClientRect();
         const cardTopRelativeToColumn = hoveredCardRect.top - columnRect.top;
-        const cardBottomRelativeToColumn =
-          hoveredCardRect.bottom - columnRect.top;
         const columnHeight = column.clientHeight;
         const hoveredCardHeight = hoveredCard.clientHeight;
 
@@ -108,7 +136,7 @@ export default function Enrollments() {
         column.style.transform = `translateY(${centerPosition}px)`;
       };
 
-      if (!isSmallScreen) {
+      if (!isSmallScreen && showColumn4) {
         // Add event listeners to each card
         column
           .querySelectorAll(".enrollments-animated-container")
@@ -134,7 +162,7 @@ export default function Enrollments() {
     window.scrollTo({ top: offset, behavior: "smooth" });
   };
 
-  if (enrollmentsContent.length !== 0 && enrollmentsSliders.length !== 0) {
+  if (enrollmentsContent.length !== 0 && filteredSliders.length !== 0) {
     return (
       <div className="enrollments-container">
         <div className="enrollments-content">
@@ -165,7 +193,7 @@ export default function Enrollments() {
               <button
                 className="enrollments-button-explore"
                 onClick={() =>
-                  window.location.replace("https://new.seu.edu.ge/76#menuId=2")
+                  window.location.replace("https://seu.edu.ge/76#menuId=2")
                 }
               >
                 <div style={{ marginRight: ".5rem" }}>{t("learn_more")}</div>
@@ -180,41 +208,52 @@ export default function Enrollments() {
         </div>
         <div className="enrollments-grid-container">
           <div className="enrollments-animted" ref={columnRef}>
-            {enrollmentsSliders.map((column, columnIndex) => (
-              <div
-                className="enrollments-column"
-                key={columnIndex}
-                id={`column-${columnIndex}`}
-              >
-                {column.map((item, itemIndex) => (
-                  <div
-                    className="enrollments-animated-container"
-                    key={itemIndex}
-                  >
-                    <img
-                      src={import.meta.env.VITE_API_MEDIA_URL + item.image}
-                      alt="image"
-                      className="enrollments-animated-img"
-                    />
-                    <h3 className="enrollments-animated-author">
-                      {item.title[i18n.language]}
-                    </h3>
-                    <h5 className="enrollments-animated-degree">
-                      {item.sub_title[i18n.language]}
-                    </h5>
-                    <div className="enrollments-animated-paragraph">
-                      <img src={QuotationMarksImage} alt="quotation marks" />
-                      <p
-                        className="enrollments-animated-paragraph-description"
-                        dangerouslySetInnerHTML={{
-                          __html: item.content[i18n.language],
-                        }}
-                      ></p>
+            {filteredSliders.map((column, columnIndex) => {
+              if (columnIndex == 4 && !showColumn4) {
+                return null;
+              }
+              if (
+                (columnIndex == 2 || columnIndex == 3 || columnIndex == 4) &&
+                isSmallScreen
+              ) {
+                return null;
+              }
+              return (
+                <div
+                  className="enrollments-column"
+                  key={columnIndex}
+                  id={`column-${columnIndex}`}
+                >
+                  {column.map((item, itemIndex) => (
+                    <div
+                      className="enrollments-animated-container"
+                      key={itemIndex}
+                    >
+                      <img
+                        src={import.meta.env.VITE_API_MEDIA_URL + item.image}
+                        alt="image"
+                        className="enrollments-animated-img"
+                      />
+                      <h3 className="enrollments-animated-author">
+                        {item.title[i18n.language]}
+                      </h3>
+                      <h5 className="enrollments-animated-degree">
+                        {item.sub_title[i18n.language]}
+                      </h5>
+                      <div className="enrollments-animated-paragraph">
+                        <img src={QuotationMarksImage} alt="quotation marks" />
+                        <p
+                          className="enrollments-animated-paragraph-description"
+                          dangerouslySetInnerHTML={{
+                            __html: item.content[i18n.language],
+                          }}
+                        ></p>
+                      </div>
                     </div>
-                  </div>
-                ))}
-              </div>
-            ))}
+                  ))}
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>

@@ -84,7 +84,7 @@
 
 .home-submenu-container {
   position: absolute;
-  top: 15%;
+  top: 8rem;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 100%;
@@ -109,26 +109,33 @@
   cursor: pointer;
   min-width: max-content;
   text-decoration: none;
-  font-size: 14px;
+  font-size: 15px;
   position: relative;
   width: 25%;
   display: flex;
   justify-content: center;
   align-items: center;
-  /* border-right: 1px solid var(--mainColorGray); */
   font-family: "FiraGO";
   font-feature-settings: "case" on;
-  font-size: 14px;
   padding: 1rem 10px;
   height: 100%;
+  font-weight: 400;
   text-transform: uppercase;
   transition: all 0.3s;
 }
 
+@keyframes fontUp {
+  0% {
+    font-weight: 800;
+  }
+
+  100% {
+    font-weight: 800;
+  }
+}
+
 .submenu-item:hover {
-  font-weight: 600;
-  font-size: 14.1px;
-  transition: all 0.3s;
+  animation: fontUp 0.3s infinite;
 }
 
 .submenu-item:last-child {
@@ -163,4 +170,10 @@
   width: 1px;
   background-color: #878686;
   display: flex;
+}
+
+@media only screen and (max-width: 1350px) {
+  .submenu-item {
+    font-size: 13px;
+  }
 }

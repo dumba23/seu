@@ -77,8 +77,18 @@
   width: 950px;
   overflow-y: scroll;
   min-height: 400px;
-  max-height: 520px;
   background-color: #ededed;
+  border-bottom-right-radius: 32px;
+}
+
+.vacancy-page-cards-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.vacancy-page-cards-container {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 .vacancy-page-content {

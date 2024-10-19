@@ -18,10 +18,12 @@ export default function Partners() {
       <div className="partners-overview-container">
         <h1 className="partners-title">{t("partners_title")}</h1>
         <h3 className="partners-description">
-          {partners && partners.title && partners.title[0].title[i18n.language]}
+          {partners && partners.title && partners?.title?.title[i18n.language]}
         </h3>
         <PartnersSlider
-          stories={partners.cards !== undefined ? partners.cards : []}
+          stories={
+            partners?.cards?.data !== undefined ? partners?.cards?.data : []
+          }
           lang={i18n.language}
         />
         <button

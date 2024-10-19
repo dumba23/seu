@@ -54,7 +54,12 @@ export default function VideoPage() {
 
   return (
     <div className="about-container">
-      <div className="vacancy-page-background-image" />
+      <div className="vacancy-page-background-image">
+        <h1 className="background-image-text">
+          {t("media")} <span className="circle" />
+          <div className="element-with-border" />
+        </h1>
+      </div>
       <div className="vacancy-page-middle-container">
         <div className="vacancy-page-middle-content">
           <div className="vacancy-page-middle-content-wrapper">
@@ -68,7 +73,7 @@ export default function VideoPage() {
           <Breadcrumbs
             data={[
               { title: t("home"), link: "/" },
-              { title: t("media_and_gallery"), link: "/videos" },
+              { title: t("media"), link: "/videos" },
               { title: t("video_gallery"), link: "/videos" },
             ]}
           />

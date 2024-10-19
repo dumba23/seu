@@ -69,16 +69,14 @@ export default function ContentPage() {
   let linksData = [];
 
   if (Object.keys(content).length !== 0) {
-    linksData = [
-      ...linksData,
-      { title: content.title[i18n.language], link: content.page_url },
-    ];
     if (content?.child_contents) {
       content?.child_contents.forEach((child) => {
-        linksData = [
-          ...linksData,
-          { title: child.title[i18n.language], link: child.page_url },
-        ];
+        if (child.visible === "both" || child.visible == i18n.language) {
+          linksData = [
+            ...linksData,
+            { title: child.title[i18n.language], link: child.page_url },
+          ];
+        }
       });
     }
   }
@@ -87,10 +85,12 @@ export default function ContentPage() {
     if (parent?.child_contents) {
       parent?.child_contents.forEach((child) => {
         if (!linksData.some((linkObj) => linkObj.link === child.page_url)) {
-          linksData = [
-            ...linksData,
-            { title: child.title[i18n.language], link: child.page_url },
-          ];
+          if (child.visible === "both" || child.visible == i18n.language) {
+            linksData = [
+              ...linksData,
+              { title: child.title[i18n.language], link: child.page_url },
+            ];
+          }
         }
       });
     }
@@ -107,7 +107,13 @@ export default function ContentPage() {
   ) {
     return (
       <div className="about-container">
-        <div className="vacancy-page-background-image" />
+        <div className="vacancy-page-background-image">
+          <h1 className="background-image-text">
+            {content?.custom_contents?.title[i18n.language] || ""}
+            <span className="circle" />
+            <div className="element-with-border" />
+          </h1>
+        </div>
         {content.type === "type1" && (
           <div className="rector-wrapper">
             <div className="rector-container">
@@ -159,9 +165,24 @@ export default function ContentPage() {
             />
           </div>
         )}
-
         <div className={`about-bottom-container ${content.type}`}>
           <div className={`about-empty-div ${content.type}`} />
+          <div className="content-page-bottom-container">
+            <Breadcrumbs
+              data={[
+                { title: t("home"), link: "/" },
+                {
+                  title: content?.custom_contents?.title[i18n.language],
+                  link: content?.custom_contents?.page_url,
+                },
+                { title: content.title[i18n.language], link: "#" },
+              ]}
+            />
+            <BreadcrumbsMobile
+              activeTitle={content.title[i18n.language]}
+              data={linksData}
+            />
+          </div>
           <div className="about-content">
             <div className="about-html-container">
               {content?.html[i18n.language] && (
@@ -207,7 +228,7 @@ export default function ContentPage() {
       <div className="type3-container">
         <div className="type3-animated-container">
           <h1 className="type3-title">{content.title[i18n.language]}</h1>
-          <div className="type-3-box">
+          <Link className="type-3-box" to={content.link_1[i18n.language]}>
             <div
               className="box-image"
               style={{
@@ -219,8 +240,8 @@ export default function ContentPage() {
               <h5>{content.title_1[i18n.language]}</h5>
               <Link to={content.link_1[i18n.language]}>{t("learn_more")}</Link>
             </div>
-          </div>
-          <div className="type-3-box">
+          </Link>
+          <Link className="type-3-box" to={content.link_2[i18n.language]}>
             <div
               className="box-image"
               style={{
@@ -232,8 +253,8 @@ export default function ContentPage() {
               <h5>{content.title_2[i18n.language]}</h5>
               <Link to={content.link_2[i18n.language]}>{t("learn_more")}</Link>
             </div>
-          </div>
-          <div className="type-3-box">
+          </Link>
+          <Link className="type-3-box" to={content.link_3[i18n.language]}>
             <div
               className="box-image"
               style={{
@@ -245,8 +266,8 @@ export default function ContentPage() {
               <h5>{content.title_3[i18n.language]}</h5>
               <Link to={content.link_3[i18n.language]}>{t("learn_more")}</Link>
             </div>
-          </div>
-          <div className="type-3-box">
+          </Link>
+          <Link className="type-3-box" to={content.link_4[i18n.language]}>
             <div
               className="box-image"
               style={{
@@ -258,14 +279,20 @@ export default function ContentPage() {
               <h5>{content.title_4[i18n.language]}</h5>
               <Link to={content.link_4[i18n.language]}>{t("learn_more")}</Link>
             </div>
-          </div>
+          </Link>
         </div>
       </div>
     );
   } else if (Object.keys(content).length !== 0 && content.type === "type4") {
     return (
       <div className="about-container">
-        <div className="vacancy-page-background-image" />
+        <div className="vacancy-page-background-image">
+          <h1 className="background-image-text">
+            {content?.custom_contents?.title[i18n.language] || ""}
+            <span className="circle" />
+            <div className="element-with-border" />
+          </h1>
+        </div>
         {content.type === "type4" && (
           <div className="rector-wrapper">
             <div className="rector-container type2">
@@ -287,6 +314,10 @@ export default function ContentPage() {
             <Breadcrumbs
               data={[
                 { title: t("home"), link: "/" },
+                {
+                  title: content?.custom_contents?.title[i18n.language],
+                  link: content?.custom_contents?.page_url,
+                },
                 { title: content.title[i18n.language], link: "#" },
               ]}
             />
@@ -344,7 +375,13 @@ export default function ContentPage() {
   } else if (Object.keys(content).length !== 0 && content.type === "type5") {
     return (
       <div className="about-container">
-        <div className="vacancy-page-background-image" />
+        <div className="vacancy-page-background-image">
+          <h1 className="background-image-text">
+            {content?.custom_contents?.title[i18n.language] || ""}
+            <span className="circle" />
+            <div className="element-with-border" />
+          </h1>
+        </div>
         {content.type === "type5" && (
           <div className="rector-wrapper">
             <div className="rector-container type2">
@@ -366,7 +403,11 @@ export default function ContentPage() {
             <Breadcrumbs
               data={[
                 { title: t("home"), link: "/" },
-                { title: content.title[i18n.language], link: "#" },
+                {
+                  title: content?.custom_contents?.title[i18n.language],
+                  link: content?.custom_contents?.page_url,
+                },
+                { title: content?.title[i18n.language], link: "#" },
               ]}
             />
             <BreadcrumbsMobile
@@ -427,32 +468,48 @@ export default function ContentPage() {
   } else if (Object.keys(content).length !== 0 && content.type === "type6") {
     return (
       <div className="about-container">
-        <div className="background-image" />
+        <div className="vacancy-page-background-image">
+          <h1 className="background-image-text">
+            {content?.custom_contents?.title[i18n.language] || ""}
+            <span className="circle" />
+            <div className="element-with-border" />
+          </h1>
+        </div>
         {content.type === "type6" && (
-          <div className="rector-container type2">
-            <div
-              style={{
-                marginLeft: "1rem",
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
-              <h3>{content.title[i18n.language]}</h3>
+          <div className="rector-wrapper">
+            <div className="rector-container type2">
+              <div
+                style={{
+                  marginLeft: "1rem",
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                <h3>{content.title[i18n.language]}</h3>
+              </div>
             </div>
           </div>
         )}
         <div className={`about-bottom-container ${content.type}`}>
           <div className={`about-empty-div ${content.type}`} />
-          <div className="about-breadcrumbs-container">
+          <div className="content-page-bottom-container">
             <Breadcrumbs
               data={[
                 { title: t("home"), link: "/" },
-                { title: content.title[i18n.language], link: "#" },
+                {
+                  title: content?.custom_contents?.title[i18n.language],
+                  link: content?.custom_contents?.page_url,
+                },
+                { title: content?.title[i18n.language], link: "#" },
               ]}
             />
+            <BreadcrumbsMobile
+              activeTitle={content.title[i18n.language]}
+              data={linksData}
+            />
           </div>
-          <div className="about-content">
-            <div className="about-type5-html-container about-type6-html-container">
+          <div className="vacancy-page-content">
+            <div className="about-type4-html-container">
               {content.personals.map((item, idx) => {
                 if (item.title[i18n.language]) {
                   return (
@@ -482,7 +539,7 @@ export default function ContentPage() {
                 }
               })}
             </div>
-            <div className="about-links-container">
+            <div className="vacancy-page-links-container">
               {linksData.map((item, idx) => {
                 return (
                   <Link
@@ -514,7 +571,13 @@ export default function ContentPage() {
   } else if (Object.keys(content).length !== 0 && content.type === "type7") {
     return (
       <div className="about-container">
-        <div className="vacancy-page-background-image" />
+        <div className="vacancy-page-background-image">
+          <h1 className="background-image-text">
+            {content?.custom_contents?.title[i18n.language] || ""}
+            <span className="circle" />
+            <div className="element-with-border" />
+          </h1>
+        </div>
         {content.type === "type7" && (
           <div className="rector-wrapper">
             <div className="rector-container type2">
@@ -537,10 +600,10 @@ export default function ContentPage() {
               data={[
                 { title: t("home"), link: "/" },
                 {
-                  title: content?.custom_contents.title[i18n.language],
-                  link: "#",
+                  title: content?.custom_contents?.title[i18n.language],
+                  link: content?.custom_contents?.page_url,
                 },
-                { title: content.title[i18n.language], link: "#" },
+                { title: content?.title[i18n.language], link: "#" },
               ]}
             />
             <BreadcrumbsMobile
@@ -549,10 +612,7 @@ export default function ContentPage() {
             />
           </div>
           <div className="vacancy-page-content">
-            <div
-              className="about-type7-html-container"
-              style={{ display: "flex", flexDirection: "column" }}
-            >
+            <div className="about-type7-html-container">
               {content?.programs.map((item, idx) => {
                 if (
                   item.exam_page === i18n.language ||
@@ -628,7 +688,13 @@ export default function ContentPage() {
   } else if (Object.keys(content).length !== 0 && content.type === "type8") {
     return (
       <div className="about-container">
-        <div className="vacancy-page-background-image" />
+        <div className="vacancy-page-background-image">
+          <h1 className="background-image-text">
+            {content?.custom_contents?.title[i18n.language] || ""}
+            <span className="circle" />
+            <div className="element-with-border" />
+          </h1>
+        </div>
         {content.type === "type8" && (
           <div className="rector-wrapper">
             <div className="rector-container type2">

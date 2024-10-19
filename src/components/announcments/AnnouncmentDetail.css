@@ -92,7 +92,7 @@
   align-items: start;
   flex-wrap: wrap;
   background-color: #ededed;
-  border-bottom-right-radius: 4rem;
+  border-bottom-right-radius: 32px;
 }
 
 .announcment-details-content {
@@ -141,7 +141,7 @@
 }
 
 .announcment-details-link-circle {
-  width: 7px;
+  min-width: 7px;
   height: 7px;
   border-radius: 50%;
   background-color: var(--mainColorOrange);

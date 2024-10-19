@@ -28,43 +28,6 @@
   opacity: 0.4; /* Adjust the opacity of the background image */
 }
 
-.background-image h1 {
-  color: white;
-  position: absolute;
-  font-family: FiraGO;
-  font-feature-settings: "case" on;
-  left: 4rem;
-  top: 40%;
-  z-index: 10;
-}
-
-.element-with-border {
-  position: absolute;
-  top: 45%;
-  left: 20.5rem;
-  width: 60%;
-  z-index: 10;
-  border: 1px solid;
-  border-image-source: linear-gradient(
-    90deg,
-    #ffffff 2.89%,
-    rgba(56, 62, 77, 0) 100.96%
-  );
-  border-image-slice: 1;
-  border-image-width: 2;
-}
-
-.circle {
-  position: absolute;
-  z-index: 10;
-  top: 43.5%;
-  left: 20rem;
-  width: 0.8rem; /* Set the width */
-  height: 0.8rem; /* Set the height */
-  border-radius: 50%; /* Make it a circle */
-  background-color: white; /* Just for demonstration */
-}
-
 .rector-container {
   position: absolute;
   width: calc(100% - 8rem);
@@ -139,15 +102,6 @@
   background-color: #e3e3e3;
 }
 
-.about-html div {
-  width: 780px;
-  margin-top: 1rem;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
-  justify-content: space-between;
-}
-
 .type3-container {
   height: 100vh;
   width: 100%;
@@ -172,6 +126,28 @@
   border-radius: 1rem;
   overflow: hidden;
   position: relative;
+}
+
+@media only screen and (max-width: 1340px) {
+  .type3-animated-container {
+    width: 100%;
+    margin: 0 4rem;
+  }
+
+  .type-3-box {
+    width: 230px !important;
+  }
+}
+
+@media only screen and (max-width: 1180px) {
+  .type-3-box {
+    width: 210px !important;
+    font-size: 13px;
+  }
+
+  .box-image h5 {
+    font-size: 18px !important;
+  }
 }
 
 .type-3-box {
@@ -334,11 +310,27 @@
   z-index: 10;
   overflow-y: auto;
   background-color: #ededed;
-  border-bottom-right-radius: 4rem;
+  border-bottom-right-radius: 32px;
 }
 
 .about-type7-html-container {
-  flex-wrap: nowrap;
+  height: auto;
+}
+
+.about-type4-html-container::-webkit-scrollbar,
+.about-type5-html-container::-webkit-scrollbar,
+.about-type6-html-container::-webkit-scrollbar,
+.about-type7-html-containe::-webkit-scrollbarr {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.about-type4-html-container,
+.about-type5-html-container,
+.about-type6-html-container,
+.about-type7-html-container {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 @media only screen and (min-width: 1540px) {
@@ -521,26 +513,32 @@
     transform: translateY(-1rem);
   }
 
+  .type3-container {
+    padding-top: 7rem;
+  }
+
   .type3-animated-container {
-    width: 90%;
-    height: 365px;
-    background-size: 190%;
-    background-position-x: 50%;
-    flex-wrap: wrap;
-    padding: 2.2rem 2.5rem;
+    width: 90% !important;
+    height: 448px !important;
+    background-size: 240% !important;
+    background-position-x: 50% !important;
+    flex-wrap: wrap !important;
+    padding: 2.2rem 0.8rem !important;
+    margin: 0;
+
     /* gap: 0.2rem; */
   }
 
   .type3-title {
     font-weight: 500;
-    font-size: 13px;
+    font-size: 18px;
     left: 1rem;
-    top: 1.5rem;
+    top: 1rem;
   }
 
   .type-3-box {
-    width: 120px;
-    height: 135px;
+    width: 145px !important;
+    height: 165px !important;
     margin-top: 1rem;
   }
 
@@ -551,19 +549,19 @@
 
   .box-image h5 {
     font-weight: 700;
-    font-size: 7px;
+    font-size: 10px !important;
     line-height: 10.06px;
   }
 
   .box-image a {
-    font-size: 4px;
+    font-size: 8px;
     width: auto;
     height: auto;
-    padding: 6.89px 6.29px 6.89px 6.29px;
+    padding: 4px 12px;
   }
 
   .type3-container {
-    height: 90vh;
+    min-height: 90vh;
   }
 
   .type4-box {
@@ -657,5 +655,57 @@
     font-size: 12px;
     line-height: 16.8px;
     max-height: max-content;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .type-3-box {
+    width: 165px !important;
+    height: 175px !important;
+    margin-top: 1rem;
+  }
+
+  .box-image h5 {
+    font-size: 12px !important;
+    max-width: 140px !important;
+    line-height: normal;
+  }
+
+  .box-image a {
+    font-size: 10px;
+  }
+}
+
+@media only screen and (max-width: 440px) {
+  .type-3-box {
+    width: 155px !important;
+    height: 225px !important;
+    margin-top: 1rem;
+  }
+
+  .type3-animated-container {
+    height: 560px !important;
+    background-size: 280% !important;
+  }
+}
+
+@media only screen and (max-width: 390px) {
+  .type3-animated-container {
+    height: 500px !important;
+    background-size: 280% !important;
+  }
+
+  .type-3-box {
+    width: 145px !important;
+    height: 205px !important;
+    margin-top: 1rem;
+  }
+}
+
+@media only screen and (max-width: 360px) {
+  .type-3-box {
+    width: 135px !important;
+    height: 155px !important;
+    margin-top: 1rem;
   }
 }

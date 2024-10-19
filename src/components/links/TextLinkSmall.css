@@ -1,6 +1,7 @@
 .text-link-small {
   position: relative;
   color: white;
+  margin-right: 10px;
   margin-bottom: 1rem;
   text-decoration: none;
   max-width: max-content;
@@ -18,7 +19,7 @@
   text-transform: capitalize;
   white-space: nowrap;
   overflow: hidden;
-  max-width: 425px;
+  max-width: 350px;
 }
 
 .text-link-small::before {

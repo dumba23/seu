@@ -55,6 +55,7 @@ const AnnouncmentSlider = () => {
   const carouselRef = useRef(null);
 
   const announcements = useSelector((state) => state.announcements.data);
+  const isMobile = window.innerWidth < 750;
 
   const CustomLeftArrow = ({ onClick }) => (
     <button
@@ -81,49 +82,50 @@ const AnnouncmentSlider = () => {
         className="announcments-slider"
         responsive={responsive}
         autoPlay={false}
-        swipeable={true}
-        draggable={true}
+        swipeable={isMobile ? false : true}
+        draggable={isMobile ? false : true}
         arrows={true}
-        infinite={true}
+        infinite={isMobile ? false : true}
         customRightArrow={<CustomRightArrow />}
         customLeftArrow={<CustomLeftArrow />}
         partialVisible={true}
         dotListClass="custom-dot-list-style"
       >
-        {announcements.map((item, index) => {
+        {announcements?.data?.map((item, index) => {
           const formattedDate = formatDate(item.date, i18n);
-
-          return (
-            <div
-              className="announcments-slider-item"
-              key={index}
-              onClick={() => navigate(`/announcments/details/${item.id}`)}
-            >
-              <div className="slider-item-top-content">
-                <div className="announcments-slider-overlay">{item.time}</div>
-                <div>
+          if (item.visible === "both" || item.visible === i18n.language) {
+            return (
+              <div
+                className="announcments-slider-item"
+                key={index}
+                onClick={() => navigate(`/announcments/details/${item.id}`)}
+              >
+                <div className="slider-item-top-content">
+                  {/* <div className="announcments-slider-overlay">{item.time}</div> */}
                   <div>
-                    <span className="announcments-day">
-                      {formattedDate.day}
-                    </span>
-                    <span className="announcments-year">
-                      {formattedDate.year}
-                    </span>
+                    <div>
+                      <span className="announcments-day">
+                        {formattedDate.day}
+                      </span>
+                      <span className="announcments-year">
+                        {formattedDate.year}
+                      </span>
+                    </div>
+                    <div className="announcments-month">
+                      {formattedDate.month}
+                    </div>
                   </div>
-                  <div className="announcments-month">
-                    {formattedDate.month}
+                  <div className="announcments-slider-description">
+                    <h3>{item.title[i18n.language]}</h3>
+                    <p>{item.description[i18n.language]}</p>
                   </div>
                 </div>
-                <div className="announcments-slider-description">
-                  <h3>{item.title[i18n.language]}</h3>
-                  <p>{item.description[i18n.language]}</p>
+                <div className="announcments-slider-read-more">
+                  <div>{t("read_more")}</div>
                 </div>
               </div>
-              <div className="announcments-slider-read-more">
-                <div>{t("read_more")}</div>
-              </div>
-            </div>
-          );
+            );
+          }
         })}
       </Carousel>
     </div>

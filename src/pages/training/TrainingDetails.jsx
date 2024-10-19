@@ -48,7 +48,13 @@ export default function TrainingDetails() {
 
     return (
       <div className="vacancy-details-container">
-        <div className="vacancy-details-background-image" />
+        <div className="vacancy-details-background-image">
+          <h1 className="background-image-text">
+            {t("trainings")}
+            <span className="circle" />
+            <div className="element-with-border" />
+          </h1>
+        </div>
         <div className="vacancy-details-middle-container">
           <div
             className="vacancy-details-middle-content"
@@ -67,6 +73,7 @@ export default function TrainingDetails() {
           <Breadcrumbs
             data={[
               { title: t("home"), link: "/" },
+              { title: t("university"), link: "#" },
               { title: t("trainings"), link: "/trainings" },
               { title: training.title[i18n.language], link: "#" },
             ]}

@@ -9,7 +9,7 @@
   flex-direction: column;
   font-family: "FiraGO";
   font-feature-settings: "case" on;
-  max-width: 845px;
+  max-width: 90%;
   cursor: pointer;
   position: relative;
   z-index: 1000;

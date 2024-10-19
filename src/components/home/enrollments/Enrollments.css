@@ -7,9 +7,10 @@
 
 .enrollments-description {
   color: #214177;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 400;
-  font-family: sans-serif;
+  font-family: FiraGO;
+  font-feature-settings: "case" off;
 }
 
 .enrollments-title {
@@ -50,6 +51,7 @@
   display: flex;
   border: none;
   font-size: 12px;
+  font-family: "FiraGO";
   cursor: pointer;
   align-items: center;
 }
@@ -71,6 +73,7 @@
   background-color: var(--mainColorOrange);
   color: white;
   cursor: pointer;
+  font-family: FiraGO;
   padding: 0.5rem 3rem;
   border-radius: 0.5rem;
 }
@@ -95,18 +98,22 @@
 .enrollments-animated-img {
   width: 100%;
   height: 236px;
+  min-height: 236px;
+  max-height: 236px;
   object-fit: cover;
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
 }
 
 .enrollments-animated-author {
+  font-family: "FiraGO";
   font-size: 14px;
   margin-left: 0.5rem;
   margin-top: 1rem;
 }
 
 .enrollments-animated-degree {
+  font-family: "FiraGO";
   margin-left: 0.5rem;
   font-size: 10px;
   max-width: 80%;
@@ -121,9 +128,15 @@
 }
 
 .enrollments-animated-paragraph-description {
-  font-weight: 800;
-  font-size: 10px;
+  font-weight: 600;
+  font-family: "FiraGO";
+  font-size: 11px;
+  padding-bottom: 10px;
   margin-left: 0.5rem;
+}
+
+.enrollments-animated-container {
+  max-height: max-content;
 }
 
 .enrollments-animted {
@@ -196,6 +209,23 @@
   width: 1px;
   height: 310px;
   background-color: #214177;
+}
+
+@media only screen and (max-width: 1350px) {
+  .enrollments-animted {
+    display: inline-grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+    justify-content: center;
+  }
+
+  .enrollments-column:nth-child(n + 5) {
+    display: none;
+  }
+
+  .enrollments-animated-container {
+    max-height: max-content;
+  }
 }
 
 @media only screen and (max-width: 1050px) {

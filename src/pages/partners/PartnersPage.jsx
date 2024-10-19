@@ -1,6 +1,6 @@
-import { useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 
 import Breadcrumbs from "../../components/breadcrumbs/Breadcrumbs";
@@ -10,11 +10,20 @@ import PartnersCard from "../../components/partners/PartnersCard";
 import ArrowRight from "../../assets/images/arrow-right-orange.svg";
 
 import "./PartnersPage.css";
+import Pagination from "../../components/pagination/Pagination";
+import { fetchPartners } from "../../services/partners";
+import {
+  fetchPartnersFailure,
+  fetchPartnersStart,
+  fetchPartnersSuccess,
+} from "../../store/slices/partnersSlice";
 
 export default function PartnersPage() {
   const { t, i18n } = useTranslation();
+  const dispatch = useDispatch();
   const partnersCardsData = useSelector((state) => state.partners.data);
   const menus = useSelector((state) => state.menus.data);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const middleContainerRef = useRef(null);
   const bottomContainerRef = useRef(null);
@@ -38,6 +47,8 @@ export default function PartnersPage() {
       let pageLink =
         submenu.contents.length > 0
           ? submenu.contents[0].page_url
+          : submenu.page_url
+          ? submenu.page_url
           : submenu.template.page_url;
       linksData = [
         ...linksData,
@@ -57,9 +68,30 @@ export default function PartnersPage() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    fetchData(i18n.language, pageNumber);
+  };
+
+  const fetchData = async (lang, pageNumber) => {
+    dispatch(fetchPartnersStart());
+    try {
+      const response = await fetchPartners(lang, pageNumber);
+      dispatch(fetchPartnersSuccess(response.data));
+    } catch (error) {
+      dispatch(fetchPartnersFailure(error.message));
+    }
+  };
+
   return (
     <div className="partners-page-container">
-      <div className="partners-page-background-image" />
+      <div className="partners-page-background-image">
+        <h1 className="background-image-text">
+          {menuData?.title[i18n.language]}
+          <span className="circle" />
+          <div className="element-with-border" />
+        </h1>
+      </div>
       <div className="partners-page-middle-container">
         <div className="partners-page-middle-content" ref={middleContainerRef}>
           <div style={{ marginLeft: "1rem" }}>
@@ -71,7 +103,8 @@ export default function PartnersPage() {
         <Breadcrumbs
           data={[
             { title: t("home"), link: "/" },
-            { title: t("international_partners"), link: "#" },
+            { title: menuData?.title[i18n.language], link: "#" },
+            { title: submenuData?.title[i18n.language], link: "" },
           ]}
         />
         <BreadcrumbsMobile
@@ -83,11 +116,18 @@ export default function PartnersPage() {
         <div className="partners-page-cards-container">
           {partnersCardsData &&
             partnersCardsData.cards &&
-            partnersCardsData.cards.map((card, idx) => {
+            partnersCardsData.cards.data.map((card, idx) => {
               if (card.visible === "both" || card.visible === i18n.language) {
                 return <PartnersCard data={card} key={idx} />;
               }
             })}
+          <div className="pagination-mobile-wrapper">
+            <Pagination
+              currentPage={partnersCardsData?.cards?.current_page}
+              totalPages={partnersCardsData?.cards?.last_page}
+              onPageChange={handlePageChange}
+            />
+          </div>
         </div>
         <div className="partners-page-links-container">
           {linksData.map((item, idx) => {

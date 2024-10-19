@@ -4,7 +4,7 @@
   "ka": "GEO",
   "close": "დახურვა",
   "explore_more": "აღმოაჩინე მეტი",
-  "benefits_title": "რა გამოარჩევს სეუს",
+  "benefits_title": "მეტი ჩვენს შესახებ",
   "partners_title": "ჩვენი პარტნიორი უნივერსიტეტები",
   "all_partners": "ყველა პარტნიორი",
   "enrollment_title": "ჩარიცხვა",
@@ -47,5 +47,10 @@
   "video_gallery": "ვიდეო გალერეა",
   "photo_gallery": "ფოტო გალერეა",
   "partners": "პარტნიორები",
-  "training_center": "ტრენინგ ცენტრი"
+  "training_center": "ტრენინგ ცენტრი",
+  "faculty": "ფაკულტეტი",
+  "programs": "პროგრამები",
+  "university": "უნივერსიტეტი",
+  "media": "მედია",
+  "maintenance": "ვებგვერდი განახლების პროცესშია"
 }

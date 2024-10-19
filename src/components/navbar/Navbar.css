@@ -124,7 +124,7 @@ header .nav-btn div {
   font-family: FiraGO;
   font-feature-settings: "case" on;
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 800;
 }
 
 header .nav-lang-btn {
@@ -181,8 +181,9 @@ header .nav-btn {
 }
 
 header nav {
+  display: block;
   position: fixed;
-  top: -100vh;
+  top: -717px;
   left: 0;
   height: 717px;
   width: 100%;
@@ -193,10 +194,10 @@ header nav {
 }
 
 header .collapsible_nav {
-  transform: translateY(100vh);
+  transform: translateY(717px);
   border-bottom-left-radius: 2.5rem;
   border-bottom-right-radius: 2.5rem;
-  display: flex;
+  display: flex !important;
   flex-direction: column;
 }
 
@@ -236,6 +237,18 @@ nav a {
   flex-wrap: wrap;
   height: 200px;
   padding-left: 2rem;
+}
+
+.nav-links-right.greater {
+  height: 180px;
+}
+
+.nav-links-right.less {
+  height: 140px;
+}
+
+.nav-links-right.between {
+  height: 160px;
 }
 
 .nav-info {
@@ -505,7 +518,7 @@ nav a {
   }
 
   .text-link-mobile-wrapper.expand {
-    max-height: 500px; /* Adjust this value based on your content */
+    max-height: max-content; /* Adjust this value based on your content */
     opacity: 1;
     gap: 1rem;
     margin: 1rem 0;

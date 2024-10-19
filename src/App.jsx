@@ -30,7 +30,7 @@ import PhotoPage from "./pages/photo/PhotoPage";
 import PhotoDetails from "./pages/photo/PhotoDetails";
 
 function App() {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   useEffect(() => {
     const storedLanguage = localStorage.getItem("language");
     if (storedLanguage) {
@@ -43,6 +43,7 @@ function App() {
       <DataProvider>
         <ToastContainer style={{ zIndex: 9999 }} />
         <Navbar />
+        <div className="maintenance">{t("maintenance")}</div>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/announcments" element={<AnnoucmentsPage />} />

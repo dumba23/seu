@@ -50,7 +50,12 @@ export default function PersonalDetails() {
 
     return (
       <div className="about-container">
-        <div className="vacancy-page-background-image" />
+        <div className="vacancy-page-background-image">
+          <h1 className="background-image-text">
+            {t("programs")} <span className="circle" />
+            <div className="element-with-border" />
+          </h1>
+        </div>
         <div className="rector-wrapper">
           <div className="rector-container type2" ref={middleContainerRef}>
             <div
@@ -61,7 +66,7 @@ export default function PersonalDetails() {
               }}
             >
               <h3>
-                {info.faculty[i18n.language]}, {info.title[i18n.language]}
+                {info?.faculty[i18n.language]}, {info?.title[i18n.language]}
               </h3>
             </div>
           </div>
@@ -76,8 +81,7 @@ export default function PersonalDetails() {
               data={[
                 { title: t("home"), link: "/" },
                 {
-                  title:
-                    info?.child_content?.custom_contents.title[i18n.language],
+                  title: t("faculty"),
                   link: info?.child_content?.custom_contents.page_url,
                 },
                 {

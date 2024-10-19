@@ -53,6 +53,7 @@ const responsive = {
 const NewsSlider = () => {
   const { t, i18n } = useTranslation();
   const news = useSelector((state) => state.news.data);
+  const isMobile = window.innerWidth < 750;
 
   const navigate = useNavigate();
 
@@ -74,10 +75,10 @@ const NewsSlider = () => {
         className="news-slider"
         responsive={responsive}
         autoPlay={false}
-        swipeable={true}
-        draggable={true}
+        swipeable={isMobile ? false : true}
+        draggable={isMobile ? false : true}
         arrows={true}
-        infinite={true}
+        infinite={isMobile ? false : true}
         renderButtonGroupOutside={false}
         renderDotsOutside={false}
         slidesToSlide={1}
@@ -86,7 +87,7 @@ const NewsSlider = () => {
         customLeftArrow={<CustomLeftArrow />}
         dotListClass="custom-dot-list-style"
       >
-        {news.map((item, index) => {
+        {news.data?.map((item, index) => {
           const formattedDate = formatDate(item.date, i18n);
           if (item.visible === "both" || item.visible === i18n.language) {
             return (
@@ -101,7 +102,13 @@ const NewsSlider = () => {
                   </div>
                   <div className="news-slider-image-container">
                     <img
-                      src={import.meta.env.VITE_API_MEDIA_URL + item.image}
+                      src={
+                        item.image_en !== null
+                          ? i18n.language === "en"
+                            ? import.meta.env.VITE_API_MEDIA_URL + item.image_en
+                            : import.meta.env.VITE_API_MEDIA_URL + item.image
+                          : import.meta.env.VITE_API_MEDIA_URL + item.image
+                      }
                       alt="image"
                       className="news-slider-image"
                     />

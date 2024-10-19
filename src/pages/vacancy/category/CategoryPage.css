@@ -74,11 +74,10 @@
 .category-page-cards-container {
   margin-bottom: 2rem;
   padding-left: 4rem;
+  padding-bottom: 2rem;
   width: 950px;
-  overflow-y: scroll;
-  min-height: 400px;
-  max-height: 520px;
   background-color: #ededed;
+  border-bottom-right-radius: 32px;
 }
 
 .category-page-content {

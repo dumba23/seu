@@ -73,7 +73,14 @@ export default function ContentPage() {
   ) {
     return (
       <div className="about-container">
-        <div className="vacancy-page-background-image" />
+        <div className="vacancy-page-background-image">
+          <h1 className="background-image-text">
+            {submenuData?.title[i18n.language] ||
+              menuData?.title[i18n.language]}
+            <span className="circle" />
+            <div className="element-with-border" />
+          </h1>
+        </div>
         {contentData.type === "type1" && (
           <div className="rector-wrapper">
             <div className="rector-container">
@@ -120,7 +127,6 @@ export default function ContentPage() {
         <div className={`about-bottom-container ${contentData.type}`}>
           <div className={`about-empty-div ${contentData.type}`} />
           <div className="content-page-bottom-container">
-            {console.log(menuData, submenuData, contentData)}
             <Breadcrumbs
               data={[
                 { title: t("home"), link: "/" },
@@ -153,20 +159,20 @@ export default function ContentPage() {
               />
             </div>
             <div className="vacancy-page-links-container">
-              {contents.map((item, idx) => {
+              {linksData.map((item, idx) => {
                 return (
                   <Link
                     key={idx}
-                    to={item.page_url}
+                    to={item.link}
                     className={`announcment-details-link ${
-                      item.id === contentData.id ? "active" : ""
+                      item.link === contentData.page_url ? "active" : ""
                     }`}
                   >
-                    {item.id === contentData.id && (
+                    {item.link === contentData.page_url && (
                       <div className="announcment-details-link-circle" />
                     )}
-                    {item.title[i18n.language]}
-                    {item.id !== contentData.id && (
+                    {item.title}
+                    {item.link !== contentData.page_url && (
                       <img
                         src={ArrowRight}
                         alt="arrow-right"
@@ -184,7 +190,14 @@ export default function ContentPage() {
   } else if (contentData.type === "type4") {
     return (
       <div className="about-container">
-        <div className="vacancy-page-background-image" />
+        <div className="vacancy-page-background-image">
+          <h1 className="background-image-text">
+            {submenuData?.title[i18n.language] ||
+              menuData?.title[i18n.language]}
+            <span className="circle" />
+            <div className="element-with-border" />
+          </h1>
+        </div>
         <div className="rector-wrapper">
           <div className="rector-container type2">
             <div
@@ -261,7 +274,14 @@ export default function ContentPage() {
   } else if (contentData.type === "type5") {
     return (
       <div className="about-container">
-        <div className="vacancy-page-background-image" />
+        <div className="vacancy-page-background-image">
+          <h1 className="background-image-text">
+            {submenuData?.title[i18n.language] ||
+              menuData?.title[i18n.language]}
+            <span className="circle" />
+            <div className="element-with-border" />
+          </h1>
+        </div>
         {contentData.type === "type5" && (
           <div className="rector-wrapper">
             <div className="rector-container type2">
@@ -349,7 +369,14 @@ export default function ContentPage() {
   ) {
     return (
       <div className="about-container">
-        <div className="vacancy-page-background-image" />
+        <div className="vacancy-page-background-image">
+          <h1 className="background-image-text">
+            {submenuData?.title[i18n.language] ||
+              menuData?.title[i18n.language]}
+            <span className="circle" />
+            <div className="element-with-border" />
+          </h1>
+        </div>
         {contentData.type === "type6" && (
           <div className="rector-wrapper">
             <div className="rector-container type2">
@@ -445,7 +472,14 @@ export default function ContentPage() {
   ) {
     return (
       <div className="about-container">
-        <div className="vacancy-page-background-image" />
+        <div className="vacancy-page-background-image">
+          <h1 className="background-image-text">
+            {submenuData?.title[i18n.language] ||
+              menuData?.title[i18n.language]}
+            <span className="circle" />
+            <div className="element-with-border" />
+          </h1>
+        </div>
         {contentData.type === "type8" && (
           <div className="rector-wrapper">
             <div className="rector-container type2">

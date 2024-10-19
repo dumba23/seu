@@ -14,6 +14,42 @@
   z-index: 2;
 }
 
+.background-image-text {
+  color: white;
+  position: relative; /* Change to relative */
+  width: max-content;
+  left: 4rem; /* Base position */
+  top: 40%;
+  z-index: 10;
+}
+
+.element-with-border {
+  position: absolute;
+  top: 58.5%; /* Adjust based on your layout */
+  left: calc(100% + 3rem);
+  width: calc(100vw - 100% - 4rem - 100px); /* Full width of the h1 */
+  z-index: 10;
+  border: 1px solid;
+  border-image-source: linear-gradient(
+    90deg,
+    #ffffff 2.89%,
+    rgba(56, 62, 77, 0) 100.96%
+  );
+  border-image-slice: 1;
+  border-image-width: 2;
+}
+
+.circle {
+  position: absolute;
+  z-index: 10;
+  top: 43.5%; /* Adjust as needed */
+  right: -3rem;
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+  background-color: white;
+}
+
 .announcments-page-background-image::before {
   content: "";
   position: absolute;
@@ -78,9 +114,19 @@
   padding-right: 2rem;
   padding-left: 4rem;
   width: 950px;
-  max-height: 500px;
   overflow-y: scroll;
   background-color: #ededed;
+  border-bottom-right-radius: 32px;
+}
+
+.announcments-page-cards-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.announcments-page-cards-container {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 .announcments-page-content {
@@ -216,5 +262,19 @@
 
   .announcments-page-bottom-container {
     padding-bottom: 1rem;
+  }
+
+  .background-image-text {
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 19px;
+  }
+
+  .element-with-border {
+    display: none;
+  }
+
+  .circle {
+    display: none;
   }
 }

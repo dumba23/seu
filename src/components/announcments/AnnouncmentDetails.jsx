@@ -38,6 +38,8 @@ export default function AnnouncmentsDetails() {
       let pageLink =
         submenu.contents.length > 0
           ? submenu.contents[0].page_url
+          : submenu.page_url
+          ? submenu.page_url
           : submenu.template.page_url;
       linksData = [
         ...linksData,
@@ -46,7 +48,8 @@ export default function AnnouncmentsDetails() {
     });
   }
 
-  const announcementData = announcements.filter((item) => item.id == id) || [];
+  const announcementData =
+    announcements?.data?.filter((item) => item.id == id) || [];
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -64,7 +67,13 @@ export default function AnnouncmentsDetails() {
 
     return (
       <div className="announcment-details-container">
-        <div className="announcment-details-background-image" />
+        <div className="announcment-details-background-image">
+          <h1 className="background-image-text">
+            {submenuData?.title[i18n.language] || ""}
+            <span className="circle" />
+            <div className="element-with-border" />
+          </h1>
+        </div>
         <div className="announcment-details-middle-container">
           <div
             className="announcment-details-middle-content"
@@ -95,7 +104,12 @@ export default function AnnouncmentsDetails() {
           <Breadcrumbs
             data={[
               { title: t("home"), link: "/" },
-              { title: t("announcements_title"), link: "#" },
+              { title: menuData?.title[i18n.language], link: "#" },
+              {
+                title: submenuData?.title[i18n.language],
+                link: "/announcments",
+              },
+              { title: announcementData[0]?.title[i18n.language], link: "" },
             ]}
           />
           <BreadcrumbsMobile

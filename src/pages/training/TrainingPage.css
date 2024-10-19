@@ -64,6 +64,17 @@
   background-color: #ededed;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-bottom-right-radius: 32px;
+}
+
+.training-page-cards-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.training-page-cards-container {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 .training-page-links-container {
@@ -112,6 +123,12 @@
 
   .training-page-container {
     min-height: 100%;
+  }
+}
+
+@media only screen and (max-width: 1440px) {
+  .training-details-card {
+    width: 95%;
   }
 }
 

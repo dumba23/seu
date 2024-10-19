@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { fetchVacancyCategory } from "../../../services/vacancy";
 
+import Pagination from "../../../components/pagination/Pagination";
 import Breadcrumbs from "../../../components/breadcrumbs/Breadcrumbs";
 import CategoryCard from "../../../components/category/CategoryCard";
 
@@ -56,7 +57,7 @@ export default function CategoryPage() {
 
     const callFetchVacanies = async () => {
       try {
-        const res = await fetchVacancyCategory(id);
+        const res = await fetchVacancyCategory(id, i18n.language);
 
         setVacancy(res.data.vacancy);
       } catch (err) {
@@ -65,7 +66,17 @@ export default function CategoryPage() {
     };
 
     callFetchVacanies();
-  }, [id]);
+  }, [id, i18n.language]);
+
+  const handlePageChange = async (pageNumber) => {
+    try {
+      const res = await fetchVacancyCategory(id, i18n.language, pageNumber);
+
+      setVacancy(res.data.vacancy);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   useEffect(() => {
     const middleContainerHeight = middleContainerRef?.current?.clientHeight;
@@ -77,7 +88,13 @@ export default function CategoryPage() {
   if (Object.keys(vacancy).length > 0)
     return (
       <div className="category-page-container">
-        <div className="category-page-background-image" />
+        <div className="category-page-background-image">
+          <h1 className="background-image-text">
+            {t("vacancies")}
+            <span className="circle" />
+            <div className="element-with-border" />
+          </h1>
+        </div>
         <div className="category-page-middle-container">
           <div
             className="category-page-middle-content"
@@ -93,7 +110,8 @@ export default function CategoryPage() {
           <Breadcrumbs
             data={[
               { title: t("home"), link: "/" },
-              { title: t("vacancies"), link: "/vacancies" },
+              { title: menuData?.title[i18n.language], link: "#" },
+              { title: submenuData?.title[i18n.language], link: "/vacancies" },
               {
                 title: vacancy.title[i18n.language],
                 link: "/vacancies/" + vacancy.id,
@@ -108,11 +126,18 @@ export default function CategoryPage() {
         <div className="category-page-content">
           <div className="category-page-cards-container">
             {vacancy.vacancies &&
-              vacancy.vacancies.map((card, idx) => {
+              vacancy.vacancies?.data?.map((card, idx) => {
                 if (card.visible === "both" || card.visible === i18n.language) {
                   return <CategoryCard data={card} key={idx} />;
                 }
               })}
+            {vacancy?.vacancies?.data?.length !== 0 && (
+              <Pagination
+                currentPage={vacancy.vacancies.current_page}
+                totalPages={vacancy.vacancies.last_page}
+                onPageChange={handlePageChange}
+              />
+            )}
           </div>
           <div className="category-page-links-container">
             {linksData.map((item, idx) => {

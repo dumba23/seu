@@ -44,6 +44,15 @@
   transition: width 1s ease;
 }
 
+@keyframes resetWidth {
+  0% {
+    width: calc(100% + 1.6rem);
+  }
+  100% {
+    width: 0;
+  }
+}
+
 .text-link:hover img {
   display: block;
   animation: appearSlowly 1s forwards, right 0.5s ease;
@@ -160,5 +169,18 @@
 
   .text-link:hover::before {
     animation: extendWidthMobile 1s forwards;
+  }
+
+  .text-link-reset:hover::before {
+    animation: resetWidth 1s forwards;
+  }
+
+  .text-link-reset:hover img:first-child {
+    display: none;
+  }
+
+  .text-link-reset:hover span {
+    transform: translateX(0);
+    transition: transform 1s ease;
   }
 }

@@ -184,6 +184,7 @@
 .benefits-lecturer-info h5 {
   font-size: 10px;
   font-weight: 400;
+  will-change: transform;
 }
 
 .benefits-lecturer-info h4 {
@@ -199,12 +200,23 @@
 }
 
 .benefits-slider-item:hover {
-  transform: scale(1.2);
+  transform: scale(1.2) translateZ(0);
+  will-change: transform;
   width: 300px;
+}
+
+.benefits-lecturer-info h4,
+.benefits-lecturer-info h5 {
+  font-family: "FiraGO";
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: font-size 0.3s;
 }
 
 .benefits-slider-item:hover .benefits-lecturer-info h4 {
   width: 240px;
+  will-change: transform;
 }
 
 .benefits-player-icon {
@@ -274,6 +286,12 @@
     gap: 10px;
   }
 
+  .benefits-slider .react-multi-carousel-item--active,
+  .benefits-slider .react-multi-carousel-item {
+    width: auto !important;
+    margin-right: 1rem;
+  }
+
   .benefits-line-left {
     display: none;
   }
@@ -313,6 +331,7 @@
 
   .benefits-slider-item {
     position: relative;
+    will-change: transform;
     width: 132px;
     height: 204px;
     margin: 0 0rem;
@@ -341,6 +360,7 @@
 
   .benefits-lecturer-info-info h5 {
     font-size: 7px;
+    will-change: transform;
   }
 
   .benefits-avatar {

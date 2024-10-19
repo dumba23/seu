@@ -33,11 +33,12 @@ import "./Navbar.css";
 
 function Navbar() {
   const { t, i18n } = useTranslation();
+  const dispatch = useDispatch();
   const location = useLocation();
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [isSearchExpanded, setIsSearchExpanded] = useState(false);
-  const menus = useSelector((state) => state.menus);
-  const [activeMenu, setActiveMenu] = useState(menus?.data[0] || []);
+  const [menus, setMenus] = useState([]);
+  const [activeMenu, setActiveMenu] = useState([]);
   const links = useSelector((state) => state.links.data.links) || [];
   const contacts = useSelector((state) => state.links.data.socials) || [];
   const hashWithoutHashSymbol = location.hash.slice(1);
@@ -89,6 +90,16 @@ function Navbar() {
       document.querySelector(".nav-container").style.backgroundColor = "#fff";
     }
 
+    if (location.pathname === "/") {
+      const scrollDistance = window.scrollY;
+      const changeColorHeight = window.innerHeight;
+
+      if (scrollDistance <= changeColorHeight) {
+        setIsHeightExceed(false);
+        document.getElementById("nav-cont").style.backgroundColor = "";
+      }
+    }
+
     const handleScroll = () => {
       const navContainer = document.querySelector(".nav-container");
 
@@ -126,18 +137,35 @@ function Navbar() {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [location.pathname]);
+  }, [location]);
 
   useEffect(() => {
-    if (menus.data.length > 0 && activeMenu.length === 0 && menuId) {
-      setActiveMenu(menus.data.find((menu) => menu.id == menuId));
-    } else if (menus.data.length > 0 && activeMenu.length === 0) {
-      setActiveMenu(menus.data[0]);
-    }
-  }, [menus.data]);
+    const callFetchMenus = async () => {
+      dispatch(fetchMenusStart());
+
+      try {
+        const res = await fetchMenus();
+
+        setMenus(res.data.menus);
+        dispatch(fetchMenusSuccess(res.data.menus));
+        if (menuId) {
+          const menu = res.data.menus.find((menu) => menu.id == menuId);
+
+          setActiveMenu(menu);
+        } else {
+          setActiveMenu(res.data.menus[0]);
+        }
+      } catch (err) {
+        dispatch(fetchMenusFailure(err.message));
+        console.error(err);
+      }
+    };
+
+    callFetchMenus();
+  }, []);
 
   const changeActiveMenu = (id) => {
-    const menu = menus?.data.find((menu) => menu.id == id);
+    const menu = menus?.find((menu) => menu.id == id);
 
     setActiveMenu(menu);
   };
@@ -158,7 +186,7 @@ function Navbar() {
 
   return (
     <header className={isNavOpen ? "collapsible" : ""} ref={navRef}>
-      <div className="nav-container">
+      <div className="nav-container" id="nav-cont">
         {!isNavOpen && (
           <img
             src={isHeightExceed ? SeuLogoSecond : SeuLogo}
@@ -270,11 +298,12 @@ function Navbar() {
           </div>
           <div className="nav-links">
             <div className="nav-links-left">
-              {menus?.data.map((menu) => {
+              {menus?.map((menu) => {
                 return (
                   <React.Fragment key={menu.id}>
                     <TextLink
                       key={menu.id}
+                      isMobile={window.innerWidth < 1250}
                       visible={menu.visible}
                       currentLang={i18n.language}
                       title={menu.title[i18n.language]}
@@ -319,7 +348,16 @@ function Navbar() {
                 );
               })}
             </div>
-            <div className="nav-links-right">
+            <div
+              className={`nav-links-right ${
+                activeMenu?.submenus?.length > 10 ? "greater" : ""
+              } ${activeMenu?.submenus?.length <= 6 ? "less" : ""} ${
+                activeMenu?.submenus?.length > 6 &&
+                activeMenu?.submenus?.length < 8
+                  ? "between"
+                  : ""
+              }`}
+            >
               {activeMenu?.submenus &&
                 (activeMenu.visible === i18n.language ||
                   activeMenu.visible === "both") &&

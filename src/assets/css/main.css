@@ -1,37 +1,67 @@
 @font-face {
   font-family: "FiraGO";
-  src: url("../fonts/FiraGO-Regular.ttf") format("truetype");
+  src: url("../fonts/FiraGO-Regular.otf") format("opentype"),
+    url("../fonts/FiraGO-Regular.woff2") format("woff2"),
+    url("../fonts/FiraGO-Regular.woff") format("woff"),
+    url("../fonts/FiraGO-Regular.ttf") format("truetype");
   font-weight: 400;
+  font-display: swap;
+  font-style: normal;
 }
 
 @font-face {
   font-family: "FiraGO";
-  src: url("../fonts/FiraGO-Medium.ttf") format("truetype");
+  src: url("../fonts/FiraGO-Medium.otf") format("opentype")
+      url("../fonts/FiraGO-Medium.woff2") format("woff2"),
+    url("../fonts/FiraGO-Medium.woff") format("woff"),
+    url("../fonts/FiraGO-Medium.ttf") format("truetype");
   font-weight: 500;
+  font-display: swap;
+  font-style: normal;
 }
 
 @font-face {
   font-family: "FiraGO";
-  src: url("../fonts/FiraGO-SemiBold.ttf") format("truetype");
+  src: url("../fonts/FiraGO-SemiBold.otf") format("opentype")
+      url("../fonts/FiraGO-SemiBold.woff2") format("woff2"),
+    url("../fonts/FiraGO-SemiBold.woff") format("woff"),
+    url("../fonts/FiraGO-SemiBold.ttf") format("truetype");
   font-weight: 600;
+  font-display: swap;
+  font-style: normal;
 }
 
 @font-face {
   font-family: "FiraGO";
-  src: url("../fonts/FiraGO-Bold.ttf") format("truetype");
+  src: url("../fonts/FiraGO-Bold.otf") format("opentype")
+      url("../fonts/FiraGO-Bold.woff2") format("woff2"),
+    url("../fonts/FiraGO-Bold.woff") format("woff"),
+    url("../fonts/FiraGO-Bold.ttf") format("truetype");
   font-weight: 700;
+  font-display: swap;
+  font-style: normal;
 }
 
 @font-face {
   font-family: "FiraGO";
-  src: url("../fonts/FiraGO-ExtraBold.ttf") format("truetype");
+  src: url("../fonts/FiraGO-ExtraBold.otf") format("opentype")
+      url("../fonts/FiraGO-ExtraBold.woff2") format("woff2"),
+    url("../fonts/FiraGO-ExtraBold.woff") format("woff"),
+    url("../fonts/FiraGO-ExtraBold.ttf") format("truetype");
   font-weight: 800;
+  font-display: swap;
+  font-style: normal;
 }
 
 @font-face {
   font-family: "FiraGO";
-  src: url("../fonts/FiraGO-Heavy.ttf") format("truetype");
+  src: url("../fonts/FiraGO-Heavy.otf") format("opentype")
+      url("../fonts/FiraGO-Heavy.woff2") format("woff2"),
+    url("../fonts/FiraGO-Heavy.woff") format("woff"),
+    url("../fonts/FiraGO-Heavy.ttf") format("truetype");
   font-weight: 900;
+  font-display: swap;
+  font-style: normal;
 }
 
 @font-face {
@@ -66,23 +96,32 @@
   padding: 1rem 3.5rem 1rem 3rem;
   min-width: 300px;
   min-height: 60px;
+  height: 100%;
   color: #214177;
   font-family: "FiraGO";
   font-weight: 400;
-  font-size: 16px;
+  font-size: 14px;
   border-radius: 8px;
   text-decoration: none;
+  border: 1px solid #fff;
+  transition: all 0.3s;
+}
+
+.pdf-link:hover,
+.new-link:hover {
+  border: 1px solid var(--mainColorOrange);
+  box-shadow: 0px 0px 8px 0px #00000040;
 }
 
 .pdf-link::before {
-  content: url("../images/pdf.svg"); /* Replace with your icon path */
+  content: url("../images/pdf.svg");
   display: block;
-  width: 20px; /* Adjust icon size */
+  width: 20px;
   height: 20px;
-  position: absolute; /* Position relative to .pdf-link */
-  left: 10px; /* Adjust as needed */
-  top: 50%; /* Center vertically */
-  transform: translateY(-50%); /* Adjust vertical alignment */
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
   margin-right: 100px;
 }
 
@@ -100,22 +139,53 @@
   text-decoration: none;
   min-width: 300px;
   min-height: 60px;
+  height: 100%;
+  border: 1px solid #fff;
+  transition: all 0.3s;
 }
 
 .new-link::before {
-  content: url("../images/link.svg"); /* Replace with your icon path */
+  content: url("../images/link.svg");
   display: block;
-  width: 20px; /* Adjust icon size */
+  width: 20px;
   height: 20px;
-  position: absolute; /* Position relative to .pdf-link */
-  left: 10px; /* Adjust as needed */
-  top: 50%; /* Center vertically */
-  transform: translateY(-50%); /* Adjust vertical alignment */
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
   margin-right: 100px;
 }
 
 @media only screen and (max-width: 1050px) {
   .pdf-link {
     font-size: 11px;
+  }
+}
+
+body {
+  font-family: "FiraGO", Arial, sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: normal;
+}
+
+.maintenance {
+  position: absolute;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.398);
+  color: #fff;
+  text-align: center;
+  font-size: 14px;
+  width: 100%;
+  padding: 0.2rem 0;
+  z-index: 10;
+}
+
+@media only screen and (max-width: 1050px) {
+  .pdf-link,
+  .new-link {
+    min-width: 100%;
+    width: 100%;
   }
 }

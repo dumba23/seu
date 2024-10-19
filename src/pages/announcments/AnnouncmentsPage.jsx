@@ -1,8 +1,16 @@
 import { useEffect, useRef } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
+import { fetchAnnouncements } from "../../services/announcements";
+import {
+  fetchAnnouncementsFailure,
+  fetchAnnouncementsStart,
+  fetchAnnouncementsSuccess,
+} from "../../store/slices/announcementsSlice";
 
+import Pagination from "../../components/pagination/Pagination";
 import ArrowRight from "../../assets/images/arrow-right-orange.svg";
 
 import Breadcrumbs from "../../components/breadcrumbs/Breadcrumbs";
@@ -13,6 +21,7 @@ import BreadcrumbsMobile from "../../components/breadcrumbs/BreadcrumbsMobile";
 
 export default function AnnoucmentsPage() {
   const { t, i18n } = useTranslation();
+  const dispatch = useDispatch();
   const announcements = useSelector((state) => state.announcements.data);
   const menus = useSelector((state) => state.menus.data);
   const middleContainerRef = useRef(null);
@@ -41,6 +50,8 @@ export default function AnnoucmentsPage() {
       let pageLink =
         submenu.contents.length > 0
           ? submenu.contents[0].page_url
+          : submenu.page_url
+          ? submenu.page_url
           : submenu.template.page_url;
       linksData = [
         ...linksData,
@@ -48,6 +59,20 @@ export default function AnnoucmentsPage() {
       ];
     });
   }
+
+  const handlePageChange = (pageNumber) => {
+    fetchData(i18n.language, pageNumber);
+  };
+
+  const fetchData = async (lang, pageNumber) => {
+    dispatch(fetchAnnouncementsStart());
+    try {
+      const response = await fetchAnnouncements(lang, pageNumber);
+      dispatch(fetchAnnouncementsSuccess(response.data.announcements));
+    } catch (error) {
+      dispatch(fetchAnnouncementsFailure(error.message));
+    }
+  };
 
   useEffect(() => {
     const middleContainerHeight = middleContainerRef?.current?.clientHeight;
@@ -58,7 +83,13 @@ export default function AnnoucmentsPage() {
 
   return (
     <div className="announcments-page-container">
-      <div className="announcments-page-background-image" />
+      <div className="announcments-page-background-image">
+        <h1 className="background-image-text">
+          {menuData?.title[i18n.language] || ""}
+          <span className="circle" />
+          <div className="element-with-border" />
+        </h1>
+      </div>
       <div className="announcments-page-middle-container">
         <div
           className="announcments-page-middle-content"
@@ -74,7 +105,8 @@ export default function AnnoucmentsPage() {
         <Breadcrumbs
           data={[
             { title: t("home"), link: "/" },
-            { title: t("announcements_title"), link: "#" },
+            { title: menuData?.title[i18n.language], link: "#" },
+            { title: submenuData?.title[i18n.language], link: "" },
           ]}
         />
         <BreadcrumbsMobile
@@ -84,11 +116,17 @@ export default function AnnoucmentsPage() {
       </div>
       <div className="announcments-page-content">
         <div className="announcments-page-cards-container">
-          {announcements.map((card, idx) => {
+          {announcements?.data?.map((card, idx) => {
             if (card.visible === "both" || card.visible === i18n.language) {
               return <AnnouncmentsCard data={card} key={idx} />;
             }
           })}
+
+          <Pagination
+            currentPage={announcements.current_page}
+            totalPages={announcements.last_page}
+            onPageChange={handlePageChange}
+          />
         </div>
         <div className="announcments-page-links-container">
           {linksData.length > 0 &&

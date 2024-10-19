@@ -16,11 +16,28 @@
   transition: all 0.3s;
 }
 
-.text-link-xs:hover {
-  font-weight: 800;
-  font-size: 14.1px;
-  transition: all 0.3s;
+@keyframes fontWeightAnimation {
+  0% {
+    font-weight: 400;
+  }
+  25% {
+    font-weight: 500;
+  }
+  50% {
+    font-weight: 700;
+  }
+  75% {
+    font-weight: 600;
+  }
+  100% {
+    font-weight: 700;
+    font-size: 14.1px;
+  } /* Go back */
 }
+
+/* .text-link-xs:hover {
+  animation: fontWeightAnimation 1s alternate;
+} */
 
 .text-link-xs:last-child {
   border: none;

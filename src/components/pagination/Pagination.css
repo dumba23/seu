@@ -1,10 +1,16 @@
 .pagination-container {
   width: 100%;
   display: flex;
-  justify-content: start;
+  justify-content: center;
   list-style-type: none;
   z-index: 100;
   margin-top: 4rem;
+  padding-right: 4rem;
+}
+
+.pagination-mobile-wrapper {
+  display: flex;
+  width: 100%;
 }
 
 .pagination {
@@ -31,4 +37,14 @@
   border: 1px solid var(--mainColorOrange);
   color: var(--mainColorOrange);
   border-color: var(mainColorOrange);
+}
+
+@media only screen and (max-width: 1050px) {
+  .pagination-container {
+    padding-right: 0;
+  }
+
+  .page-link {
+    padding: 5px 10px;
+  }
 }

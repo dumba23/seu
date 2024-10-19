@@ -14,7 +14,7 @@ import translationKA from "./locales/ka/translation.json";
 
 i18n.init({
   interpolation: { escapeValue: false }, // React already does escaping
-  lng: "en", // language to use by default
+  lng: "ka", // language to use by default
   resources: {
     en: {
       translation: translationEN,

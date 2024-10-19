@@ -46,7 +46,11 @@ export default function ArticlePage() {
 
   return (
     <div className="about-container">
-      <div className="vacancy-page-background-image" />
+      <div className="vacancy-page-background-image">
+        <h1 className="background-image-text">{t("media")}</h1>
+        <span className="circle" />
+        <div className="element-with-border" />
+      </div>
       <div className="vacancy-page-middle-container">
         <div className="vacancy-page-middle-content">
           <div className="vacancy-page-middle-content-wrapper">
@@ -60,7 +64,7 @@ export default function ArticlePage() {
           <Breadcrumbs
             data={[
               { title: t("home"), link: "/" },
-              { title: t("media_and_gallery"), link: "/videos" },
+              { title: t("media"), link: "/videos" },
               { title: t("articles"), link: "/articles" },
             ]}
           />

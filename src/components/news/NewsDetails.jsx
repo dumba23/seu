@@ -15,7 +15,7 @@ export default function NewsDetails() {
   const { id } = useParams();
   const { t, i18n } = useTranslation();
   const news = useSelector((state) => state.news.data);
-  const newData = news.filter((item) => item.id == id) || [];
+  const newData = news?.data?.filter((item) => item.id == id) || [];
 
   const middleContainerRef = useRef(null);
   const bottomContainerRef = useRef(null);
@@ -41,6 +41,8 @@ export default function NewsDetails() {
       let pageLink =
         submenu.contents.length > 0
           ? submenu.contents[0].page_url
+          : submenu.page_url
+          ? submenu.page_url
           : submenu.template.page_url;
       linksData = [
         ...linksData,
@@ -65,7 +67,13 @@ export default function NewsDetails() {
 
     return (
       <div className="news-details-container">
-        <div className="news-details-background-image" />
+        <div className="news-details-background-image">
+          <h1 className="background-image-text">
+            {t("news_title")}
+            <span className="circle" />
+            <div className="element-with-border" />
+          </h1>
+        </div>
         <div className="news-details-middle-container">
           <div className="news-details-middle-content" ref={middleContainerRef}>
             <div className="news-details-middle-content-wrapper">
@@ -84,9 +92,10 @@ export default function NewsDetails() {
           <Breadcrumbs
             data={[
               { title: t("home"), link: "/" },
+              { title: menuData?.title[i18n.language], link: "#" },
               { title: t("news_title"), link: "/news" },
               {
-                title: newData[0].title[i18n.language],
+                title: newData[0]?.title[i18n.language],
                 link: "#",
               },
             ]}

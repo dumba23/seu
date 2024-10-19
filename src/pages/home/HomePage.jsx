@@ -24,6 +24,7 @@ export default function HomePage() {
     const callFetchLockScreen = async () => {
       try {
         const res = await fetchLockScreen();
+
         setVideo(res.data.video);
         setTitle(...res.data.title);
       } catch (err) {
@@ -48,31 +49,22 @@ export default function HomePage() {
   return (
     <div>
       <div className="video-background" id="video-background">
-        {
-          video !== null &&
-            (isVideo(video.url) ? (
-              <video autoPlay loop muted playsInline>
-                <source
-                  src={`${import.meta.env.VITE_API_MEDIA_URL}${video.url}`}
-                  type="video/mp4"
-                />
-                Your browser does not support the video tag.
-              </video>
-            ) : (
-              <img
+        {video !== null &&
+          (isVideo(video.url) ? (
+            <video autoPlay loop muted playsInline>
+              <source
                 src={`${import.meta.env.VITE_API_MEDIA_URL}${video.url}`}
-                alt="Media content"
-                className="video-image"
+                type="video/mp4"
               />
-            ))
-          // <video autoPlay loop muted playsInline>
-          //   <source
-          //     src={import.meta.env.VITE_API_MEDIA_URL + video?.url}
-          //     type="video/mp4"
-          //   />
-          //   Your browser does not support the video tag.
-          // </video>
-        }
+              Your browser does not support the video tag.
+            </video>
+          ) : (
+            <img
+              src={`${import.meta.env.VITE_API_MEDIA_URL}${video.url}`}
+              alt="Media content"
+              className="video-image"
+            />
+          ))}
         {links.length > 0 && (
           <div className="home-submenu-container">
             <div className="home-submenu">

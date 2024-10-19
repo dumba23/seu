@@ -14,6 +14,11 @@ const responsive = {
     items: 5,
     slidesToSlide: 1, // optional, default to 1.
   },
+  desktopSm: {
+    breakpoint: { max: 1370, min: 1024 },
+    items: 4,
+    slidesToSlide: 1,
+  },
   tablet: {
     breakpoint: { max: 1024, min: 768 },
     items: 3,
@@ -21,12 +26,12 @@ const responsive = {
   },
   mobile: {
     breakpoint: { max: 767, min: 464 },
-    items: 2,
+    items: 2.5,
     slidesToSlide: 1, // optional, default to 1.
   },
   mobileXs: {
     breakpoint: { max: 464, min: 370 },
-    items: 2,
+    items: 2.5,
     slidesToSlide: 1,
   },
 };
@@ -34,6 +39,7 @@ const responsive = {
 const PartnersSlider = ({ stories, lang }) => {
   const carouselRef = useRef(null);
   const { i18n } = useTranslation();
+  const isMobile = window.innerWidth < 750;
 
   const handleLeftButtonClick = () => {
     if (carouselRef.current) {
@@ -53,11 +59,11 @@ const PartnersSlider = ({ stories, lang }) => {
         ref={carouselRef}
         className="partners-slider"
         responsive={responsive}
-        autoPlay={true}
-        swipeable={true}
-        draggable={true}
+        autoPlay={isMobile ? false : true}
+        swipeable={isMobile ? false : true}
+        draggable={isMobile ? false : true}
         arrows={false}
-        infinite={true}
+        infinite={isMobile ? false : true}
         partialVisible={false}
         dotListClass="custom-dot-list-style"
         containerClass="custom-carousel-container"

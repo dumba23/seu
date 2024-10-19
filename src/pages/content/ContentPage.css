@@ -32,58 +32,11 @@
   opacity: 0.4; /* Adjust the opacity of the background image */
 }
 
-.background-image h1 {
-  color: white;
-  position: absolute;
-  font-family: FiraGO;
-  font-feature-settings: "case" on;
-  left: 4rem;
-  top: 40%;
-  z-index: 10;
-}
-
-.element-with-border {
-  position: absolute;
-  top: 45%;
-  left: 20.5rem;
-  width: 60%;
-  z-index: 10;
-  border: 1px solid;
-  border-image-source: linear-gradient(
-    90deg,
-    #ffffff 2.89%,
-    rgba(56, 62, 77, 0) 100.96%
-  );
-  border-image-slice: 1;
-  border-image-width: 2;
-}
-
-.circle {
-  position: absolute;
-  z-index: 10;
-  top: 43.5%;
-  left: 20rem;
-  width: 0.8rem; /* Set the width */
-  height: 0.8rem; /* Set the height */
-  border-radius: 50%; /* Make it a circle */
-  background-color: white; /* Just for demonstration */
-}
-
 .seu-background-image {
   z-index: -1;
   position: absolute;
   left: 0;
   bottom: 0;
-}
-
-.rector-paragraph {
-  display: flex;
-  align-items: flex-start;
-  margin-left: 1.5rem;
-  margin-top: 2rem;
-  font-family: "FiraGO";
-  font-style: italic;
-  max-width: 490px;
 }
 
 .paragraph-underline {
@@ -109,12 +62,13 @@
   z-index: 10;
   flex-wrap: wrap;
   background-color: #ededed;
-  border-bottom-right-radius: 4rem;
+  border-bottom-right-radius: 32px;
 }
 
 .about-html {
   font-size: 16px;
   font-family: "FiraGO";
+  font-weight: 400;
   max-width: 90%;
   padding-bottom: 5rem;
 }
@@ -164,8 +118,18 @@
   height: auto;
   overflow-y: auto;
   background-color: #ededed;
-  border-bottom-right-radius: 4rem;
+  border-bottom-right-radius: 32px;
   transition: height 0.5s ease-in-out;
+}
+
+.about-type8-html-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.about-type8-html-container {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 .type8-box {
@@ -247,6 +211,11 @@
 }
 
 @media only screen and (max-width: 1050px) {
+  .about-html div {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    width: auto;
+  }
+
   .seu-rector,
   .about-empty-div.type1 {
     display: none;
