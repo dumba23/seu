@@ -74,7 +74,7 @@ const PartnersSlider = ({ stories, lang }) => {
               <div
                 className="partners-slider-item"
                 key={index}
-                onClick={() => window.location.replace(item.page_url)}
+                onClick={() => window.open(item.page_url, "_blank")}
               >
                 <div className="slider-item-content">
                   <div className="partners-image-container">

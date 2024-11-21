@@ -14,6 +14,7 @@ export default function BenefitsSliderItem({
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(5000); // Default duration for images
   const [poster, setPoster] = useState(null);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
     if (videoRef.current && isVideo(item.url)) {
@@ -23,12 +24,20 @@ export default function BenefitsSliderItem({
         captureVideoFrame(1);
       };
       videoRef.current.addEventListener("loadedmetadata", handleLoadedMetadata);
+      videoRef.current.addEventListener("play", () => setIsPlaying(true));
+      videoRef.current.addEventListener("pause", () => setIsPlaying(false));
 
       return () => {
         if (videoRef.current) {
           videoRef.current.removeEventListener(
             "loadedmetadata",
             handleLoadedMetadata
+          );
+          videoRef.current.removeEventListener("play", () =>
+            setIsPlaying(true)
+          );
+          videoRef.current.removeEventListener("pause", () =>
+            setIsPlaying(false)
           );
         }
       };
@@ -40,22 +49,16 @@ export default function BenefitsSliderItem({
       const canvas = canvasRef.current;
       const context = canvas.getContext("2d");
 
-      // Seek video to the desired time
       videoRef.current.currentTime = timeInSeconds;
 
-      // Once the seek operation is complete, draw the frame
       videoRef.current.onseeked = () => {
-        // Set canvas dimensions to match video
         canvas.width = videoRef.current.videoWidth;
         canvas.height = videoRef.current.videoHeight;
 
-        // Draw the video frame to the canvas
         context.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height);
 
-        // Convert canvas to an image URL
         const dataURL = canvas.toDataURL("image/jpeg");
 
-        // Set the captured frame as the poster
         setPoster(dataURL);
       };
     }
@@ -95,6 +98,12 @@ export default function BenefitsSliderItem({
     return videoExtensions.some((ext) => url.endsWith(ext));
   };
 
+  const handleMute = () => {
+    if (videoRef.current) {
+      videoRef.current.muted = !videoRef.current.muted;
+    }
+  };
+
   return (
     <div className="benefits-slider-item">
       {isVideo(item.url) ? (
@@ -103,8 +112,6 @@ export default function BenefitsSliderItem({
             crossOrigin="anonymous"
             src={`${import.meta.env.VITE_API_MEDIA_URL + item.url}`}
             className="benefits-media"
-            controls={false}
-            muted
             ref={videoRef}
             loop
             preload="metadata"
@@ -115,6 +122,45 @@ export default function BenefitsSliderItem({
               type="video/mp4"
             />
           </video>
+          {isPlaying && (
+            <div className="controls">
+              <button onClick={handleMute}>
+                {videoRef.current?.muted ? (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    className="svg"
+                  >
+                    <path
+                      fill="#fff"
+                      d="M3 9v6h4l5 5V4L7 9H3zm12 3a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"
+                    />
+                  </svg>
+                ) : (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    className="svg"
+                  >
+                    <path
+                      fill="#fff"
+                      d="M3 9v6h4l5 5V4L7 9H3zm9-3v6a3 0 0 0 0 0-6z"
+                    />
+                    <path
+                      fill="#fff"
+                      d="M21 12c0 1.667-.556 3.214-1.5 4.5l1.415 1.415C22.323 15.354 23 13.814 23 12s-.677-3.354-1.085-4.915l-1.415 1.415C20.444 8.786 21 10.333 21 12z"
+                    />
+                  </svg>
+                )}
+              </button>
+            </div>
+          )}
           <canvas ref={canvasRef} style={{ display: "none" }} />
         </>
       ) : (

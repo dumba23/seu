@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { formatDate } from "../../utils/dateUtils";
@@ -9,6 +9,7 @@ import ArrowRight from "../../assets/images/arrow-right-orange.svg";
 
 import "./AnnouncmentDetail.css";
 import { useTranslation } from "react-i18next";
+import { fetchAnnouncment } from "../../services/announcements";
 import BreadcrumbsMobile from "../breadcrumbs/BreadcrumbsMobile";
 
 export default function AnnouncmentsDetails() {
@@ -18,6 +19,7 @@ export default function AnnouncmentsDetails() {
   const menus = useSelector((state) => state.menus.data);
   const middleContainerRef = useRef(null);
   const bottomContainerRef = useRef(null);
+  const [data, setData] = useState([]);
 
   const submenuData = menus.reduce((acc, menu) => {
     if (acc) return acc;
@@ -56,14 +58,34 @@ export default function AnnouncmentsDetails() {
   }, []);
 
   useEffect(() => {
+    handleFetchAnnouncment();
+  }, [i18n.language]);
+
+  const handleFetchAnnouncment = async () => {
+    try {
+      const response = await fetchAnnouncment(id);
+      if (
+        response.data[0]?.visible === i18n.language ||
+        response.data[0]?.visible === "both"
+      ) {
+        setData(response.data);
+      } else {
+        navigate(`/announcments?lang=${i18n.language}`);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
     const middleContainerHeight = middleContainerRef?.current?.clientHeight;
     if (middleContainerHeight > 88) {
       bottomContainerRef.current.style.paddingTop = "4rem";
     }
   }, [announcementData]);
 
-  if (announcementData.length !== 0) {
-    const formattedDate = formatDate(announcementData[0].date, i18n);
+  if (data.length !== 0) {
+    const formattedDate = formatDate(data[0].date, i18n);
 
     return (
       <div className="announcment-details-container">
@@ -93,7 +115,7 @@ export default function AnnouncmentsDetails() {
                   {formattedDate.month}
                 </span>
               </div>
-              <h3>{announcementData[0].title[i18n.language]}</h3>
+              <h3>{data[0].title[i18n.language]}</h3>
             </div>
           </div>
         </div>
@@ -109,7 +131,7 @@ export default function AnnouncmentsDetails() {
                 title: submenuData?.title[i18n.language],
                 link: "/announcments",
               },
-              { title: announcementData[0]?.title[i18n.language], link: "" },
+              { title: data[0]?.title[i18n.language], link: "" },
             ]}
           />
           <BreadcrumbsMobile
@@ -122,7 +144,7 @@ export default function AnnouncmentsDetails() {
             <div
               className="announcment-details-paragraph"
               dangerouslySetInnerHTML={{
-                __html: announcementData[0].content[i18n.language],
+                __html: data[0].content[i18n.language],
               }}
             />
           </div>
@@ -131,7 +153,7 @@ export default function AnnouncmentsDetails() {
               return (
                 <Link
                   key={idx}
-                  to={item.link}
+                  to={item.link + `?lang=${i18n.language}`}
                   className={`announcment-details-link ${
                     item.title === "ანონსები" ? "active" : ""
                   }`}

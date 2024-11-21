@@ -133,7 +133,10 @@ export default function TrainingDetails() {
                 </span>
               </div>
               <Link
-                to={training.registration_link[i18n.language]}
+                to={
+                  training.registration_link[i18n.language] +
+                  `?lang=${i18n.language}`
+                }
                 type="submit"
                 className="training-link"
               >

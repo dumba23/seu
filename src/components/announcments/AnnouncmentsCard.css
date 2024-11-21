@@ -41,6 +41,10 @@
   font-size: 18px;
   font-feature-settings: "case" on;
   color: #383e4d;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
 }
 
 .announcments-card-date-month {
@@ -105,5 +109,6 @@
   .announcments-card-description {
     font-weight: 400;
     font-size: 14px;
+    word-break: break-word;
   }
 }

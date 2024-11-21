@@ -144,7 +144,7 @@ export default function CategoryPage() {
               return (
                 <Link
                   key={idx}
-                  to={item.link}
+                  to={item.link + `?lang=${i18n.language}`}
                   className={`category-page-link ${
                     item.link == "/vacancies/" + vacancy.id ? "active" : ""
                   }`}

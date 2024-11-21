@@ -8,7 +8,10 @@ export default function PhotoBox({ data }) {
 
   const coverPhoto = data.photos.find((photo) => photo.cover === 1);
   return (
-    <div className="video-box" onClick={() => navigate("/photos/" + data.id)}>
+    <div
+      className="video-box"
+      onClick={() => navigate("/photos/" + data.id + `?lang=${i18n.language}`)}
+    >
       <div
         className="video-cover"
         style={{

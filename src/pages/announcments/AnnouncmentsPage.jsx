@@ -134,7 +134,7 @@ export default function AnnoucmentsPage() {
               return (
                 <Link
                   key={idx}
-                  to={item.link}
+                  to={item.link + `?lang=${i18n.language}`}
                   className={`announcments-page-link ${
                     item.title === "ანონსები" ? "active" : ""
                   }`}

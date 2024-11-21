@@ -44,7 +44,7 @@ export default function TrainingPage() {
           : submenu.template.page_url;
       linksData = [
         ...linksData,
-        { title: submenu.title[i18n.language], link: pageLink },
+        { title: submenu?.title[i18n.language], link: pageLink },
       ];
     });
   }
@@ -83,7 +83,7 @@ export default function TrainingPage() {
       <div className="vacancy-page-middle-container">
         <div className="vacancy-page-middle-content" ref={middleContainerRef}>
           <div style={{ marginLeft: "1rem" }}>
-            {submenuData.title[i18n.language]}
+            {submenuData?.title[i18n.language]}
           </div>
         </div>
       </div>
@@ -113,7 +113,7 @@ export default function TrainingPage() {
             return (
               <Link
                 key={idx}
-                to={item.link}
+                to={item.link + `?lang=${i18n.language}`}
                 className={`vacancy-page-link ${
                   item.link === "/trainings" ? "active" : ""
                 }`}

@@ -9,7 +9,9 @@ export default function TrainingCard({ data }) {
   return (
     <div
       className="training-card-container"
-      onClick={() => navigate(`/trainings/${data.id}`)}
+      onClick={() =>
+        navigate(`/trainings/${data.id}` + `?lang=${i18n.language}`)
+      }
     >
       <div className="training-card-left-horizontal" />
       <div className="training-card-top">

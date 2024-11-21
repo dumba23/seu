@@ -57,12 +57,10 @@ export default function PhotoDetails() {
     return (
       <div className="about-container">
         <div className="vacancy-page-background-image" />
-        <div className="vacancy-page-middle-container">
-          <div className="vacancy-page-middle-content">
-            <div className="vacancy-page-middle-content-wrapper">
-              <div style={{ marginLeft: "1rem" }}>
-                {photo?.description[i18n.language]}
-              </div>
+        <div class="rector-wrapper">
+          <div class="rector-container type2">
+            <div>
+              <h3> {photo?.description[i18n.language]}</h3>
             </div>
           </div>
         </div>
@@ -107,7 +105,7 @@ export default function PhotoDetails() {
                 return (
                   <Link
                     key={idx}
-                    to={item.link}
+                    to={item.link + `?lang=${i18n.language}`}
                     className={`vacancy-page-link ${
                       item.link === "/photos" ? "active" : ""
                     }`}

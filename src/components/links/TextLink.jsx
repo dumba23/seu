@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 import ArrowRightIcon from "../../assets/images/arrow-right.svg";
 import SquareIcon from "../../assets/images/square.svg";
@@ -15,15 +15,20 @@ export default function TextLink({
   visible,
   currentLang,
 }) {
-  const navigate = useNavigate();
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+
+  const to = {
+    pathname: location.pathname,
+    search: searchParams.toString(),
+  };
 
   if (currentLang === visible || visible === "both") {
     if (isMobile) {
       return (
         <Link
-          onDoubleClick={() => navigate("/")}
-          to={`${active ? "#" : "#menuId=" + menuId}`}
-          onClick={() => changeActiveMenu(active ? [] : menuId)}
+          to={to}
+          onClick={() => changeActiveMenu(active ? null : menuId)}
           className={`text-link ${
             active ? "text-link-active" : "text-link-reset"
           }`}
@@ -44,8 +49,7 @@ export default function TextLink({
     } else {
       return (
         <Link
-          onDoubleClick={() => navigate("/")}
-          to={`#menuId=${menuId}`}
+          to={to}
           onClick={() => changeActiveMenu(menuId)}
           className={`text-link text-link-${active && "active"}`}
         >

@@ -32,6 +32,13 @@
 .breadcrumbs-title {
   font-size: 13px;
   font-weight: 400;
+  max-width: 100%;
+  white-space: wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
 
 .breadcrumbs-content.active .breadcrumbs-title {

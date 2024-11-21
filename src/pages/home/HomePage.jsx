@@ -18,6 +18,7 @@ export default function HomePage() {
   const { t, i18n } = useTranslation();
   const [video, setVideo] = useState(null);
   const [title, setTitle] = useState("");
+  const [explore, setExplore] = useState("");
   const links = useSelector((state) => state.links.data.links) || [];
 
   useEffect(() => {
@@ -27,6 +28,7 @@ export default function HomePage() {
 
         setVideo(res.data.video);
         setTitle(...res.data.title);
+        setExplore(res.data.explore);
       } catch (err) {
         console.error(err);
       }
@@ -74,9 +76,9 @@ export default function HomePage() {
                     <Link
                       to={
                         i18n.language === "ka" && link.page_url !== null
-                          ? link.page_url
+                          ? link.page_url + `?lang=${i18n.language}`
                           : link.page_url_en !== null
-                          ? link.page_url_en
+                          ? link.page_url_en + `?lang=${i18n.language}`
                           : ""
                       }
                       className="submenu-item"
@@ -102,7 +104,17 @@ export default function HomePage() {
         <div className="overlay" />
         <button className="explore-button" onClick={scrollToBenefits}>
           <img src={ScrollImg} />
-          <p>{t("explore_more")}</p>
+
+          {explore && explore.title ? (
+            <p
+              dangerouslySetInnerHTML={{
+                __html: explore.title[i18n?.language],
+              }}
+            />
+          ) : (
+            ""
+          )}
+
           <img src={ScrollDownImg} />
         </button>
       </div>

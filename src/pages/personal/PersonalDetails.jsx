@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { fetchPersonals } from "../../services/personal";
 import Linkedin from "../../assets/images/personal-linkedin.svg";
@@ -7,9 +7,8 @@ import Linkedin from "../../assets/images/personal-linkedin.svg";
 import "./PersonalDetails.css";
 
 export default function PersonalDetails() {
-  const navigate = useNavigate();
   const { id } = useParams();
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const [info, setInfo] = useState([]);
 
   useEffect(() => {
@@ -32,7 +31,9 @@ export default function PersonalDetails() {
 
   useEffect(() => {
     if (i18n.language && info.title && !info.title[i18n.language]) {
-      navigate("/");
+      window.location.replace(
+        info.child_content.page_url + `?lang=${i18n.language}`
+      );
     }
   }, [i18n.language, info]);
 
@@ -60,7 +61,10 @@ export default function PersonalDetails() {
                 }}
               />
               {info.linkedin && (
-                <Link to={info.linkedin} className="personal-linkedin">
+                <Link
+                  to={info.linkedin + `?lang=${i18n.language}`}
+                  className="personal-linkedin"
+                >
                   <img src={Linkedin} />
                   <span>Linkedin</span>
                 </Link>

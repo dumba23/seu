@@ -11,7 +11,9 @@ export default function NewsCard({ data }) {
   return (
     <div
       className="news-card-container"
-      onClick={() => navigate(`/news/details/${data.id}`)}
+      onClick={() =>
+        navigate(`/news/details/${data.id}` + `?lang=${i18n.language}`)
+      }
     >
       <div className="news-card-image-container">
         <img

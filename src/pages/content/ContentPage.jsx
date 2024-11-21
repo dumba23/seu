@@ -163,7 +163,7 @@ export default function ContentPage() {
                 return (
                   <Link
                     key={idx}
-                    to={item.link}
+                    to={item.link + `?lang=${i18n.language}`}
                     className={`announcment-details-link ${
                       item.link === contentData.page_url ? "active" : ""
                     }`}
@@ -247,7 +247,7 @@ export default function ContentPage() {
                 return (
                   <Link
                     key={idx}
-                    to={item.link}
+                    to={item.link + `?lang=${i18n.language}`}
                     className={`vacancy-page-link ${
                       item.link === contentData.page_url ? "active" : ""
                     }`}
@@ -339,7 +339,7 @@ export default function ContentPage() {
                 return (
                   <Link
                     key={idx}
-                    to={item.link}
+                    to={item.link + `?lang=${i18n.language}`}
                     className={`vacancy-page-link ${
                       item.link === contentData.page_url ? "active" : ""
                     }`}
@@ -415,7 +415,11 @@ export default function ContentPage() {
                       className="type5-box type6-box"
                       style={{ cursor: "pointer" }}
                       key={idx}
-                      onClick={() => navigate("/personals/" + item.id)}
+                      onClick={() =>
+                        navigate(
+                          "/personals/" + item.id + `?lang=${i18n.language}`
+                        )
+                      }
                     >
                       <div
                         className="type5-img type6-img"
@@ -442,7 +446,7 @@ export default function ContentPage() {
                 return (
                   <Link
                     key={idx}
-                    to={item.link}
+                    to={item.link + `?lang=${i18n.language}`}
                     className={`vacancy-page-link ${
                       item.link === contentData.page_url ? "active" : ""
                     }`}
@@ -522,7 +526,7 @@ export default function ContentPage() {
                 return (
                   <Link
                     key={idx}
-                    to={item.link}
+                    to={item.link + `?lang=${i18n.language}`}
                     className={`vacancy-page-link ${
                       item.link === contentData.page_url ? "active" : ""
                     }`}

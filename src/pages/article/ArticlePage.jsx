@@ -10,11 +10,15 @@ import ArticleCard from "./ArticleCard";
 
 import "./ArticlePage.css";
 import BreadcrumbsMobile from "../../components/breadcrumbs/BreadcrumbsMobile";
+import Pagination from "../../components/pagination/Pagination";
 
 export default function ArticlePage() {
   const { t, i18n } = useTranslation();
-  const navigate = useNavigate();
+
   const [articles, setArticles] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const perPage = 30;
 
   let linksData = [
     {
@@ -34,15 +38,20 @@ export default function ArticlePage() {
   useEffect(() => {
     const callFetchArticles = async () => {
       try {
-        const res = await fetchArticles();
-        setArticles(res.data);
+        const res = await fetchArticles(currentPage, perPage, i18n.language);
+        setArticles(res.data.data);
+        setTotalPages(res.data.last_page);
       } catch (err) {
         console.error(err);
       }
     };
 
     callFetchArticles();
-  }, []);
+  }, [currentPage, i18n.language]);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   return (
     <div className="about-container">
@@ -71,12 +80,20 @@ export default function ArticlePage() {
           <BreadcrumbsMobile activeTitle={t("articles")} data={linksData} />
         </div>
         <div className="vacancy-page-content">
-          <div className="article-page-cards-container">
+          <div
+            className="article-page-cards-container"
+            style={{ height: "auto" }}
+          >
             {articles?.map((card, idx) => {
               if (card.visible === "both" || card.visible === i18n.language) {
                 return <ArticleCard data={card} key={idx} />;
               }
             })}
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={handlePageChange}
+            />
           </div>
           <div className="vacancy-page-links-container">
             {linksData.map((item, idx) => {

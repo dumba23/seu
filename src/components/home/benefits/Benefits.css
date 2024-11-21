@@ -252,6 +252,18 @@
   opacity: 1;
 }
 
+.controls {
+  position: absolute;
+  top: 4rem;
+  left: 10px;
+}
+
+.controls button {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+}
+
 @keyframes roll {
   0% {
     transform: translateY(-120%);
@@ -264,13 +276,13 @@
 .styled-string {
   display: flex;
   justify-content: center;
+  overflow: hidden;
 }
 
 .styled-char {
   display: inline-block;
   height: 2rem;
-  max-width: 15px;
-  overflow: hidden;
+  max-width: 15.6px;
 }
 
 .slot-machine {
@@ -396,5 +408,22 @@
   .benefits-slider-top,
   .progress-bar {
     will-change: transform;
+  }
+
+  .controls {
+    z-index: 10;
+    top: 2.5rem;
+    left: 5px;
+    background-color: rgba(196, 196, 196, 0.376);
+    border-radius: 50%;
+    height: 14px;
+    width: 14px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .svg {
+    width: 14px;
+    height: 14px;
   }
 }

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Benefits.css";
 
 function AnimatedNumber({ text }) {
-  const characters = text.split("");
+  let characters = text.split("");
 
   const [currentCharacters, setCurrentCharacters] = useState(
     characters.map(() => Math.floor(Math.random() * 9) + 1)
@@ -34,7 +34,7 @@ function AnimatedNumber({ text }) {
     return () => clearTimeout(timeout);
   }, []);
 
-  const styledCharacters = currentCharacters.map((char, index) => {
+  const styledCharacters = currentCharacters?.map((char, index) => {
     const animationContent = Array.from({ length: 10 }, (_, i) =>
       i === 0 ? char : i
     );
@@ -53,6 +53,7 @@ function AnimatedNumber({ text }) {
       </div>
     );
   });
+
   return <div className="styled-string">{styledCharacters}</div>;
 }
 

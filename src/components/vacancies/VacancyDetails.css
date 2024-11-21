@@ -247,6 +247,7 @@
 
 .vacancy-share-buttons {
   display: flex;
+  margin-top: 0.5rem;
 }
 
 @media only screen and (max-width: 1050px) {
@@ -317,8 +318,6 @@
     font-size: 14px;
     font-weight: 400;
     max-width: 100%;
-    word-wrap: break-word;
-    word-break: break-all;
   }
 
   .vacancy-details-card-label {

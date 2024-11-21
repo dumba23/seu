@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { fetchPrograms } from "../../services/program";
 import Breadcrumbs from "../../components/breadcrumbs/Breadcrumbs";
@@ -11,9 +11,11 @@ import { fetchFile } from "../../services/exam";
 import BreadcrumbsMobile from "../../components/breadcrumbs/BreadcrumbsMobile";
 
 export default function ProgramExams() {
+  const navigate = useNavigate();
   const { id } = useParams();
   const { t, i18n } = useTranslation();
   const [info, setInfo] = useState([]);
+  const [isProgram, setIsProgram] = useState(false);
 
   const middleContainerRef = useRef(null);
   const bottomContainerRef = useRef(null);
@@ -24,17 +26,33 @@ export default function ProgramExams() {
 
   useEffect(() => {
     const getProgramInfo = async () => {
+      let isProgramTemp = false;
+
       try {
         const res = await fetchPrograms(id);
 
         setInfo(res.data);
+
+        res?.data?.program_exams.forEach((exam) => {
+          if (exam[`pdf_${i18n.language}`]) {
+            setIsProgram(true);
+            isProgramTemp = true;
+          } else {
+            setIsProgram(false);
+            isProgramTemp = false;
+          }
+        });
       } catch (err) {
         console.error(err);
+      } finally {
+        if (!isProgramTemp) {
+          navigate(`/programs/${id}` + `?lang=${i18n.language}`);
+        }
       }
     };
 
     getProgramInfo();
-  }, [id]);
+  }, [id, i18n.language]);
 
   useEffect(() => {
     const middleContainerHeight = middleContainerRef?.current?.clientHeight;
@@ -107,7 +125,7 @@ export default function ProgramExams() {
                   title: info?.child_content?.title[i18n.language],
                   link: info?.child_content?.page_url,
                 },
-                { title: t("exam_topics"), link: "" },
+                ...(isProgram ? [{ title: t("exam_topics"), link: "" }] : []),
               ]}
             />
             <BreadcrumbsMobile
@@ -116,7 +134,7 @@ export default function ProgramExams() {
                   title: info.title[i18n.language],
                   link: "/programs/" + info.id,
                 },
-                { title: t("exam_topics"), link: "" },
+                ...(isProgram ? [{ title: t("exam_topics"), link: "" }] : []),
               ]}
               activeTitle={t("exam_topics")}
             />
@@ -152,23 +170,25 @@ export default function ProgramExams() {
               {info.program_exams && (
                 <>
                   <Link
-                    to={`/programs/${info.id}`}
+                    to={`/programs/${info.id}` + `?lang=${i18n.language}`}
                     className={`vacancy-page-link`}
                   >
                     {info.title[i18n.language]}
                   </Link>
-                  <Link
-                    to={info.exam_page}
-                    className={`vacancy-page-link active`}
-                  >
-                    <div className="news-page-link-circle" />
-                    {t("exam_topics")}
-                    <img
-                      src={ArrowRight}
-                      alt="arrow-right"
-                      className="news-page-link-arrow"
-                    />
-                  </Link>
+                  {isProgram && (
+                    <Link
+                      to={info.exam_page + `?lang=${i18n.language}`}
+                      className={`vacancy-page-link active`}
+                    >
+                      <div className="news-page-link-circle" />
+                      {t("exam_topics")}
+                      <img
+                        src={ArrowRight}
+                        alt="arrow-right"
+                        className="news-page-link-arrow"
+                      />
+                    </Link>
+                  )}
                 </>
               )}
             </div>

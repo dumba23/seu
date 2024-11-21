@@ -60,14 +60,19 @@ export default function VacancyDetails() {
     return (
       <div className="vacancy-details-container">
         <div className="vacancy-links-buttons">
-          <Link to={vacancy.document} className="vacancy-link">
-            <img
-              src={LinkImg}
-              style={{ width: "20px", height: "20px", marginRight: "0.5rem" }}
-            />
-            {t("additional_documentation")}
-          </Link>
-          <div className="vacancy-share-buttons">
+          {vacancy.document && (
+            <Link
+              to={vacancy.document + `?lang=${i18n.language}`}
+              className="vacancy-link"
+            >
+              <img
+                src={LinkImg}
+                style={{ width: "20px", height: "20px", marginRight: "0.5rem" }}
+              />
+              {t("additional_documentation")}
+            </Link>
+          )}
+          {/* <div className="vacancy-share-buttons">
             <a
               href={`https://www.facebook.com/sharer/sharer.php?u=${vacancy.fb}`}
               target="_blank"
@@ -98,7 +103,7 @@ export default function VacancyDetails() {
                 {t("share")}
               </button>
             </a>
-          </div>
+          </div> */}
         </div>
         <div className="vacancy-details-background-image" />
         <div className="vacancy-details-middle-container">

@@ -7,7 +7,7 @@ import "./Announcments.css";
 import { useTranslation } from "react-i18next";
 
 export default function Announcments() {
-  const { t } = useTranslation();
+  const { i18n, t } = useTranslation();
   const navigate = useNavigate();
 
   return (
@@ -18,7 +18,7 @@ export default function Announcments() {
       <div>
         <button
           className="announcments-button all"
-          onClick={() => navigate("/announcments")}
+          onClick={() => navigate("/announcments" + `?lang=${i18n.language}`)}
         >
           {t("all_announcements")}
         </button>

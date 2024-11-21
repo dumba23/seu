@@ -14,17 +14,18 @@
   border-image-width: 2;
 }
 
-.general-info-program {
-  position: relative;
-  z-index: 10;
-}
-
 .general-info-program,
 .mobile-general-info-program {
   background-color: #fff;
   max-width: max-content;
   padding: 0.5rem 1rem;
   border-radius: 8px;
+}
+
+.general-info-program {
+  position: relative;
+  z-index: 10;
+  max-width: 80%;
 }
 
 .general-info-program h1,
@@ -131,6 +132,7 @@
   padding: 1rem;
   margin-left: 1rem;
   width: 100%;
+  max-width: 100%;
   border: 1px solid #ddd;
   border-radius: 0.25rem;
 }

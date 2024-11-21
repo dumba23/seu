@@ -15,7 +15,9 @@ export default function CategoryCard({ data }) {
       </div>
       <div
         className="category-see-full"
-        onClick={() => navigate(`/vacancies/${data.id}`)}
+        onClick={() =>
+          navigate(`/vacancies/${data.id}` + `?lang=${i18n.language}`)
+        }
       >
         იხილე სრულად
       </div>

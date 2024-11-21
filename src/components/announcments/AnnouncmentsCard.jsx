@@ -13,7 +13,9 @@ export default function AnnouncmentsCard({ data }) {
   return (
     <div
       className="announcments-card-container"
-      onClick={() => navigate(`/announcments/details/${data.id}`)}
+      onClick={() =>
+        navigate(`/announcments/details/${data.id}` + `?lang=${i18n.language}`)
+      }
     >
       <div className="announcments-card-top">
         <div className="announcments-card-date">

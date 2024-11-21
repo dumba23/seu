@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 import "./BreadcrumbsMobile.css";
 
 export default function BreadcrumbsMobile({ data, activeTitle }) {
+  const { i18n } = useTranslation();
   const [rearrangedData, setRearrangedData] = useState([]);
 
   useEffect(() => {
     if (data.length > 0) {
       setRearrangedData(
         data.sort((a, b) =>
-          a.title === activeTitle.toLowerCase()
+          a.title === activeTitle?.toLowerCase()
             ? -1
-            : b.title === activeTitle.toLowerCase()
+            : b.title === activeTitle?.toLowerCase()
             ? 1
             : 0
         )
@@ -31,7 +33,7 @@ export default function BreadcrumbsMobile({ data, activeTitle }) {
           return (
             <React.Fragment key={idx}>
               <Link
-                to={item.link}
+                to={item.link + `?lang=${i18n.language}`}
                 className={`breadcrumbs-mobile-content ${
                   activeTitle === item.title ? "active" : ""
                 }`}

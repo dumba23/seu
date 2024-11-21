@@ -98,7 +98,12 @@ const AnnouncmentSlider = () => {
               <div
                 className="announcments-slider-item"
                 key={index}
-                onClick={() => navigate(`/announcments/details/${item.id}`)}
+                onClick={() =>
+                  navigate(
+                    `/announcments/details/${item.id}` +
+                      `?lang=${i18n.language}`
+                  )
+                }
               >
                 <div className="slider-item-top-content">
                   {/* <div className="announcments-slider-overlay">{item.time}</div> */}

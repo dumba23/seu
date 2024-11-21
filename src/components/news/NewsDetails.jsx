@@ -1,5 +1,5 @@
-import { useEffect, useRef } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useState, useEffect, useRef } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { formatDate } from "../../utils/dateUtils";
@@ -10,12 +10,15 @@ import ArrowRight from "../../assets/images/arrow-right-orange.svg";
 
 import "./NewsDetails.css";
 import BreadcrumbsMobile from "../breadcrumbs/BreadcrumbsMobile";
+import { fetchNew } from "../../services/news";
 
 export default function NewsDetails() {
   const { id } = useParams();
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
   const news = useSelector((state) => state.news.data);
   const newData = news?.data?.filter((item) => item.id == id) || [];
+  const [data, setData] = useState([]);
 
   const middleContainerRef = useRef(null);
   const bottomContainerRef = useRef(null);
@@ -56,14 +59,34 @@ export default function NewsDetails() {
   }, []);
 
   useEffect(() => {
+    handleFetchNew();
+  }, [i18n.language]);
+
+  useEffect(() => {
     const middleContainerHeight = middleContainerRef?.current?.clientHeight;
     if (middleContainerHeight > 88) {
       bottomContainerRef.current.style.paddingTop = "4rem";
     }
   }, [newData]);
 
-  if (newData.length !== 0) {
-    const formattedDate = formatDate(newData[0].date, i18n);
+  const handleFetchNew = async () => {
+    try {
+      const response = await fetchNew(id);
+      if (
+        response.data[0]?.visible === i18n.language ||
+        response.data[0]?.visible === "both"
+      ) {
+        setData(response.data);
+      } else {
+        navigate(`/news?lang=${i18n.language}`);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  if (data.length !== 0) {
+    const formattedDate = formatDate(data[0].date, i18n);
 
     return (
       <div className="news-details-container">
@@ -77,7 +100,7 @@ export default function NewsDetails() {
         <div className="news-details-middle-container">
           <div className="news-details-middle-content" ref={middleContainerRef}>
             <div className="news-details-middle-content-wrapper">
-              <h3>{newData[0].title[i18n.language]}</h3>
+              <h3>{data[0].title[i18n.language]}</h3>
               <h6>
                 {formattedDate.day +
                   " " +
@@ -95,7 +118,7 @@ export default function NewsDetails() {
               { title: menuData?.title[i18n.language], link: "#" },
               { title: t("news_title"), link: "/news" },
               {
-                title: newData[0]?.title[i18n.language],
+                title: data[0]?.title[i18n.language],
                 link: "#",
               },
             ]}
@@ -107,7 +130,7 @@ export default function NewsDetails() {
             <div
               className="news-details-paragraph"
               dangerouslySetInnerHTML={{
-                __html: newData[0].content[i18n.language],
+                __html: data[0].content[i18n.language],
               }}
             />
           </div>
@@ -116,7 +139,7 @@ export default function NewsDetails() {
               return (
                 <Link
                   key={idx}
-                  to={item.link}
+                  to={item.link + `?lang=${i18n.language}`}
                   className={`news-details-link ${
                     item.link.includes("news") ? "active" : ""
                   }`}

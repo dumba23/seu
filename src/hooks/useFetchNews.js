@@ -16,20 +16,23 @@ const useFetchNews = () => {
   const { data, loading, error } = useSelector((state) => state.news);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData = async (page = 1) => {
       dispatch(fetchNewsStart());
       try {
-        const response = await fetchNews(i18n.language);
+        const response = await fetchNews(i18n.language, page);
         dispatch(fetchNewsSuccess(response.data.news));
       } catch (error) {
         dispatch(fetchNewsFailure(error.message));
       }
     };
 
-    if (location.pathname === "/" || location.pathname.includes("news")) {
+    if (location.pathname === "/") {
+      localStorage.removeItem("newsPage");
       fetchData();
+    } else {
+      fetchData(localStorage.getItem("newsPage"));
     }
-  }, [dispatch, i18n.language, location.pathname]);
+  }, [dispatch, i18n.language]);
 
   return { data, loading, error };
 };

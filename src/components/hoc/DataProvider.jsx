@@ -12,6 +12,9 @@ import { useTranslation } from "react-i18next";
 const DataProvider = ({ children }) => {
   const { i18n } = useTranslation();
   const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const lang = params.get("lang");
+
   useFetchPartners();
   useFetchBenefits();
   useFetchAnnouncements();
@@ -21,9 +24,6 @@ const DataProvider = ({ children }) => {
   useFetchVacancies();
 
   useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    const lang = params.get("lang") || "ka";
-
     if (lang === "en" || lang === "ka") {
       i18n.changeLanguage(lang);
       localStorage.setItem("language", lang);

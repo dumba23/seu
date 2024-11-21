@@ -107,7 +107,7 @@ export default function VideoPage() {
               return (
                 <Link
                   key={idx}
-                  to={item.link}
+                  to={item.link + `?lang=${i18n.language}`}
                   className={`vacancy-page-link ${
                     item.link === "/videos" ? "active" : ""
                   }`}

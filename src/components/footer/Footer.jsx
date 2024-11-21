@@ -20,7 +20,6 @@ import { useNavigate, Link } from "react-router-dom";
 
 const Footer = () => {
   const { t, i18n } = useTranslation();
-  const navigate = useNavigate();
   const [message, setMessage] = useState("");
 
   const links = useSelector((state) => state.links.data.links) || [];
@@ -53,7 +52,11 @@ const Footer = () => {
               {links.map((link, idx) => {
                 return (
                   <React.Fragment key={idx}>
-                    <Link to={link.page_url} className="submenu-item" key={idx}>
+                    <Link
+                      to={link.page_url + `?lang=${i18n.language}`}
+                      className="submenu-item"
+                      key={idx}
+                    >
                       {link.title[i18n.language]}
                     </Link>
                     {idx !== links.length - 1 && (

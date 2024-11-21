@@ -134,7 +134,7 @@ export default function PartnersPage() {
             return (
               <Link
                 key={idx}
-                to={item.link}
+                to={item.link + `?lang=${i18n.language}`}
                 className={`partners-page-link ${
                   item.link === "/partners" ? "active" : ""
                 }`}

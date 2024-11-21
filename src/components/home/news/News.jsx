@@ -7,7 +7,7 @@ import "./News.css";
 import { useTranslation } from "react-i18next";
 
 export default function News() {
-  const { t } = useTranslation();
+  const { i18n, t } = useTranslation();
   const navigate = useNavigate();
 
   return (
@@ -17,7 +17,7 @@ export default function News() {
           <h1 className="news-title">{t("news_title")}</h1>
           <div className="news-flex-row">
             <button
-              onClick={() => navigate("/news")}
+              onClick={() => navigate("/news" + `?lang=${i18n.language}`)}
               className="news-button all"
               style={{
                 position: "absolute",

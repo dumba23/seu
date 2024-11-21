@@ -392,7 +392,7 @@
   word-wrap: break-word;
 }
 
-.type5-box p {
+.type5-bottom-p {
   font-family: "FiraGO";
   font-feature-settings: "case" on;
   border-top: 1px solid #10101027;
@@ -438,6 +438,10 @@
   color: #29334f;
   margin: 0rem 0 0.2rem 0.5rem;
   word-wrap: break-word;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
 .type6-bottom h3 {
@@ -455,12 +459,12 @@
   height: 100%;
 }
 
-.type6-bottom p {
+.type6-bottom .type5-bottom-p {
   max-height: 90px;
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 4;
 }
 
 .type7-box {
@@ -476,6 +480,10 @@
 .type7-bottom {
   height: 82px;
   min-height: 72px;
+}
+
+.type7-bottom .type5-bottom-p {
+  -webkit-line-clamp: 2;
 }
 
 .program-name {
@@ -608,7 +616,7 @@
     margin: 0.4rem 0 0.5rem 0.5rem;
   }
 
-  .type5-box p {
+  .type5-bottom-p {
     font-size: 6px;
     line-height: 7.4px;
   }

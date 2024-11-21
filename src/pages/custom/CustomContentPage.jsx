@@ -11,6 +11,7 @@ import SeuImage from "../../assets/images/seu.png";
 import ArrowRight from "../../assets/images/arrow-right-orange.svg";
 import "./CustomContentPage.css";
 import BreadcrumbsMobile from "../../components/breadcrumbs/BreadcrumbsMobile";
+import Pagination from "../../components/pagination/Pagination";
 
 export default function ContentPage() {
   const { t, i18n } = useTranslation();
@@ -18,8 +19,19 @@ export default function ContentPage() {
   const { id } = useParams();
   const [content, setContent] = useState({});
   const [parent, setParent] = useState({});
+  const [page, setPage] = useState(1);
+  const [perPage, setPerPage] = useState(50);
+  const [pagination, setPagination] = useState(null);
 
   useEffect(() => {
+    if (window.innerWidth < 1050) {
+      setPerPage(50);
+    } else if (window.innerWidth > 1050 && window.innerWidth < 1440) {
+      setPerPage(75);
+    } else {
+      setPerPage(100);
+    }
+
     let customId = 0;
     const callFetchContent = async () => {
       const startIndex =
@@ -27,13 +39,19 @@ export default function ContentPage() {
       const slicedPart = location.pathname.substring(startIndex);
 
       try {
-        const res = await fetchContent(slicedPart[0] !== 0 ? id : id.slice(1));
+        const res = await fetchContent(
+          slicedPart[0] !== 0 ? id : id.slice(1),
+          i18n.language,
+          page,
+          perPage
+        );
 
         if (
           res.data.content.visible === "both" ||
           res.data.content.visible === i18n.language
         ) {
           setContent(res.data.content);
+          setPagination(res.data.pagination);
           if (res.data?.content?.child_contents?.length > 0) {
             window.location.replace(
               res.data.content.child_contents[0].page_url
@@ -64,7 +82,7 @@ export default function ContentPage() {
     if (customId !== 0) {
       callFetchCustom();
     }
-  }, [id, i18n.language]);
+  }, [id, i18n.language, page]);
 
   let linksData = [];
 
@@ -95,6 +113,10 @@ export default function ContentPage() {
       });
     }
   }
+
+  const handlePageChange = (pageNumber) => {
+    setPage(pageNumber);
+  };
 
   if (
     Object.keys(content).length !== 0 &&
@@ -199,7 +221,7 @@ export default function ContentPage() {
                 return (
                   <Link
                     key={idx}
-                    to={item.link}
+                    to={item.link + `?lang=${i18n.language}`}
                     className={`vacancy-page-link ${
                       item.link === content.page_url ? "active" : ""
                     }`}
@@ -228,7 +250,10 @@ export default function ContentPage() {
       <div className="type3-container">
         <div className="type3-animated-container">
           <h1 className="type3-title">{content.title[i18n.language]}</h1>
-          <Link className="type-3-box" to={content.link_1[i18n.language]}>
+          <Link
+            className="type-3-box"
+            to={content.link_1[i18n.language] + `?lang=${i18n.language}`}
+          >
             <div
               className="box-image"
               style={{
@@ -238,10 +263,17 @@ export default function ContentPage() {
               }}
             >
               <h5>{content.title_1[i18n.language]}</h5>
-              <Link to={content.link_1[i18n.language]}>{t("learn_more")}</Link>
+              <Link
+                to={content.link_1[i18n.language] + `?lang=${i18n.language}`}
+              >
+                {t("learn_more")}
+              </Link>
             </div>
           </Link>
-          <Link className="type-3-box" to={content.link_2[i18n.language]}>
+          <Link
+            className="type-3-box"
+            to={content.link_2[i18n.language] + `?lang=${i18n.language}`}
+          >
             <div
               className="box-image"
               style={{
@@ -251,7 +283,11 @@ export default function ContentPage() {
               }}
             >
               <h5>{content.title_2[i18n.language]}</h5>
-              <Link to={content.link_2[i18n.language]}>{t("learn_more")}</Link>
+              <Link
+                to={content.link_2[i18n.language] + `?lang=${i18n.language}`}
+              >
+                {t("learn_more")}
+              </Link>
             </div>
           </Link>
           <Link className="type-3-box" to={content.link_3[i18n.language]}>
@@ -264,10 +300,17 @@ export default function ContentPage() {
               }}
             >
               <h5>{content.title_3[i18n.language]}</h5>
-              <Link to={content.link_3[i18n.language]}>{t("learn_more")}</Link>
+              <Link
+                to={content.link_3[i18n.language] + `?lang=${i18n.language}`}
+              >
+                {t("learn_more")}
+              </Link>
             </div>
           </Link>
-          <Link className="type-3-box" to={content.link_4[i18n.language]}>
+          <Link
+            className="type-3-box"
+            to={content.link_4[i18n.language] + `?lang=${i18n.language}`}
+          >
             <div
               className="box-image"
               style={{
@@ -277,7 +320,11 @@ export default function ContentPage() {
               }}
             >
               <h5>{content.title_4[i18n.language]}</h5>
-              <Link to={content.link_4[i18n.language]}>{t("learn_more")}</Link>
+              <Link
+                to={content.link_4[i18n.language] + `?lang=${i18n.language}`}
+              >
+                {t("learn_more")}
+              </Link>
             </div>
           </Link>
         </div>
@@ -348,7 +395,7 @@ export default function ContentPage() {
                 return (
                   <Link
                     key={idx}
-                    to={item.link}
+                    to={item.link + `?lang=${i18n.language}`}
                     className={`vacancy-page-link ${
                       item.link === content.page_url ? "active" : ""
                     }`}
@@ -430,7 +477,9 @@ export default function ContentPage() {
                     />
                     <div className="type5-bottom">
                       <h3>{item.title[i18n.language]}</h3>
-                      <p>{item.description[i18n.language]}</p>
+                      <div className="type5-bottom-p">
+                        {item.description[i18n.language]}
+                      </div>
                     </div>
                   </div>
                 );
@@ -441,7 +490,7 @@ export default function ContentPage() {
                 return (
                   <Link
                     key={idx}
-                    to={item.link}
+                    to={item.link + `?lang=${i18n.language}`}
                     className={`vacancy-page-link ${
                       item.link === content.page_url ? "active" : ""
                     }`}
@@ -509,7 +558,10 @@ export default function ContentPage() {
             />
           </div>
           <div className="vacancy-page-content">
-            <div className="about-type4-html-container">
+            <div
+              className="about-type4-html-container"
+              style={{ height: "auto" }}
+            >
               {content.personals.map((item, idx) => {
                 if (item.title[i18n.language]) {
                   return (
@@ -517,7 +569,11 @@ export default function ContentPage() {
                       className="type5-box type6-box"
                       style={{ cursor: "pointer" }}
                       key={idx}
-                      onClick={() => navigate("/personals/" + item.id)}
+                      onClick={() =>
+                        navigate(
+                          "/personals/" + item.id + `?lang=${i18n.language}`
+                        )
+                      }
                     >
                       <div
                         className="type5-img type6-img"
@@ -532,19 +588,31 @@ export default function ContentPage() {
                           <h3>{item.title[i18n.language]}</h3>
                           <h4>{item.position[i18n.language]}</h4>
                         </div>
-                        <p>{item.description[i18n.language]}</p>
+                        <div
+                          className="type5-bottom-p"
+                          dangerouslySetInnerHTML={{
+                            __html: item.description[i18n.language],
+                          }}
+                        />
                       </div>
                     </div>
                   );
                 }
               })}
+              {pagination && (
+                <Pagination
+                  currentPage={pagination.current_page}
+                  totalPages={pagination.last_page}
+                  onPageChange={handlePageChange}
+                />
+              )}
             </div>
             <div className="vacancy-page-links-container">
               {linksData.map((item, idx) => {
                 return (
                   <Link
                     key={idx}
-                    to={item.link}
+                    to={item.link + `?lang=${i18n.language}`}
                     className={`vacancy-page-link ${
                       item.link === content.page_url ? "active" : ""
                     }`}
@@ -621,15 +689,19 @@ export default function ContentPage() {
                   return (
                     <div
                       key={idx}
-                      style={{ display: "flex", flexDirection: "column" }}
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        width: "100%",
+                      }}
                     >
                       <h1 className="program-name">
                         {item.title[i18n.language]}
                       </h1>
-                      <div
+                      <Link
                         className="type5-box type6-box type7-box"
                         style={{ cursor: "pointer" }}
-                        onClick={() => navigate("/programs/" + item.id)}
+                        to={`/programs/${item.id}` + `?lang=${i18n.language}`}
                       >
                         <div
                           className="type5-img type6-img type7-img"
@@ -648,9 +720,11 @@ export default function ContentPage() {
                               {item.faculty[i18n.language]}
                             </h4>
                           </div>
-                          <p>{item.description[i18n.language]}</p>
+                          <div className="type5-bottom-p">
+                            {item.description[i18n.language]}
+                          </div>
                         </div>
-                      </div>
+                      </Link>
                     </div>
                   );
                 }
@@ -661,7 +735,7 @@ export default function ContentPage() {
                 return (
                   <Link
                     key={idx}
-                    to={item.link}
+                    to={item.link + `?lang=${i18n.language}`}
                     className={`vacancy-page-link ${
                       item.link === content.page_url ? "active" : ""
                     }`}
@@ -741,7 +815,7 @@ export default function ContentPage() {
                 return (
                   <Link
                     key={idx}
-                    to={item.link}
+                    to={item.link + `?lang=${i18n.language}`}
                     className={`vacancy-page-link ${
                       item.link === content.page_url ? "active" : ""
                     }`}

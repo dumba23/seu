@@ -36,32 +36,6 @@ const BenefitsSlider = () => {
     setActiveIndex(state.currentSlide);
   };
 
-  // useEffect(() => {
-  //   const handleTouchStart = (event) => {
-  //     if (event.target.closest(".react-multi-carousel-list")) {
-  //       // Disable Y-axis scrolling
-  //       document.body.style.overflowY = "hidden";
-  //     }
-  //   };
-
-  //   const handleTouchEnd = () => {
-  //     // Re-enable Y-axis scrolling
-  //     document.body.style.overflowY = "auto";
-  //   };
-
-  //   window.addEventListener("touchstart", handleTouchStart, { passive: false });
-  //   window.addEventListener("touchend", handleTouchEnd);
-  //   window.addEventListener("mousedown", handleTouchStart);
-  //   window.addEventListener("mouseup", handleTouchEnd);
-
-  //   return () => {
-  //     window.removeEventListener("touchstart", handleTouchStart);
-  //     window.removeEventListener("touchend", handleTouchEnd);
-  //     window.removeEventListener("mousedown", handleTouchStart);
-  //     window.removeEventListener("mouseup", handleTouchEnd);
-  //   };
-  // }, []);
-
   return (
     <div className="benefits-slider-container">
       <Carousel

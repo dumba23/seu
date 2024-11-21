@@ -275,7 +275,7 @@
   .news-slider {
     transform: none;
     margin-left: 1rem;
-    padding: 4rem 0;
+    padding: 3rem 0 0 0;
   }
 
   .news-left-button,

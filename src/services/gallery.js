@@ -1,7 +1,9 @@
 import axiosInstance from "../plugins/axios";
 
-export const fetchArticles = async () => {
-  return axiosInstance.get("/api/articles");
+export const fetchArticles = async (page = 1, perPage = 30, lang) => {
+  return axiosInstance.get(
+    `/api/articles?page=${page}&per_page=${perPage}&lang=${lang}`
+  );
 };
 
 export const fetchVideos = async (page = 1, perPage = 9, lang) => {

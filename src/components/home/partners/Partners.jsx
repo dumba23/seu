@@ -28,7 +28,7 @@ export default function Partners() {
         />
         <button
           className="partners-button"
-          onClick={() => navigate("/partners")}
+          onClick={() => navigate("/partners" + `?lang=${i18n.language}`)}
         >
           {t("all_partners")}
         </button>

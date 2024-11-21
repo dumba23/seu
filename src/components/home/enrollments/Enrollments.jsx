@@ -45,64 +45,49 @@ export default function Enrollments() {
     const columns =
       columnRef?.current?.querySelectorAll(".enrollments-column") || [];
 
-    columns.forEach((column) => {
+    columns.forEach((column, index) => {
       const originalChildren = Array.from(column.children);
-      const clonedChildren = originalChildren.map((child) =>
-        child.cloneNode(true)
-      );
 
-      const childHeight = originalChildren[0]?.offsetHeight;
-      const height =
-        childHeight * originalChildren.length +
-        26 * (originalChildren.length + 1);
-
-      clonedChildren.forEach((clonedChild) => {
-        column.appendChild(clonedChild);
+      originalChildren.forEach((child) => {
+        const originalClone = child.cloneNode(true);
+        originalClone.classList.add("cloned");
+        const duplicatedClone = child.cloneNode(true);
+        duplicatedClone.classList.add("cloned");
+        column.appendChild(originalClone);
+        column.appendChild(duplicatedClone);
       });
 
-      let currentPositionOdd = 0;
-      let currentPositionEven = -height;
+      const isOdd = index % 2 === 0;
+      let currentPosition = isOdd ? 0 : -column.scrollHeight / 2;
 
       const moveColumn = () => {
-        if (column.id[column.id.length - 1] % 2) {
-          currentPositionOdd--;
-          if (currentPositionOdd <= -height) {
-            currentPositionOdd = 0;
-          }
-          column.style.transition = "transform linear";
-          column.style.transform = `translateY(${currentPositionOdd}px)`;
-        } else {
-          currentPositionEven++;
-          if (currentPositionEven >= height - 1224) {
-            currentPositionEven = -height;
-          }
-          column.style.transition = "transform linear";
-          column.style.transform = `translateY(${currentPositionEven}px)`;
+        currentPosition += isOdd ? -1 : 1;
+        column.style.transform = `translateY(${currentPosition}px)`;
+
+        const resetPoint = column.scrollHeight / 2;
+        if (isOdd && Math.abs(currentPosition) >= resetPoint) {
+          currentPosition = 0;
+        } else if (!isOdd && currentPosition >= resetPoint) {
+          currentPosition = -resetPoint;
         }
       };
 
       let intervalId = setInterval(moveColumn, 30);
 
-      const startAnimation = () => {
-        intervalId = setInterval(moveColumn, 30);
-      };
-
-      const stopAnimation = () => {
-        clearInterval(intervalId);
-      };
+      const stopAnimation = () => clearInterval(intervalId);
+      const startAnimation = () => (intervalId = setInterval(moveColumn, 30));
 
       if (isSmallScreen) {
-        // Toggle animation on click
         column.addEventListener("click", () => {
           if (intervalId) {
             stopAnimation();
-            intervalId = null; // Pause
+            intervalId = null;
           } else {
-            startAnimation(); // Resume
+            startAnimation();
           }
         });
       } else {
-        column.addEventListener("mouseenter", () => clearInterval(intervalId));
+        column.addEventListener("mouseenter", stopAnimation);
         column.addEventListener("mouseleave", () => {
           clearInterval(intervalId);
           intervalId = setInterval(moveColumn, 30);
@@ -116,7 +101,6 @@ export default function Enrollments() {
         const columnHeight = column.clientHeight;
         const hoveredCardHeight = hoveredCard.clientHeight;
 
-        // Calculate the position to center the hovered card
         return -(
           cardTopRelativeToColumn +
           hoveredCardHeight / 2 -
@@ -124,37 +108,53 @@ export default function Enrollments() {
         );
       };
 
-      // Function to move the column to center the hovered card
       const moveColumnToCenterCard = (hoveredCard) => {
         const centerPosition = calculateCenterPosition(hoveredCard);
-        if (column.id[column.id.length - 1] % 2) {
-          currentPositionOdd = centerPosition;
-        } else {
-          currentPositionEven = centerPosition;
-        }
+        currentPosition = centerPosition;
         column.style.transition = "transform .5s linear";
         column.style.transform = `translateY(${centerPosition}px)`;
       };
 
       if (!isSmallScreen && showColumn4) {
-        // Add event listeners to each card
         column
           .querySelectorAll(".enrollments-animated-container")
           .forEach((card) => {
-            card.addEventListener("mouseenter", () => {
-              moveColumnToCenterCard(card);
-            });
-
-            card.addEventListener("mouseleave", () => {
-              // Restore the column to its original position when the mouse leaves the card
-              moveColumnToCenterCard(null);
-            });
+            card.addEventListener("mouseenter", () =>
+              moveColumnToCenterCard(card)
+            );
+            card.addEventListener("mouseleave", startAnimation);
           });
-
-        return () => clearInterval(intervalId);
       }
+
+      return () => clearInterval(intervalId);
     });
   }, [enrollmentsSliders]);
+
+  useEffect(() => {
+    const columns =
+      columnRef?.current?.querySelectorAll(".enrollments-column") || [];
+
+    columns.forEach((column) => {
+      // Remove previously cloned elements
+      Array.from(column.children).forEach((child) => {
+        if (child.classList.contains("cloned")) {
+          column.removeChild(child);
+        }
+      });
+
+      // Re-create cloned elements with the updated language content
+      const originalChildren = Array.from(column.children);
+      originalChildren.forEach((child) => {
+        const originalClone = child.cloneNode(true);
+        originalClone.classList.add("cloned");
+        const duplicatedClone = child.cloneNode(true);
+        duplicatedClone.classList.add("cloned");
+
+        column.appendChild(originalClone);
+        column.appendChild(duplicatedClone);
+      });
+    });
+  }, [i18n.language]);
 
   const scrollToEnrollments = () => {
     const announcmentsComponent = document.getElementById("announcments");

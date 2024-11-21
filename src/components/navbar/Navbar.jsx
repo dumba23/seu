@@ -20,7 +20,7 @@ import TextLinkMobile from "../links/TextLinkMobile";
 import SearchIcon from "../../components/icons/SearchIcon";
 import SeuLogo from "../../assets/images/logo.svg";
 import SquareLink from "../links/SquareLink";
-import SeuLogoSecond from "../../assets/images/seu-logo-second.svg";
+import SeuLogoSecond from "../../assets/images/seu-logo-second.png";
 import InstagramIcon from "../../assets/images/instagram.svg";
 import LinkedinIcon from "../../assets/images/linkedin.svg";
 import YoutubeIcon from "../../assets/images/youtube.svg";
@@ -41,18 +41,17 @@ function Navbar() {
   const [activeMenu, setActiveMenu] = useState([]);
   const links = useSelector((state) => state.links.data.links) || [];
   const contacts = useSelector((state) => state.links.data.socials) || [];
-  const hashWithoutHashSymbol = location.hash.slice(1);
-  const hashParams = new URLSearchParams(hashWithoutHashSymbol);
-  const menuId = hashParams.get("menuId");
+  const [menuId, setMenuId] = useState(localStorage.getItem("menuId") || 1);
   const navRef = useRef(null);
   const [isHeightExceed, setIsHeightExceed] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!menuId) {
-      const url = location.pathname + location.search + `#menuId=${1}`;
-
-      navigate(url);
+      const url = location.pathname + location.search;
+      localStorage.setItem("menuId", 1);
+      setMenuId(1);
+      navigate(url + `?lang=${i18n.language}`);
     }
   }, []);
 
@@ -165,14 +164,29 @@ function Navbar() {
   }, []);
 
   const changeActiveMenu = (id) => {
-    const menu = menus?.find((menu) => menu.id == id);
+    if (id === null) {
+      setActiveMenu([]);
+      localStorage.removeItem("menuId");
+      setMenuId(null);
+    } else {
+      const menu = menus?.find((menu) => menu.id == id);
 
-    setActiveMenu(menu);
+      setActiveMenu(menu);
+      setMenuId(menu.id);
+      localStorage.setItem("menuId", menu.id);
+    }
   };
 
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
     localStorage.setItem("language", lng);
+
+    const searchParams = new URLSearchParams(window.location.search);
+    searchParams.set("lang", lng);
+
+    navigate({
+      search: searchParams.toString(),
+    });
   };
 
   const showNavbar = () => {
@@ -193,7 +207,7 @@ function Navbar() {
             alt="seu-logo"
             className="nav-logo"
             onClick={() => navigate("/")}
-            style={{ cursor: "pointer" }}
+            style={{ cursor: "pointer", width: "113px" }}
           />
         )}
         <nav className={isNavOpen ? "collapsible_nav" : "flex-col"}>

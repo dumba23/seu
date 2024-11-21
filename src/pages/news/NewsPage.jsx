@@ -42,6 +42,7 @@ export default function NewsPage() {
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
+    localStorage.setItem("newsPage", pageNumber);
     fetchData(i18n.language, pageNumber);
   };
 
@@ -125,7 +126,7 @@ export default function NewsPage() {
             return (
               <Link
                 key={idx}
-                to={item.link}
+                to={item.link + `?lang=${i18n.language}`}
                 className={`news-page-link ${
                   item.link === "/news" ? "active" : ""
                 }`}

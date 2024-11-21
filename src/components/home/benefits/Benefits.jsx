@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import AnimatedNumber from "./AnimatedNumber";
@@ -8,14 +8,17 @@ import BenefitsSlider from "./BenefitsSlider";
 
 export default function Benefits() {
   const { t, i18n } = useTranslation();
-  const statistics = useSelector((state) => state.benefits.data.statistics);
+  const statistics =
+    useSelector((state) => state.benefits.data.statistics) || [];
   const benefitsDataRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           entry.target.classList.add("visible");
+          setIsVisible(true);
         }
       },
       { threshold: 0.5 }
@@ -53,7 +56,7 @@ export default function Benefits() {
             <React.Fragment key={idx}>
               <div className="benefits-flex-col" style={{ marginLeft: "2rem" }}>
                 <span className="benefits-data-count">
-                  <AnimatedNumber text={stat.value} />
+                  {isVisible ? <AnimatedNumber text={stat.value} /> : null}
                 </span>
                 <span className="benefits-data-title">
                   {stat.name[i18n.language]}

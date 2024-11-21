@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { fetchPrograms } from "../../services/program";
 import Breadcrumbs from "../../components/breadcrumbs/Breadcrumbs";
@@ -10,9 +10,11 @@ import "./ProgramDetails.css";
 import ProgramDropdown from "./ProgramDropdown";
 
 export default function PersonalDetails() {
+  const navigate = useNavigate();
   const { id } = useParams();
   const { t, i18n } = useTranslation();
   const [info, setInfo] = useState([]);
+  const [isProgram, setIsProgram] = useState(false);
 
   const middleContainerRef = useRef(null);
   const bottomContainerRef = useRef(null);
@@ -27,13 +29,24 @@ export default function PersonalDetails() {
         const res = await fetchPrograms(id);
 
         setInfo(res.data);
+        res?.data?.program_exams?.forEach((exam) => {
+          if (exam[`pdf_${i18n.language}`]) {
+            setIsProgram(true);
+          } else {
+            setIsProgram(false);
+          }
+        });
+
+        if (!isProgram) {
+          navigate(`/programs/${res.data.id}` + `?lang=${i18n.language}`);
+        }
       } catch (err) {
         console.error(err);
       }
     };
 
     getProgramInfo();
-  }, []);
+  }, [id, i18n.language]);
 
   useEffect(() => {
     const middleContainerHeight = middleContainerRef?.current?.clientHeight;
@@ -129,13 +142,17 @@ export default function PersonalDetails() {
                       className="news-page-link-arrow"
                     />
                   </Link>
-                  {info.program_exams.length > 0 && (
+                  {isProgram ? (
                     <Link
-                      to={`/programs/exam/${info.id}`}
+                      to={
+                        `/programs/exam/${info.id}` + `?lang=${i18n.language}`
+                      }
                       className={`vacancy-page-link`}
                     >
                       {t("exam_topics")}
                     </Link>
+                  ) : (
+                    <></>
                   )}
                 </>
               )}

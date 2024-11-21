@@ -15,7 +15,9 @@ export default function AnnouncmentsCard({ data }) {
   return (
     <div
       className="category-page-card-container"
-      onClick={() => navigate(`/vacancies/details/${data.id}`)}
+      onClick={() =>
+        navigate(`/vacancies/details/${data.id}` + `?lang=${i18n.language}`)
+      }
     >
       <div className="category-page-card-top">
         <h2 className="category-page-card-title">
